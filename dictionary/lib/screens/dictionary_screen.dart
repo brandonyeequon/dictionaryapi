@@ -81,29 +81,6 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
     });
   }
 
-  Future<void> _testConnection() async {
-    setState(() {
-      _isLoading = true;
-      _errorMessage = null;
-    });
-
-    try {
-      final success = await JishoApiService.testConnection();
-      setState(() {
-        _isLoading = false;
-        if (success) {
-          _errorMessage = 'Connection test successful! You can search normally.';
-        } else {
-          _errorMessage = 'Connection test failed. Please check your internet connection.';
-        }
-      });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-        _errorMessage = 'Connection test failed: ${e.toString().replaceAll('Exception: ', '')}';
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +114,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
           Container(
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.inversePrimary.withOpacity(0.1),
+              color: Theme.of(context).colorScheme.inversePrimary.withValues(alpha: 0.1),
               borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
@@ -195,19 +172,9 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () => _performSearch(_lastSearchTerm),
-                  child: const Text('Retry'),
-                ),
-                const SizedBox(width: 16),
-                OutlinedButton(
-                  onPressed: _testConnection,
-                  child: const Text('Test Connection'),
-                ),
-              ],
+            ElevatedButton(
+              onPressed: () => _performSearch(_lastSearchTerm),
+              child: const Text('Retry'),
             ),
           ],
         ),

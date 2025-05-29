@@ -350,9 +350,9 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
         vertical: small ? 2 : (large ? 6 : 4),
       ),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(small ? 4 : (large ? 8 : 6)),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Text(
         text,

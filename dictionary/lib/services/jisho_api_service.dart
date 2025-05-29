@@ -14,13 +14,15 @@ class JishoApiService {
 
       final encodedKeyword = Uri.encodeComponent(keyword.trim());
       final url = Uri.parse('$_baseUrl?keyword=$encodedKeyword');
-      
-      print('Making request to: $url'); // Debug log
 
-      final response = await http.get(url).timeout(_timeout);
-      
-      print('Response status: ${response.statusCode}'); // Debug log
-      print('Response body length: ${response.body.length}'); // Debug log
+      final response = await http.get(
+        url,
+        headers: {
+          'User-Agent': 'Flutter-Dictionary-App/1.0',
+          'Accept': 'application/json',
+          'Accept-Encoding': 'gzip, deflate, br',
+        },
+      ).timeout(_timeout);
 
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
@@ -34,15 +36,6 @@ class JishoApiService {
       throw Exception('Invalid response format: $e');
     } catch (e) {
       throw Exception('Unexpected error: $e');
-    }
-  }
-
-  static Future<bool> testConnection() async {
-    try {
-      final response = await searchWords('test');
-      return response != null && response.isSuccessful;
-    } catch (e) {
-      return false;
     }
   }
 
