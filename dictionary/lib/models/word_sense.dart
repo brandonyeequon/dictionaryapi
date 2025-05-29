@@ -6,7 +6,7 @@ class WordSense {
   final List<String> restrictions;
   final List<String> seeAlso;
   final List<String> antonyms;
-  final List<String> source;
+  final List<Map<String, dynamic>> source;
   final List<String> info;
   final List<String>? sentences;
 
@@ -34,12 +34,28 @@ class WordSense {
       restrictions: List<String>.from(json['restrictions'] ?? []),
       seeAlso: List<String>.from(json['see_also'] ?? []),
       antonyms: List<String>.from(json['antonyms'] ?? []),
-      source: List<String>.from(json['source'] ?? []),
+      source: _parseSource(json['source'] ?? []),
       info: List<String>.from(json['info'] ?? []),
       sentences: json['sentences'] != null 
           ? List<String>.from(json['sentences']) 
           : null,
     );
+  }
+
+  static List<Map<String, dynamic>> _parseSource(dynamic sourceData) {
+    if (sourceData is List) {
+      return sourceData.map((item) {
+        if (item is Map<String, dynamic>) {
+          return item;
+        } else if (item is String) {
+          // Handle legacy string format by converting to map
+          return {'text': item};
+        } else {
+          return {'text': item.toString()};
+        }
+      }).toList();
+    }
+    return [];
   }
 
   Map<String, dynamic> toJson() {

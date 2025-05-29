@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/dictionary_screen.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'Roboto',
       ),
-      home: const DictionaryScreen(),
+      home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

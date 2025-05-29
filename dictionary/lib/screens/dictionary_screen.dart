@@ -5,6 +5,7 @@ import '../widgets/word_card.dart';
 import '../widgets/search_bar_widget.dart';
 import 'word_detail_screen.dart';
 import 'favorites_screen.dart';
+import 'flashcards_screen.dart';
 
 class DictionaryScreen extends StatefulWidget {
   const DictionaryScreen({super.key});
@@ -96,6 +97,17 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         elevation: 0,
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const FlashcardsScreen(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.quiz),
+            tooltip: 'Flashcards',
+          ),
           IconButton(
             onPressed: () {
               Navigator.of(context).push(

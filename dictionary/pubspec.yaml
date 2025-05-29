@@ -41,14 +41,20 @@ dependencies:
   # Local storage for preferences and simple data
   shared_preferences: ^2.2.2
   
-  # SQLite database for word lists and flashcards
+  # SQLite database for word lists and flashcards (mobile platforms)
   sqflite: ^2.3.0
+  
+  # Web storage for browsers (IndexedDB)
+  idb_shim: ^2.4.1+1
   
   # Path provider for database file location
   path_provider: ^2.1.2
   
   # Path manipulation utilities
   path: ^1.8.3
+  
+  # Platform detection
+  universal_platform: ^1.1.0
 
 dev_dependencies:
   flutter_test:

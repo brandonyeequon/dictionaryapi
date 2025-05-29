@@ -6,12 +6,14 @@ class WordCard extends StatefulWidget {
   final WordEntry wordEntry;
   final VoidCallback? onTap;
   final VoidCallback? onFavorite;
+  final Widget? trailing;
 
   const WordCard({
     super.key,
     required this.wordEntry,
     this.onTap,
     this.onFavorite,
+    this.trailing,
   });
 
   @override
@@ -72,6 +74,10 @@ class _WordCardState extends State<WordCard> {
                   Expanded(
                     child: _buildWordHeader(),
                   ),
+                  if (widget.trailing != null) ...[
+                    widget.trailing!,
+                    const SizedBox(width: 4),
+                  ],
                   IconButton(
                     onPressed: _toggleFavorite,
                     icon: Icon(

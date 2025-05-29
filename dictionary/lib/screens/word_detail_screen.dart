@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../models/word_entry.dart';
+import '../models/word_list.dart';
 import '../services/favorites_service.dart';
+import '../services/flashcard_service.dart';
+import '../services/word_list_service.dart';
 
 class WordDetailScreen extends StatefulWidget {
   final WordEntry wordEntry;
@@ -13,18 +16,25 @@ class WordDetailScreen extends StatefulWidget {
 
 class _WordDetailScreenState extends State<WordDetailScreen> {
   final FavoritesService _favoritesService = FavoritesService();
+  final FlashcardService _flashcardService = FlashcardService();
+  final WordListService _wordListService = WordListService();
   bool _isLoading = false;
+  bool _isFlashcardLoading = false;
 
   @override
   void initState() {
     super.initState();
     _favoritesService.addListener(_onFavoritesChanged);
-    _loadFavorites();
+    _flashcardService.addListener(_onFlashcardsChanged);
+    _wordListService.addListener(_onWordListsChanged);
+    _loadServices();
   }
 
   @override
   void dispose() {
     _favoritesService.removeListener(_onFavoritesChanged);
+    _flashcardService.removeListener(_onFlashcardsChanged);
+    _wordListService.removeListener(_onWordListsChanged);
     super.dispose();
   }
 
@@ -34,8 +44,22 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
     }
   }
 
-  Future<void> _loadFavorites() async {
+  void _onFlashcardsChanged() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  void _onWordListsChanged() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  Future<void> _loadServices() async {
     await _favoritesService.loadFavorites();
+    await _flashcardService.loadFlashcards();
+    await _wordListService.loadWordLists();
   }
 
   Future<void> _toggleFavorite() async {
@@ -54,6 +78,38 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
               isFavorite 
                   ? 'Added "${widget.wordEntry.mainWord}" to favorites'
                   : 'Removed "${widget.wordEntry.mainWord}" from favorites',
+            ),
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _toggleFlashcard() async {
+    setState(() => _isFlashcardLoading = true);
+    
+    bool success;
+    final hasFlashcard = _flashcardService.hasFlashcard(widget.wordEntry.slug);
+    
+    if (hasFlashcard) {
+      final flashcard = _flashcardService.getFlashcard(widget.wordEntry.slug);
+      success = await _flashcardService.removeFlashcard(flashcard!.id);
+    } else {
+      success = await _flashcardService.addFlashcard(widget.wordEntry);
+    }
+    
+    if (mounted) {
+      setState(() => _isFlashcardLoading = false);
+      
+      if (success) {
+        final isNowFlashcard = _flashcardService.hasFlashcard(widget.wordEntry.slug);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              isNowFlashcard 
+                  ? 'Added "${widget.wordEntry.mainWord}" to flashcards'
+                  : 'Removed "${widget.wordEntry.mainWord}" from flashcards',
             ),
             duration: const Duration(seconds: 2),
           ),
@@ -90,9 +146,29 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
                 : 'Add to favorites',
           ),
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.quiz),
-            tooltip: 'Add to flashcards',
+            onPressed: _isFlashcardLoading ? null : _toggleFlashcard,
+            icon: _isFlashcardLoading
+                ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : Icon(
+                    _flashcardService.hasFlashcard(widget.wordEntry.slug)
+                        ? Icons.quiz
+                        : Icons.quiz_outlined,
+                    color: _flashcardService.hasFlashcard(widget.wordEntry.slug)
+                        ? Colors.green
+                        : null,
+                  ),
+            tooltip: _flashcardService.hasFlashcard(widget.wordEntry.slug)
+                ? 'Remove from flashcards'
+                : 'Add to flashcards',
+          ),
+          IconButton(
+            onPressed: _showAddToListDialog,
+            icon: const Icon(Icons.playlist_add),
+            tooltip: 'Add to list',
           ),
         ],
       ),
@@ -258,6 +334,18 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
                         ),
                       ),
                     ),
+                  if (sense.source.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4),
+                      child: Text(
+                        'Source: ${_formatSource(sense.source)}',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey[600],
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -343,6 +431,18 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
     );
   }
 
+  String _formatSource(List<Map<String, dynamic>> sources) {
+    return sources.map((source) {
+      if (source.containsKey('language') && source.containsKey('word')) {
+        return '${source['language']}: ${source['word']}';
+      } else if (source.containsKey('text')) {
+        return source['text'];
+      } else {
+        return source.toString();
+      }
+    }).join(', ');
+  }
+
   Widget _buildTag(String text, Color color, {bool large = false, bool small = false}) {
     return Container(
       padding: EdgeInsets.symmetric(
@@ -363,5 +463,155 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
         ),
       ),
     );
+  }
+
+  Widget _buildListTileForDialog(WordList list) {
+    final isAlreadyInList = _wordListService.isWordInList(list.id, widget.wordEntry.slug);
+    
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundColor: isAlreadyInList ? Colors.grey : Theme.of(context).primaryColor,
+        child: Text(
+          list.name.substring(0, 1).toUpperCase(),
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      title: Text(list.name),
+      subtitle: Text('${_wordListService.getWordCountInList(list.id)} words'),
+      trailing: isAlreadyInList 
+          ? const Icon(Icons.check_circle, color: Colors.green)
+          : const Icon(Icons.add_circle_outline),
+      enabled: !isAlreadyInList,
+      onTap: isAlreadyInList 
+          ? null 
+          : () => Navigator.of(context).pop(list),
+    );
+  }
+
+  Future<void> _showAddToListDialog() async {
+    try {
+      // Show loading indicator
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const AlertDialog(
+          content: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(width: 16),
+              Text('Loading lists...'),
+            ],
+          ),
+        ),
+      );
+
+      // Ensure word lists are loaded before accessing them
+      if (!_wordListService.isLoaded) {
+        await _wordListService.loadWordLists();
+      }
+      
+      // Close loading dialog
+      if (mounted) {
+        Navigator.of(context).pop();
+      }
+      
+      final lists = _wordListService.wordLists;
+    
+    if (lists.isEmpty) {
+      // Show dialog to create a list first
+      if (mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('No Lists Available'),
+            content: const Text('You need to create a word list first. Go to the Learn tab to create your first list.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+      return;
+    }
+
+    WordList? selectedList;
+    if (mounted) {
+      selectedList = await showDialog<WordList>(
+        context: context,
+        builder: (context) => AlertDialog(
+        title: const Text('Add to List'),
+        content: SizedBox(
+          width: 300,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Add "${widget.wordEntry.mainWord}" to which list?'),
+              const SizedBox(height: 16),
+              if (lists.length > 5)
+                SizedBox(
+                  height: 300,
+                  child: ListView.builder(
+                    itemCount: lists.length,
+                    itemBuilder: (context, index) => _buildListTileForDialog(lists[index]),
+                  ),
+                )
+              else
+                ...lists.map((list) => _buildListTileForDialog(list)),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Cancel'),
+          ),
+        ],
+      ),
+      );
+    }
+
+    if (selectedList != null) {
+      final success = await _wordListService.addWordToList(
+        selectedList.id,
+        widget.wordEntry,
+      );
+      
+      if (mounted) {
+        if (success) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Added "${widget.wordEntry.mainWord}" to "${selectedList.name}"'),
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Failed to add word to list'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    }
+    } catch (e) {
+      // Close loading dialog if still open
+      if (mounted) {
+        Navigator.of(context).pop();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error loading lists: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 }

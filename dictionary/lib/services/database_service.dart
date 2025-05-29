@@ -11,6 +11,7 @@ class DatabaseService {
   static const String _favoritesTable = 'favorites';
   static const String _wordListsTable = 'word_lists';
   static const String _wordListItemsTable = 'word_list_items';
+  static const String _flashcardsTable = 'flashcards';
 
   static Future<Database> get database async {
     if (_database != null) return _database!;
@@ -58,6 +59,25 @@ class DatabaseService {
         added_at INTEGER NOT NULL,
         FOREIGN KEY (list_id) REFERENCES $_wordListsTable (id) ON DELETE CASCADE,
         UNIQUE(list_id, slug)
+      )
+    ''');
+
+    await db.execute('''
+      CREATE TABLE $_flashcardsTable (
+        id TEXT PRIMARY KEY,
+        word_slug TEXT NOT NULL,
+        word TEXT NOT NULL,
+        reading TEXT NOT NULL,
+        definition TEXT NOT NULL,
+        tags TEXT NOT NULL,
+        created_at INTEGER NOT NULL,
+        last_reviewed INTEGER NOT NULL,
+        next_review INTEGER NOT NULL,
+        interval_days INTEGER NOT NULL DEFAULT 1,
+        ease_factor INTEGER NOT NULL DEFAULT 250,
+        repetitions INTEGER NOT NULL DEFAULT 0,
+        is_learning INTEGER NOT NULL DEFAULT 1,
+        UNIQUE(word_slug)
       )
     ''');
   }
@@ -234,5 +254,113 @@ class DatabaseService {
     } catch (e) {
       return false;
     }
+  }
+
+  // Flashcard methods
+  static Future<bool> addFlashcard(dynamic flashcard) async {
+    try {
+      final db = await database;
+      await db.insert(
+        _flashcardsTable,
+        {
+          'id': flashcard.id,
+          'word_slug': flashcard.wordSlug,
+          'word': flashcard.word,
+          'reading': flashcard.reading,
+          'definition': flashcard.definition,
+          'tags': json.encode(flashcard.tags),
+          'created_at': flashcard.createdAt.millisecondsSinceEpoch,
+          'last_reviewed': flashcard.lastReviewed.millisecondsSinceEpoch,
+          'next_review': flashcard.nextReview.millisecondsSinceEpoch,
+          'interval_days': flashcard.intervalDays,
+          'ease_factor': flashcard.easeFactor,
+          'repetitions': flashcard.repetitions,
+          'is_learning': flashcard.isLearning ? 1 : 0,
+        },
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  static Future<bool> updateFlashcard(dynamic flashcard) async {
+    try {
+      final db = await database;
+      await db.update(
+        _flashcardsTable,
+        {
+          'word_slug': flashcard.wordSlug,
+          'word': flashcard.word,
+          'reading': flashcard.reading,
+          'definition': flashcard.definition,
+          'tags': json.encode(flashcard.tags),
+          'created_at': flashcard.createdAt.millisecondsSinceEpoch,
+          'last_reviewed': flashcard.lastReviewed.millisecondsSinceEpoch,
+          'next_review': flashcard.nextReview.millisecondsSinceEpoch,
+          'interval_days': flashcard.intervalDays,
+          'ease_factor': flashcard.easeFactor,
+          'repetitions': flashcard.repetitions,
+          'is_learning': flashcard.isLearning ? 1 : 0,
+        },
+        where: 'id = ?',
+        whereArgs: [flashcard.id],
+      );
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  static Future<bool> removeFlashcard(String flashcardId) async {
+    try {
+      final db = await database;
+      await db.delete(
+        _flashcardsTable,
+        where: 'id = ?',
+        whereArgs: [flashcardId],
+      );
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  static Future<List<dynamic>> getFlashcards() async {
+    try {
+      final db = await database;
+      final result = await db.query(
+        _flashcardsTable,
+        orderBy: 'next_review ASC',
+      );
+
+      return result.map((row) {
+        final tagsData = json.decode(row['tags'] as String);
+        return {
+          'id': row['id'],
+          'word_slug': row['word_slug'],
+          'word': row['word'],
+          'reading': row['reading'],
+          'definition': row['definition'],
+          'tags': tagsData,
+          'created_at': row['created_at'],
+          'last_reviewed': row['last_reviewed'],
+          'next_review': row['next_review'],
+          'interval_days': row['interval_days'],
+          'ease_factor': row['ease_factor'],
+          'repetitions': row['repetitions'],
+          'is_learning': (row['is_learning'] as int) == 1,
+        };
+      }).map((data) => _createFlashcardFromData(data)).toList();
+    } catch (e) {
+      return [];
+    }
+  }
+
+  static dynamic _createFlashcardFromData(Map<String, dynamic> data) {
+    // This will be imported from flashcard.dart
+    // For now, return the data as is and let FlashcardService handle it
+    return data;
   }
 }

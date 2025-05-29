@@ -112,6 +112,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+  idb_shim:
+    dependency: "direct main"
+    description:
+      name: idb_shim
+      sha256: "109ce57e7ae8a758e806c24669bf7809f0e4c0bc390159589819061ec2ca75c0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.6+2"
   leak_tracker:
     dependency: transitive
     description:
@@ -240,6 +248,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+  sembast:
+    dependency: transitive
+    description:
+      name: sembast
+      sha256: "7119cf6f79bd1d48c8ec7943f4facd96c15ab26823021ed0792a487c7cd34441"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.8.5+1"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -405,6 +421,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
+  universal_platform:
+    dependency: "direct main"
+    description:
+      name: universal_platform
+      sha256: "64e16458a0ea9b99260ceb5467a214c1f298d647c659af1bff6d3bf82536b1ec"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   vector_math:
     dependency: transitive
     description:

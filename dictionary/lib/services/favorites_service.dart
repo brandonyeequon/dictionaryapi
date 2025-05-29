@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import '../models/word_entry.dart';
-import 'database_service.dart';
+import 'storage/storage_interface.dart';
+import 'storage/storage_factory.dart';
 
 class FavoritesService extends ChangeNotifier {
   static final FavoritesService _instance = FavoritesService._internal();
@@ -10,6 +11,7 @@ class FavoritesService extends ChangeNotifier {
   final Set<String> _favoritesSlugs = <String>{};
   List<WordEntry> _favorites = [];
   bool _isLoaded = false;
+  late final StorageInterface _storage;
 
   bool get isLoaded => _isLoaded;
   List<WordEntry> get favorites => List.unmodifiable(_favorites);
@@ -19,7 +21,10 @@ class FavoritesService extends ChangeNotifier {
     if (_isLoaded) return;
 
     try {
-      _favorites = await DatabaseService.getFavorites();
+      _storage = StorageFactory.createStorage();
+      await _storage.initialize();
+      
+      _favorites = await _storage.getFavorites();
       _favoritesSlugs.clear();
       _favoritesSlugs.addAll(_favorites.map((word) => word.slug));
       _isLoaded = true;
@@ -43,7 +48,9 @@ class FavoritesService extends ChangeNotifier {
 
   Future<bool> addFavorite(WordEntry wordEntry) async {
     try {
-      final success = await DatabaseService.addToFavorites(wordEntry);
+      if (!_isLoaded) await loadFavorites();
+      
+      final success = await _storage.addToFavorites(wordEntry);
       if (success) {
         _favoritesSlugs.add(wordEntry.slug);
         _favorites.insert(0, wordEntry);
@@ -58,7 +65,9 @@ class FavoritesService extends ChangeNotifier {
 
   Future<bool> removeFavorite(String slug) async {
     try {
-      final success = await DatabaseService.removeFromFavorites(slug);
+      if (!_isLoaded) await loadFavorites();
+      
+      final success = await _storage.removeFromFavorites(slug);
       if (success) {
         _favoritesSlugs.remove(slug);
         _favorites.removeWhere((word) => word.slug == slug);
