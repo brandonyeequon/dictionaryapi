@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import '../models/user_progress.dart';
 import '../models/study_session.dart';
@@ -15,36 +16,60 @@ class EnhancedLearnScreen extends StatefulWidget {
   State<EnhancedLearnScreen> createState() => _EnhancedLearnScreenState();
 }
 
-class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
+class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> with WidgetsBindingObserver {
   final EnhancedFlashcardService _flashcardService = EnhancedFlashcardService();
   final EnhancedWordListService _wordListService = EnhancedWordListService();
   
   bool _isLoading = true;
   UserProgress? _userProgress;
   Map<String, dynamic> _flashcardStats = {};
+  Timer? _refreshDebounceTimer;
   
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _initializeServices();
-    // Listen to both word list and flashcard service changes
+    // Only listen for major changes that require UI refresh
     _wordListService.addListener(_onDataChanged);
     _flashcardService.addListener(_onDataChanged);
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _wordListService.removeListener(_onDataChanged);
     _flashcardService.removeListener(_onDataChanged);
+    _refreshDebounceTimer?.cancel();
     super.dispose();
   }
 
   void _onDataChanged() {
     if (mounted) {
-      // Reload stats when data changes
-      debugPrint('[EnhancedLearnScreen] Data changed - refreshing stats');
+      // Debounce rapid refresh calls to prevent excessive reloading
+      _refreshDebounceTimer?.cancel();
+      _refreshDebounceTimer = Timer(const Duration(milliseconds: 300), () {
+        if (mounted) {
+          debugPrint('[EnhancedLearnScreen] Debounced refresh executing');
+          _loadUserData();
+        }
+      });
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // Cancel any pending debounced refresh and refresh immediately when app resumes
+      _refreshDebounceTimer?.cancel();
       _loadUserData();
     }
+  }
+
+  Future<void> _forceRefresh() async {
+    debugPrint('[EnhancedLearnScreen] Force refresh requested by user');
+    _refreshDebounceTimer?.cancel(); // Cancel any pending debounced refresh
+    await _loadUserData();
   }
 
   Future<void> _initializeServices() async {
@@ -89,7 +114,7 @@ class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
-              onRefresh: _loadUserData,
+              onRefresh: _forceRefresh,
               child: SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 padding: const EdgeInsets.all(16),
@@ -649,7 +674,8 @@ class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
             ),
           ),
         ).then((_) {
-          // Refresh data when returning from study session
+          // Cancel debounce and refresh immediately after study session
+          _refreshDebounceTimer?.cancel();
           _loadUserData();
         });
       } else if (mounted) {
@@ -683,7 +709,7 @@ class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Created list: $result')),
           );
-          await _loadUserData(); // Refresh to show new list
+          await _loadUserData(); // Immediate refresh for user action
         }
       } catch (e) {
         if (mounted) {
@@ -711,7 +737,8 @@ class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
             ),
           ),
         ).then((_) {
-          // Refresh data when returning from study session
+          // Cancel debounce and refresh immediately after study session
+          _refreshDebounceTimer?.cancel();
           _loadUserData();
         });
       } else if (mounted) {
@@ -762,7 +789,7 @@ class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Updated list name to: $result')),
           );
-          await _loadUserData(); // Refresh to show updated list
+          await _loadUserData(); // Immediate refresh for user action
         }
       } catch (e) {
         if (mounted) {
@@ -801,7 +828,7 @@ class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Deleted "${list.name}"')),
           );
-          await _loadUserData(); // Refresh to remove deleted list
+          await _loadUserData(); // Immediate refresh for user action
         }
       } catch (e) {
         if (mounted) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/jotoba_word_entry.dart';
+import '../services/audio_service.dart';
 import 'ruby_text_widget.dart';
 import 'pitch_accent_widget.dart';
 
@@ -124,10 +125,13 @@ class JotobaWordCard extends StatelessWidget {
         ],
         if (wordEntry.hasAudio) ...[
           const SizedBox(height: 4.0),
-          Icon(
-            Icons.volume_up,
-            size: 16.0,
-            color: Colors.purple[600],
+          InkWell(
+            onTap: () => _playAudio(context),
+            child: Icon(
+              Icons.volume_up,
+              size: 16.0,
+              color: Colors.blue[600],
+            ),
           ),
         ],
       ],
@@ -296,5 +300,33 @@ class JotobaWordCard extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Future<void> _playAudio(BuildContext context) async {
+    if (wordEntry.hasAudio && wordEntry.primaryAudioUrl != null) {
+      final audioService = AudioService();
+      final success = await audioService.playAudio(wordEntry.primaryAudioUrl!);
+      
+      if (!context.mounted) return;
+      
+      if (!success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to play audio for "${wordEntry.primaryWord}"'),
+            duration: const Duration(seconds: 2),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+      // Success case doesn't show a snackbar to avoid clutter in dictionary list
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('No audio available for this word'),
+          duration: Duration(seconds: 1),
+          backgroundColor: Colors.orange,
+        ),
+      );
+    }
   }
 }

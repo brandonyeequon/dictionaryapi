@@ -3,6 +3,7 @@ import '../models/jotoba_word_entry.dart';
 import '../models/word_entry.dart';
 import '../models/word_list.dart';
 import '../services/enhanced_word_list_service.dart';
+import '../services/audio_service.dart';
 import '../widgets/ruby_text_widget.dart';
 import '../widgets/pitch_accent_widget.dart';
 
@@ -42,10 +43,6 @@ class WordDetailScreen extends StatelessWidget {
             _buildWordHeader(context),
             const SizedBox(height: 24),
             _buildDefinitions(context),
-            if (wordEntry.hasAudio) ...[
-              const SizedBox(height: 24),
-              _buildAudioSection(context),
-            ],
             if (wordEntry.frequencyRank != null) ...[
               const SizedBox(height: 24),
               _buildFrequencyInfo(context),
@@ -108,6 +105,20 @@ class WordDetailScreen extends StatelessWidget {
                         pitchParts: wordEntry.pitchParts,
                         fontSize: 18,
                       ),
+                    if (wordEntry.hasAudio) ...[
+                      const SizedBox(width: 12),
+                      IconButton(
+                        onPressed: () => _playAudio(context),
+                        icon: Icon(
+                          Icons.volume_up,
+                          color: Colors.blue[600],
+                          size: 24,
+                        ),
+                        tooltip: 'Play Audio',
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                      ),
+                    ],
                   ],
                 ),
               )),
@@ -213,46 +224,39 @@ class WordDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildAudioSection(BuildContext context) {
-    return Card(
-      elevation: 1,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Icon(Icons.volume_up, color: Colors.blue[600]),
-                const SizedBox(width: 8),
-                Text(
-                  'Audio Pronunciation',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Text(
-              'Audio is available for this word',
-              style: TextStyle(color: Colors.grey[700]),
-            ),
-            const SizedBox(height: 8),
-            ElevatedButton.icon(
-              onPressed: () {
-                // TODO: Implement audio playback
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Audio playback not implemented yet')),
-                );
-              },
-              icon: const Icon(Icons.play_arrow),
-              label: const Text('Play Audio'),
-            ),
-          ],
+  Future<void> _playAudio(BuildContext context) async {
+    if (wordEntry.hasAudio && wordEntry.primaryAudioUrl != null) {
+      final audioService = AudioService();
+      final success = await audioService.playAudio(wordEntry.primaryAudioUrl!);
+      
+      if (!context.mounted) return;
+      
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Playing audio for "${wordEntry.primaryWord}"'),
+            duration: const Duration(seconds: 1),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to play audio for "${wordEntry.primaryWord}"'),
+            duration: const Duration(seconds: 2),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('No audio available for this word'),
+          duration: Duration(seconds: 2),
+          backgroundColor: Colors.orange,
         ),
-      ),
-    );
+      );
+    }
   }
 
   Widget _buildFrequencyInfo(BuildContext context) {

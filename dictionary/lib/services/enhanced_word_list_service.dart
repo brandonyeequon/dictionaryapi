@@ -157,7 +157,7 @@ class EnhancedWordListService extends ChangeNotifier {
         
         notifyListeners();
         
-        // Force refresh flashcard service singleton to update stats
+        // Force refresh flashcard service to ensure UI updates immediately
         final flashcardService = EnhancedFlashcardService();
         await flashcardService.forceRefresh();
         
@@ -245,7 +245,7 @@ class EnhancedWordListService extends ChangeNotifier {
   Future<void> _createFlashcardForWord(WordEntry wordEntry, List<int> listIds) async {
     try {
       final flashcardService = EnhancedFlashcardService();
-      await flashcardService.initialize();
+      // Don't call initialize again if already initialized
       
       // The EnhancedFlashcardService.createFlashcardFromWord already handles
       // both creating new flashcards and updating existing ones with new list IDs

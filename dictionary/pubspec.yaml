@@ -55,6 +55,9 @@ dependencies:
   
   # Platform detection
   universal_platform: ^1.1.0
+  
+  # Audio playback for pronunciation
+  audioplayers: ^6.0.0
 
 dev_dependencies:
   flutter_test:
