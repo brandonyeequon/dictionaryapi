@@ -6,6 +6,7 @@ import '../widgets/search_bar_widget.dart';
 import 'word_detail_screen.dart';
 import 'favorites_screen.dart';
 import 'flashcards_screen.dart';
+import 'api_debug_screen.dart';
 
 class DictionaryScreen extends StatefulWidget {
   const DictionaryScreen({super.key});
@@ -118,6 +119,29 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
             },
             icon: const Icon(Icons.favorite),
             tooltip: 'Favorites',
+          ),
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              if (value == 'debug') {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const ApiDebugScreen(),
+                  ),
+                );
+              }
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: 'debug',
+                child: Row(
+                  children: [
+                    Icon(Icons.bug_report),
+                    SizedBox(width: 8),
+                    Text('API Debug'),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
