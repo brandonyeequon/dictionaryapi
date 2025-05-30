@@ -60,7 +60,7 @@ class EnhancedFlashcard {
       wordListIds: wordListIds,
       createdAt: now,
       lastReviewed: now,
-      nextReview: now.add(const Duration(hours: 4)), // Start with 4 hours
+      nextReview: now, // New cards are immediately available for study
     );
   }
 

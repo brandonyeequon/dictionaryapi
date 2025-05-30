@@ -416,7 +416,7 @@ class EnhancedSqliteStorage implements EnhancedStorageInterface {
       final db = await database;
       final result = await db.query(
         'enhanced_flashcards',
-        where: 'mastery_level = ?',
+        where: 'mastery_level = ? AND total_reviews = 0',
         whereArgs: [MasteryLevel.newWord.level],
         orderBy: 'created_at ASC',
       );

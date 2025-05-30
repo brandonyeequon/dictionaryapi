@@ -27,6 +27,22 @@ class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
   void initState() {
     super.initState();
     _initializeServices();
+    // Listen to word list changes
+    _wordListService.addListener(_onWordListChanged);
+  }
+
+  @override
+  void dispose() {
+    _wordListService.removeListener(_onWordListChanged);
+    super.dispose();
+  }
+
+  void _onWordListChanged() {
+    if (mounted) {
+      setState(() {
+        // Trigger rebuild when word lists change
+      });
+    }
   }
 
   Future<void> _initializeServices() async {
@@ -49,6 +65,9 @@ class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
     try {
       final progress = await _flashcardService.getUserProgress();
       final stats = await _flashcardService.getFlashcardStats();
+      
+      // Also reload word lists to ensure they're up to date
+      await _wordListService.loadWordLists();
       
       setState(() {
         _userProgress = progress;

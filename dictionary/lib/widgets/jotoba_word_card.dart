@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import '../models/jotoba_word_entry.dart';
-import '../models/word_entry.dart';
-import '../models/word_list.dart';
-import '../services/enhanced_word_list_service.dart';
 import 'ruby_text_widget.dart';
 
 /// Word card widget specifically designed for Jotoba word entries
@@ -42,8 +39,6 @@ class JotobaWordCard extends StatelessWidget {
                 const SizedBox(height: 4.0),
                 _buildFrequencyInfo(context),
               ],
-              const SizedBox(height: 8.0),
-              _buildActionButtons(context),
             ],
           ),
         ),
@@ -280,124 +275,6 @@ class JotobaWordCard extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildActionButtons(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: OutlinedButton.icon(
-            onPressed: () => _showAddToListDialog(context),
-            icon: const Icon(Icons.add, size: 16),
-            label: const Text('Add to List'),
-            style: OutlinedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              minimumSize: const Size(0, 32),
-              textStyle: const TextStyle(fontSize: 12),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Future<void> _showAddToListDialog(BuildContext context) async {
-    final wordListService = EnhancedWordListService();
-    await wordListService.initialize();
-    
-    final wordLists = wordListService.wordLists;
-    
-    if (wordLists.isEmpty) {
-      if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('No word lists found. Create a list first in the Learn section.'),
-        ),
-      );
-      return;
-    }
-
-    if (!context.mounted) return;
-    final selectedList = await showDialog<WordList>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Add to Word List'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text('Select a list to add "${wordEntry.primaryWord}":'),
-            const SizedBox(height: 16),
-            ...wordLists.map((list) => ListTile(
-              title: Text(list.name),
-              onTap: () => Navigator.of(context).pop(list),
-            )),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel'),
-          ),
-        ],
-      ),
-    );
-
-    if (selectedList != null && context.mounted) {
-      await _addWordToList(context, selectedList);
-    }
-  }
-
-  Future<void> _addWordToList(BuildContext context, WordList selectedList) async {
-    try {
-      final wordListService = EnhancedWordListService();
-      final convertedWord = _convertToWordEntry(wordEntry);
-      
-      final success = await wordListService.addWordToList(selectedList.id, convertedWord);
-      
-      if (!context.mounted) return;
-      if (success) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Added "${wordEntry.primaryWord}" to "${selectedList.name}"'),
-            backgroundColor: Colors.green,
-          ),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Failed to add word to list'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    } catch (e) {
-      if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error: $e'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
-  }
-
-  WordEntry _convertToWordEntry(JotobaWordEntry jotobaEntry) {
-    return WordEntry(
-      slug: jotobaEntry.slug ?? jotobaEntry.primaryWord,
-      isCommon: jotobaEntry.isCommon,
-      tags: jotobaEntry.tags,
-      jlpt: jotobaEntry.jlpt,
-      japanese: jotobaEntry.reading.map((r) => JapaneseReading(
-        word: r.kanji,
-        reading: r.kana,
-      )).toList(),
-      senses: jotobaEntry.senses.map((s) => WordSense(
-        englishDefinitions: s.allGlossTexts,
-        partsOfSpeech: s.partsOfSpeech,
-        tags: s.tags,
-        info: s.info,
-      )).toList(),
     );
   }
 }

@@ -142,7 +142,7 @@ class EnhancedWordListService extends ChangeNotifier {
     return _wordLists.where((list) => list.id == listId).firstOrNull;
   }
 
-  /// Add a word to a list
+  /// Add a word to a list and automatically create flashcard
   Future<bool> addWordToList(int listId, WordEntry wordEntry) async {
     await _ensureInitialized();
     
@@ -151,6 +151,10 @@ class EnhancedWordListService extends ChangeNotifier {
       if (success) {
         // Update cache
         _listWordsCache[listId]?.add(wordEntry);
+        
+        // Automatically create flashcard for this word
+        await _createFlashcardForWord(wordEntry, [listId]);
+        
         notifyListeners();
         
         debugPrint('[EnhancedWordListService] Added word to list $listId: ${wordEntry.slug}');
@@ -162,7 +166,7 @@ class EnhancedWordListService extends ChangeNotifier {
     }
   }
 
-  /// Remove a word from a list
+  /// Remove a word from a list and update flashcard associations
   Future<bool> removeWordFromList(int listId, String wordSlug) async {
     await _ensureInitialized();
     
@@ -171,6 +175,10 @@ class EnhancedWordListService extends ChangeNotifier {
       if (success) {
         // Update cache
         _listWordsCache[listId]?.removeWhere((word) => word.slug == wordSlug);
+        
+        // Update flashcard associations
+        await _updateFlashcardAfterWordRemoval(wordSlug, listId);
+        
         notifyListeners();
         
         debugPrint('[EnhancedWordListService] Removed word from list $listId: $wordSlug');
@@ -226,6 +234,54 @@ class EnhancedWordListService extends ChangeNotifier {
     } catch (e) {
       debugPrint('[EnhancedWordListService] Create flashcard from word failed: $e');
       return false;
+    }
+  }
+
+  /// Helper method to create flashcard for a word when added to lists
+  Future<void> _createFlashcardForWord(WordEntry wordEntry, List<int> listIds) async {
+    try {
+      final flashcardService = EnhancedFlashcardService();
+      await flashcardService.initialize();
+      
+      // The EnhancedFlashcardService.createFlashcardFromWord already handles
+      // both creating new flashcards and updating existing ones with new list IDs
+      final success = await flashcardService.createFlashcardFromWord(wordEntry, listIds);
+      
+      if (success) {
+        debugPrint('[EnhancedWordListService] Successfully ensured flashcard exists for ${wordEntry.slug} in lists: $listIds');
+      } else {
+        debugPrint('[EnhancedWordListService] Failed to ensure flashcard for ${wordEntry.slug}');
+      }
+    } catch (e) {
+      debugPrint('[EnhancedWordListService] Error creating flashcard for word: $e');
+    }
+  }
+
+  /// Helper method to update flashcard associations when word is removed from a list
+  Future<void> _updateFlashcardAfterWordRemoval(String wordSlug, int removedListId) async {
+    try {
+      final flashcardService = EnhancedFlashcardService();
+      await flashcardService.initialize();
+      
+      // Get the existing flashcard
+      final existingCard = await flashcardService.getFlashcardByWordSlug(wordSlug);
+      if (existingCard != null) {
+        // Remove the list ID from the flashcard's word list associations
+        final updatedListIds = existingCard.wordListIds.where((id) => id != removedListId).toList();
+        
+        if (updatedListIds.isEmpty) {
+          // If no lists remain, optionally delete the flashcard
+          // For now, we'll keep it but it won't be associated with any lists
+          debugPrint('[EnhancedWordListService] Flashcard ${existingCard.id} for $wordSlug is no longer associated with any lists');
+        } else if (updatedListIds.length != existingCard.wordListIds.length) {
+          // Update the flashcard with the new list associations through the storage
+          final updatedCard = existingCard.copyWith(wordListIds: updatedListIds);
+          await _storage.updateFlashcard(updatedCard);
+          debugPrint('[EnhancedWordListService] Updated flashcard ${existingCard.id} - removed list $removedListId');
+        }
+      }
+    } catch (e) {
+      debugPrint('[EnhancedWordListService] Error updating flashcard after word removal: $e');
     }
   }
 
