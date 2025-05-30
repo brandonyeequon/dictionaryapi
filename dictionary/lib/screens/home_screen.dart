@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dictionary_screen.dart';
-import 'learn_screen.dart';
+import 'enhanced_learn_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
   
   final List<Widget> _screens = [
     const DictionaryScreen(),
-    const LearnScreen(),
+    const EnhancedLearnScreen(),
   ];
 
   @override
