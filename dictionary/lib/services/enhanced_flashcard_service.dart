@@ -7,7 +7,7 @@ import '../models/word_mastery.dart';
 import '../models/study_session.dart';
 import '../models/user_progress.dart';
 import 'storage/enhanced_storage_interface.dart';
-import 'storage/enhanced_sqlite_storage.dart';
+import 'storage/enhanced_storage_factory.dart';
 
 /// Enhanced flashcard service with list integration, SRS, and progress tracking
 class EnhancedFlashcardService extends ChangeNotifier {
@@ -45,8 +45,7 @@ class EnhancedFlashcardService extends ChangeNotifier {
     if (_isInitialized) return;
     
     try {
-      // TODO: Add web storage support
-      _storage = EnhancedSqliteStorage();
+      _storage = EnhancedStorageFactory.createStorage();
       await _storage.initialize();
       _isInitialized = true;
       
@@ -128,6 +127,8 @@ class EnhancedFlashcardService extends ChangeNotifier {
         _flashcardCache[flashcard.id] = flashcard;
         await _refreshCaches(); // Refresh to update due cards
         notifyListeners();
+        
+        debugPrint('[EnhancedFlashcardService] Created flashcard for ${wordEntry.slug} - notifying listeners');
       }
       
       return success;
@@ -194,7 +195,7 @@ class EnhancedFlashcardService extends ChangeNotifier {
         ? allCards.map((c) => c.accuracy).reduce((a, b) => a + b) / allCards.length
         : 0.0;
     
-    return {
+    final stats = {
       'totalCards': allCards.length,
       'dueCards': dueCards.length,
       'newCards': newCards.length,
@@ -203,6 +204,9 @@ class EnhancedFlashcardService extends ChangeNotifier {
       'averageAccuracy': totalAccuracy,
       'statsByMastery': statsByMastery.map((k, v) => MapEntry(k.displayName, v)),
     };
+    
+    debugPrint('[EnhancedFlashcardService] Stats calculated: ${stats['newCards']} new cards, ${stats['dueCards']} due cards, ${stats['totalCards']} total');
+    return stats;
   }
 
   /// Start a study session
@@ -497,6 +501,13 @@ class EnhancedFlashcardService extends ChangeNotifier {
   Future<EnhancedFlashcard?> getFlashcardByWordSlug(String wordSlug) async {
     await _ensureInitialized();
     return await _storage.getFlashcardByWordSlug(wordSlug);
+  }
+
+  /// Force refresh all caches and notify listeners (useful after external changes)
+  Future<void> forceRefresh() async {
+    await _refreshCaches();
+    notifyListeners();
+    debugPrint('[EnhancedFlashcardService] Force refresh completed');
   }
 
   @override

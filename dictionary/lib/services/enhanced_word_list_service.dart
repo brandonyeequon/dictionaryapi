@@ -6,7 +6,7 @@ import '../models/word_list.dart';
 import '../models/enhanced_flashcard.dart';
 import '../models/study_session.dart';
 import 'storage/enhanced_storage_interface.dart';
-import 'storage/enhanced_sqlite_storage.dart';
+import 'storage/enhanced_storage_factory.dart';
 import 'enhanced_flashcard_service.dart';
 
 /// Enhanced word list service that integrates with the flashcard system
@@ -32,7 +32,7 @@ class EnhancedWordListService extends ChangeNotifier {
     if (_isInitialized) return;
     
     try {
-      _storage = EnhancedSqliteStorage();
+      _storage = EnhancedStorageFactory.createStorage();
       await _storage.initialize();
       _isInitialized = true;
       
@@ -156,6 +156,10 @@ class EnhancedWordListService extends ChangeNotifier {
         await _createFlashcardForWord(wordEntry, [listId]);
         
         notifyListeners();
+        
+        // Force refresh flashcard service singleton to update stats
+        final flashcardService = EnhancedFlashcardService();
+        await flashcardService.forceRefresh();
         
         debugPrint('[EnhancedWordListService] Added word to list $listId: ${wordEntry.slug}');
       }

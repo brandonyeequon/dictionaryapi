@@ -41,15 +41,13 @@ class JotobaWordEntry {
       reading: _parseReadings(json),
       senses: _parseSenses(json),
       audio: _parseAudio(json),
-      common: json['common'] ?? false,
-      tags: List<String>.from(json['tags'] ?? []),
-      jlpt: List<String>.from(json['jlpt'] ?? []),
+      common: _parseBool(json['common']),
+      tags: _parseStringList(json['tags']),
+      jlpt: _parseStringList(json['jlpt']),
       pitchAccent: _parsePitchAccent(json),
       frequency: json['frequency'],
       collocations: json['collocations'],
-      alternativeSpellings: json['alternative_spellings'] != null
-          ? List<String>.from(json['alternative_spellings'])
-          : null,
+      alternativeSpellings: _parseStringListNullable(json['alternative_spellings']),
     );
   }
 
@@ -232,6 +230,30 @@ class JotobaWordEntry {
           .toList();
     }
     return [];
+  }
+
+  static bool _parseBool(dynamic value) {
+    if (value is bool) return value;
+    if (value is String) {
+      return value.toLowerCase() == 'true' || value == '1';
+    }
+    if (value is int) return value != 0;
+    return false;
+  }
+
+  static List<String> _parseStringList(dynamic value) {
+    if (value is List) {
+      return value.map((e) => e.toString()).toList();
+    }
+    if (value is String) {
+      return [value];
+    }
+    return [];
+  }
+
+  static List<String>? _parseStringListNullable(dynamic value) {
+    if (value == null) return null;
+    return _parseStringList(value);
   }
 
   Map<String, dynamic> toJson() {

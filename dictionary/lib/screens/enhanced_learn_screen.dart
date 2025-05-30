@@ -27,21 +27,23 @@ class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
   void initState() {
     super.initState();
     _initializeServices();
-    // Listen to word list changes
-    _wordListService.addListener(_onWordListChanged);
+    // Listen to both word list and flashcard service changes
+    _wordListService.addListener(_onDataChanged);
+    _flashcardService.addListener(_onDataChanged);
   }
 
   @override
   void dispose() {
-    _wordListService.removeListener(_onWordListChanged);
+    _wordListService.removeListener(_onDataChanged);
+    _flashcardService.removeListener(_onDataChanged);
     super.dispose();
   }
 
-  void _onWordListChanged() {
+  void _onDataChanged() {
     if (mounted) {
-      setState(() {
-        // Trigger rebuild when word lists change
-      });
+      // Reload stats when data changes
+      debugPrint('[EnhancedLearnScreen] Data changed - refreshing stats');
+      _loadUserData();
     }
   }
 
@@ -63,6 +65,7 @@ class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
 
   Future<void> _loadUserData() async {
     try {
+      debugPrint('[EnhancedLearnScreen] Loading user data...');
       final progress = await _flashcardService.getUserProgress();
       final stats = await _flashcardService.getFlashcardStats();
       
@@ -73,6 +76,8 @@ class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
         _userProgress = progress;
         _flashcardStats = stats;
       });
+      
+      debugPrint('[EnhancedLearnScreen] User data loaded - new cards: ${stats['newCards']}');
     } catch (e) {
       debugPrint('Error loading user data: $e');
     }
