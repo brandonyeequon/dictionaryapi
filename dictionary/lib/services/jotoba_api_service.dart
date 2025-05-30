@@ -258,9 +258,9 @@ class JotobaApiService {
           debugPrint('[JotobaApiService] Response body length: ${response.body.length}');
         }
         
-        late dynamic jsonData;
+        late dynamic jsonDataDecoded; // Renamed to avoid confusion
         try {
-          jsonData = json.decode(response.body);
+          jsonDataDecoded = json.decode(response.body);
         } catch (e) {
           if (kDebugMode) {
             debugPrint('[JotobaApiService] JSON decode error: $e');
@@ -268,20 +268,39 @@ class JotobaApiService {
           }
           throw Exception('Invalid JSON response format from Jotoba: $e');
         }
+
+        // ****** START MODIFICATION ******
+        dynamic actualDataToParse = jsonDataDecoded; // Default to the full decoded response
+
+        if (jsonDataDecoded is Map<String, dynamic> && jsonDataDecoded.containsKey('body')) {
+          if (jsonDataDecoded['body'] is Map<String, dynamic>) {
+            actualDataToParse = jsonDataDecoded['body'] as Map<String, dynamic>;
+            if (kDebugMode) {
+              debugPrint('[JotobaApiService] Extracted "body" from response for parsing.');
+            }
+          } else {
+            // This case might indicate an unexpected structure for 'body'
+            if (kDebugMode) {
+              debugPrint('[JotobaApiService] "body" key found but is not a Map. Using full response.');
+            }
+          }
+        }
+        // ****** END MODIFICATION ******
         
         if (kDebugMode) {
-          debugPrint('[JotobaApiService] Response has words: ${jsonData.containsKey('words')}');
-          debugPrint('[JotobaApiService] Response has kanji: ${jsonData.containsKey('kanji')}');
+          // Adjust debug prints if necessary, or they can remain general
+          debugPrint('[JotobaApiService] Data for validation has words: ${actualDataToParse.containsKey('words')}');
+          debugPrint('[JotobaApiService] Data for validation has kanji: ${actualDataToParse.containsKey('kanji')}');
         }
         
-        if (!_isValidJotobaResponse(jsonData)) {
+        if (!_isValidJotobaResponse(actualDataToParse)) { // Use actualDataToParse
           if (kDebugMode) {
-            debugPrint('[JotobaApiService] Invalid response structure: $jsonData');
+            debugPrint('[JotobaApiService] Invalid response structure: $actualDataToParse');
           }
           throw Exception('Invalid response structure from Jotoba API');
         }
         
-        return jsonData;
+        return actualDataToParse; // Return actualDataToParse
       } else {
         throw Exception(
           'HTTP ${response.statusCode} from Jotoba API: ${response.reasonPhrase}'
