@@ -31,7 +31,7 @@ class JotobaApiService {
         if (limit != null) 'limit': limit,
       };
 
-      final response = await _makeRequest(
+      final response = await makeRequest(
         endpoint: '/api/search/words',
         body: requestBody,
       );
@@ -66,7 +66,7 @@ class JotobaApiService {
         if (limit != null) 'limit': limit,
       };
 
-      final response = await _makeRequest(
+      final response = await makeRequest(
         endpoint: '/api/search/names',
         body: requestBody,
       );
@@ -101,7 +101,7 @@ class JotobaApiService {
         if (limit != null) 'limit': limit,
       };
 
-      final response = await _makeRequest(
+      final response = await makeRequest(
         endpoint: '/api/search/kanji',
         body: requestBody,
       );
@@ -136,7 +136,7 @@ class JotobaApiService {
         if (limit != null) 'limit': limit,
       };
 
-      final response = await _makeRequest(
+      final response = await makeRequest(
         endpoint: '/api/search/sentences',
         body: requestBody,
       );
@@ -171,7 +171,7 @@ class JotobaApiService {
         if (limit != null) 'limit': limit,
       };
 
-      final response = await _makeRequest(
+      final response = await makeRequest(
         endpoint: '/api/kanji/by_radical',
         body: requestBody,
       );
@@ -206,7 +206,7 @@ class JotobaApiService {
         if (limit != null) 'limit': limit,
       };
 
-      final response = await _makeRequest(
+      final response = await makeRequest(
         endpoint: '/api/suggestion',
         body: requestBody,
       );
@@ -225,8 +225,8 @@ class JotobaApiService {
     }
   }
 
-  /// Make HTTP request to Jotoba API
-  static Future<Map<String, dynamic>?> _makeRequest({
+  /// Make HTTP request to Jotoba API (exposed for unified search)
+  static Future<Map<String, dynamic>?> makeRequest({
     required String endpoint,
     required Map<String, dynamic> body,
   }) async {

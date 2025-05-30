@@ -3,8 +3,22 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 /// Script to collect Jotoba API responses for analysis
-/// Run with: dart api_response_collector.dart
+/// Run with: dart tools/api_response_collector.dart
+/// 
+/// WARNING: This is a development tool only!
+/// Do NOT import or run this in the main app.
 void main() async {
+  // Guard against accidental execution in production
+  if (const bool.fromEnvironment('dart.vm.product')) {
+    print('ERROR: API Response Collector should not run in production!');
+    exit(1);
+  }
+  
+  print('=== Jotoba API Response Collector ===');
+  print('Development tool for collecting API responses');
+  print('Run from project root: dart tools/api_response_collector.dart');
+  print('');
+  
   final collector = ApiResponseCollector();
   await collector.collectResponses();
 }

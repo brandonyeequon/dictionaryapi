@@ -51,15 +51,20 @@ class DictionaryService {
     int? limit,
   }) async {
     try {
-      // Use existing searchWords method but parse response differently
-      final wordResponse = await JotobaApiService.searchWords(
-        query: query,
-        language: language ?? _preferredLanguage,
-        limit: limit,
+      // Make direct API call to get raw response with both words and kanji
+      final requestBody = {
+        'query': query.trim(),
+        'language': language ?? _preferredLanguage,
+        if (limit != null) 'limit': limit,
+      };
+
+      final rawResponse = await JotobaApiService.makeRequest(
+        endpoint: '/api/search/words',
+        body: requestBody,
       );
       
-      if (wordResponse?.metadata != null) {
-        return JotobaUnifiedResponse.fromJson(wordResponse!.metadata!);
+      if (rawResponse != null) {
+        return JotobaUnifiedResponse.fromJson(rawResponse);
       }
       return null;
     } catch (e) {

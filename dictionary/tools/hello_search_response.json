@@ -1,0 +1,558 @@
+{
+  "status_code": 200,
+  "headers": {
+    "access-control-allow-credentials": "true",
+    "connection": "keep-alive",
+    "date": "Fri, 30 May 2025 20:13:09 GMT",
+    "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+    "strict-transport-security": "max-age=63072000; preload",
+    "content-length": "4839",
+    "access-control-expose-headers": "content-type",
+    "content-type": "application/json",
+    "server": "openresty"
+  },
+  "body": {
+    "kanji": [
+      {
+        "literal": "今",
+        "meanings": [
+          "now"
+        ],
+        "grade": 2,
+        "stroke_count": 4,
+        "frequency": 49,
+        "jlpt": 5,
+        "onyomi": [
+          "コン",
+          "キン"
+        ],
+        "kunyomi": [
+          "いま"
+        ],
+        "chinese": [
+          "jin1"
+        ],
+        "korean_r": [
+          "geum"
+        ],
+        "korean_h": [
+          "금"
+        ],
+        "parts": [
+          "𠆢",
+          "一"
+        ],
+        "radical": "人"
+      },
+      {
+        "literal": "日",
+        "meanings": [
+          "day",
+          "sun",
+          "Japan",
+          "counter for days"
+        ],
+        "grade": 1,
+        "stroke_count": 4,
+        "frequency": 1,
+        "jlpt": 5,
+        "onyomi": [
+          "ニチ",
+          "ジツ"
+        ],
+        "kunyomi": [
+          "ひ",
+          "-び",
+          "-か"
+        ],
+        "chinese": [
+          "ri4"
+        ],
+        "korean_r": [
+          "il"
+        ],
+        "korean_h": [
+          "일"
+        ],
+        "parts": [
+          "日"
+        ],
+        "radical": "日"
+      },
+      {
+        "literal": "你",
+        "meanings": [
+          "you",
+          "second person pronoun"
+        ],
+        "stroke_count": 7,
+        "variant": [
+          "1-28-04",
+          "1-53-85",
+          "1-16-62",
+          "1-18-56",
+          "1-29-91"
+        ],
+        "onyomi": [
+          "ジ",
+          "ニ"
+        ],
+        "kunyomi": [
+          "なんじ",
+          "しかり",
+          "その",
+          "のみ"
+        ],
+        "chinese": [
+          "ni3"
+        ],
+        "korean_r": [
+          "ni"
+        ],
+        "radical": "人"
+      },
+      {
+        "literal": "好",
+        "meanings": [
+          "fond",
+          "pleasing",
+          "like something"
+        ],
+        "grade": 4,
+        "stroke_count": 6,
+        "frequency": 423,
+        "jlpt": 3,
+        "onyomi": [
+          "コウ"
+        ],
+        "kunyomi": [
+          "この.む",
+          "す.く",
+          "よ.い",
+          "い.い"
+        ],
+        "chinese": [
+          "hao3",
+          "hao4"
+        ],
+        "korean_r": [
+          "ho"
+        ],
+        "korean_h": [
+          "호"
+        ],
+        "parts": [
+          "子",
+          "女"
+        ],
+        "radical": "女"
+      }
+    ],
+    "words": [
+      {
+        "reading": {
+          "kana": "こんにちは",
+          "kanji": "今日は",
+          "furigana": "[今日|こん|にち]は"
+        },
+        "common": true,
+        "senses": [
+          {
+            "glosses": [
+              "hello",
+              "good day",
+              "good afternoon"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English",
+            "information": "は is pronounced as わ",
+            "misc": "UsuallyWrittenInKana"
+          }
+        ],
+        "audio": "/resource/audio/tofugu/1289400"
+      },
+      {
+        "reading": {
+          "kana": "もしもし",
+          "furigana": null
+        },
+        "common": true,
+        "senses": [
+          {
+            "glosses": [
+              "hello (e.g. on phone)"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English"
+          },
+          {
+            "glosses": [
+              "excuse me! (when calling out to someone)"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English"
+          }
+        ],
+        "pitch": [
+          {
+            "part": "も",
+            "high": true
+          },
+          {
+            "part": "しもし",
+            "high": false
+          }
+        ]
+      },
+      {
+        "reading": {
+          "kana": "ハロー",
+          "furigana": null
+        },
+        "common": true,
+        "senses": [
+          {
+            "glosses": [
+              "hello"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English"
+          }
+        ]
+      },
+      {
+        "reading": {
+          "kana": "どうも",
+          "furigana": null
+        },
+        "common": true,
+        "senses": [
+          {
+            "glosses": [
+              "thank you",
+              "thanks"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English",
+            "misc": "Abbreviation",
+            "xref": "どうも有難う"
+          },
+          {
+            "glosses": [
+              "much (thanks)",
+              "very (sorry)",
+              "quite (regret)"
+            ],
+            "pos": [
+              "Adverb"
+            ],
+            "language": "English"
+          },
+          {
+            "glosses": [
+              "quite",
+              "really",
+              "mostly"
+            ],
+            "pos": [
+              "Adverb"
+            ],
+            "language": "English"
+          },
+          {
+            "glosses": [
+              "somehow"
+            ],
+            "pos": [
+              "Adverb"
+            ],
+            "language": "English"
+          },
+          {
+            "glosses": [
+              "in spite of oneself",
+              "try as one might",
+              "no matter how hard one may try (to, not to)"
+            ],
+            "pos": [
+              "Adverb"
+            ],
+            "language": "English",
+            "xref": "どうしても・1"
+          },
+          {
+            "glosses": [
+              "greetings",
+              "hello",
+              "goodbye"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English"
+          }
+        ]
+      },
+      {
+        "reading": {
+          "kana": "ハローワーク",
+          "furigana": null
+        },
+        "common": false,
+        "senses": [
+          {
+            "glosses": [
+              "Hello Work (official nickname for the Public Employment Security Office)"
+            ],
+            "pos": [
+              {
+                "Noun": "Normal"
+              }
+            ],
+            "language": "English",
+            "xref": "公共職業安定所"
+          }
+        ]
+      },
+      {
+        "reading": {
+          "kana": "ニーハオ",
+          "kanji": "你好",
+          "furigana": "[你好|ニーハオ]"
+        },
+        "common": false,
+        "senses": [
+          {
+            "glosses": [
+              "hello"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English",
+            "misc": "UsuallyWrittenInKana"
+          }
+        ]
+      },
+      {
+        "reading": {
+          "kana": "いよう",
+          "furigana": null
+        },
+        "common": false,
+        "senses": [
+          {
+            "glosses": [
+              "hey",
+              "hello",
+              "hi"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English"
+          },
+          {
+            "glosses": [
+              "wow",
+              "oh",
+              "ooh"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English"
+          },
+          {
+            "glosses": [
+              "oomph",
+              "heave-ho"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English"
+          }
+        ],
+        "pitch": [
+          {
+            "part": "い",
+            "high": true
+          },
+          {
+            "part": "よう",
+            "high": false
+          }
+        ]
+      },
+      {
+        "reading": {
+          "kana": "やあやあ",
+          "furigana": null
+        },
+        "common": false,
+        "senses": [
+          {
+            "glosses": [
+              "hi",
+              "hello"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English",
+            "misc": "MaleTermOrLanguage"
+          },
+          {
+            "glosses": [
+              "hey",
+              "listen!"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English"
+          },
+          {
+            "glosses": [
+              "oh"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English",
+            "information": "expression of mild surprise"
+          },
+          {
+            "glosses": [
+              "come on!"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English",
+            "information": "in kendo"
+          }
+        ],
+        "pitch": [
+          {
+            "part": "や",
+            "high": true
+          },
+          {
+            "part": "あやあ",
+            "high": false
+          }
+        ]
+      },
+      {
+        "reading": {
+          "kana": "はいはい",
+          "furigana": null
+        },
+        "common": false,
+        "senses": [
+          {
+            "glosses": [
+              "yeah, yeah",
+              "whatever",
+              "sure"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English",
+            "misc": "Colloquialism",
+            "xref": "はい・2"
+          },
+          {
+            "glosses": [
+              "yes",
+              "sure",
+              "gotcha"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English",
+            "misc": "Colloquialism"
+          },
+          {
+            "glosses": [
+              "hello"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English",
+            "information": "on phone, as a reply to もしもし"
+          },
+          {
+            "glosses": [
+              "giddy-up",
+              "gee-up",
+              "giddap"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English",
+            "information": "said to a horse",
+            "xref": "はい・3"
+          }
+        ],
+        "pitch": [
+          {
+            "part": "は",
+            "high": true
+          },
+          {
+            "part": "いはい",
+            "high": false
+          }
+        ]
+      },
+      {
+        "reading": {
+          "kana": "ちわ",
+          "furigana": null
+        },
+        "common": false,
+        "senses": [
+          {
+            "glosses": [
+              "hello",
+              "hi"
+            ],
+            "pos": [
+              "Interjection"
+            ],
+            "language": "English",
+            "misc": "Abbreviation",
+            "xref": "こんにちは"
+          }
+        ],
+        "pitch": [
+          {
+            "part": "ち",
+            "high": true
+          },
+          {
+            "part": "わ",
+            "high": false
+          }
+        ]
+      }
+    ]
+  }
+}
