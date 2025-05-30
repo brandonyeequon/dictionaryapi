@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../models/user_progress.dart';
 import '../models/study_session.dart';
+import '../models/word_entry.dart';
+import '../models/word_list.dart';
 import '../services/enhanced_flashcard_service.dart';
 import '../services/enhanced_word_list_service.dart';
 import 'enhanced_study_screen.dart';
-import 'word_lists_screen.dart';
 
 /// Enhanced learn screen with user progress, streaks, and level progression
 class EnhancedLearnScreen extends StatefulWidget {
@@ -74,11 +75,9 @@ class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
                     const SizedBox(height: 16),
                     _buildUserProgressCard(),
                     const SizedBox(height: 24),
-                    _buildQuickStudyActions(),
+                    _buildGlobalStudyActions(),
                     const SizedBox(height: 24),
-                    _buildStatisticsCard(),
-                    const SizedBox(height: 24),
-                    _buildWordListsSection(),
+                    _buildMyListsSection(),
                     const SizedBox(height: 24),
                     _buildAchievementsSection(),
                   ],
@@ -233,7 +232,7 @@ class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
     );
   }
 
-  Widget _buildQuickStudyActions() {
+  Widget _buildGlobalStudyActions() {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -241,7 +240,7 @@ class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Quick Study',
+              'Global Study Options',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -331,144 +330,230 @@ class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
     );
   }
 
-  Widget _buildStatisticsCard() {
-    final stats = _flashcardStats;
-    if (stats.isEmpty) return const SizedBox.shrink();
 
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _buildMyListsSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Vocabulary Overview',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              'My Word Lists',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                  child: _buildStatCard(
-                    'Total Cards',
-                    '${stats['totalCards'] ?? 0}',
-                    Icons.quiz,
-                    Colors.blue,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: _buildStatCard(
-                    'Mastered',
-                    '${stats['masteredCards'] ?? 0}',
-                    Icons.star,
-                    Colors.green,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: _buildStatCard(
-                    'Accuracy',
-                    '${(stats['averageAccuracy'] ?? 0.0).toStringAsFixed(1)}%',
-                    Icons.check_circle,
-                    Colors.orange,
-                  ),
-                ),
-              ],
+            OutlinedButton.icon(
+              onPressed: _createNewList,
+              icon: const Icon(Icons.add, size: 18),
+              label: const Text('New List'),
             ),
           ],
         ),
-      ),
+        const SizedBox(height: 16),
+        _buildWordListCards(),
+      ],
     );
   }
 
-  Widget _buildStatCard(String title, String value, IconData icon, Color color) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        children: [
-          Icon(icon, color: color, size: 32),
-          const SizedBox(height: 8),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
+  Widget _buildWordListCards() {
+    final lists = _wordListService.wordLists;
+    
+    if (lists.isEmpty) {
+      return Card(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            children: [
+              Icon(Icons.list, size: 64, color: Colors.grey[400]),
+              const SizedBox(height: 16),
+              Text(
+                'No Word Lists Yet',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: Colors.grey[600],
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Create your first list to start organizing your vocabulary',
+                style: TextStyle(color: Colors.grey[600]),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton.icon(
+                onPressed: _createNewList,
+                icon: const Icon(Icons.add),
+                label: const Text('Create First List'),
+              ),
+            ],
           ),
-          Text(
-            title,
-            style: const TextStyle(fontSize: 12),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
+        ),
+      );
+    }
+
+    return Column(
+      children: lists.map((list) => _buildWordListCard(list)).toList(),
     );
   }
 
-  Widget _buildWordListsSection() {
+  Widget _buildWordListCard(list) {
+    return FutureBuilder<List<WordEntry>>(
+      future: _wordListService.getWordsInList(list.id),
+      builder: (context, snapshot) {
+        final wordCount = snapshot.data?.length ?? 0;
+        return _buildWordListCardContent(list, wordCount);
+      },
+    );
+  }
+
+  Widget _buildWordListCardContent(list, int wordCount) {
+    
     return Card(
+      margin: const EdgeInsets.only(bottom: 16),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Word Lists',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const WordListsScreen(),
-                      ),
-                    );
-                  },
-                  child: const Text('Manage All'),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const WordListsScreen(),
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.list),
-                    label: const Text('View Lists'),
+                CircleAvatar(
+                  backgroundColor: Theme.of(context).primaryColor,
+                  child: Text(
+                    list.name.substring(0, 1).toUpperCase(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: _createNewList,
-                    icon: const Icon(Icons.add),
-                    label: const Text('New List'),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        list.name,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        '$wordCount words',
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
                   ),
+                ),
+                PopupMenuButton(
+                  icon: const Icon(Icons.more_vert),
+                  onSelected: (value) => _handleListAction(value, list),
+                  itemBuilder: (context) => [
+                    const PopupMenuItem(
+                      value: 'edit',
+                      child: Row(
+                        children: [
+                          Icon(Icons.edit),
+                          SizedBox(width: 8),
+                          Text('Edit'),
+                        ],
+                      ),
+                    ),
+                    const PopupMenuItem(
+                      value: 'delete',
+                      child: Row(
+                        children: [
+                          Icon(Icons.delete, color: Colors.red),
+                          SizedBox(width: 8),
+                          Text('Delete', style: TextStyle(color: Colors.red)),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Study Options',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 12),
+            GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              childAspectRatio: 2.8,
+              children: [
+                _buildListStudyButton(
+                  'Study All',
+                  Icons.play_arrow,
+                  Colors.blue,
+                  () => _startListStudy(list, StudySessionType.mixed),
+                ),
+                _buildListStudyButton(
+                  'New Words',
+                  Icons.fiber_new,
+                  Colors.green,
+                  () => _startListStudy(list, StudySessionType.newCards),
+                ),
+                _buildListStudyButton(
+                  'Due Cards',
+                  Icons.schedule,
+                  Colors.orange,
+                  () => _startListStudy(list, StudySessionType.due),
+                ),
+                _buildListStudyButton(
+                  'Review',
+                  Icons.refresh,
+                  Colors.purple,
+                  () => _startListStudy(list, StudySessionType.mixed),
                 ),
               ],
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildListStudyButton(
+    String title,
+    IconData icon,
+    Color color,
+    VoidCallback onPressed,
+  ) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: color.withValues(alpha: 0.1),
+        foregroundColor: color,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: BorderSide(color: color.withValues(alpha: 0.3)),
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, size: 20),
+          const SizedBox(height: 2),
+          Text(
+            title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 11,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -574,16 +659,130 @@ class _EnhancedLearnScreenState extends State<EnhancedLearnScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Created list: $result')),
           );
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const WordListsScreen(),
-            ),
-          );
+          await _loadUserData(); // Refresh to show new list
         }
       } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Error creating list: $e')),
+          );
+        }
+      }
+    }
+  }
+
+  Future<void> _startListStudy(WordList list, StudySessionType sessionType) async {
+    try {
+      final success = await _flashcardService.startStudySession(
+        sessionType: sessionType,
+        targetListIds: [list.id],
+        cardLimit: 20,
+      );
+      
+      if (success && mounted) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => EnhancedStudyScreen(
+              initialSessionType: sessionType,
+            ),
+          ),
+        ).then((_) {
+          // Refresh data when returning from study session
+          _loadUserData();
+        });
+      } else if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('No ${sessionType.displayName.toLowerCase()} cards available in "${list.name}"'),
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error starting study session: $e'),
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _handleListAction(String action, WordList list) async {
+    switch (action) {
+      case 'edit':
+        await _editList(list);
+        break;
+      case 'delete':
+        await _deleteList(list);
+        break;
+    }
+  }
+
+  Future<void> _editList(WordList list) async {
+    final result = await showDialog<String>(
+      context: context,
+      builder: (context) => _EditListDialog(initialName: list.name),
+    );
+    
+    if (result != null && result.isNotEmpty && result != list.name) {
+      try {
+        final updatedList = WordList(
+          id: list.id,
+          name: result,
+          createdAt: list.createdAt,
+          updatedAt: DateTime.now(),
+        );
+        await _wordListService.updateWordList(updatedList);
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Updated list name to: $result')),
+          );
+          await _loadUserData(); // Refresh to show updated list
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error updating list: $e')),
+          );
+        }
+      }
+    }
+  }
+
+  Future<void> _deleteList(WordList list) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Delete List'),
+        content: Text('Are you sure you want to delete "${list.name}"? This action cannot be undone.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: const Text('Delete'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true) {
+      try {
+        await _wordListService.deleteWordList(list.id);
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Deleted "${list.name}"')),
+          );
+          await _loadUserData(); // Refresh to remove deleted list
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error deleting list: $e')),
           );
         }
       }
@@ -659,6 +858,64 @@ class _CreateListDialogState extends State<_CreateListDialog> {
             }
           },
           child: const Text('Create'),
+        ),
+      ],
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+}
+
+class _EditListDialog extends StatefulWidget {
+  final String initialName;
+  
+  const _EditListDialog({required this.initialName});
+
+  @override
+  State<_EditListDialog> createState() => _EditListDialogState();
+}
+
+class _EditListDialogState extends State<_EditListDialog> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.initialName);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Edit List Name'),
+      content: TextField(
+        controller: _controller,
+        decoration: const InputDecoration(
+          labelText: 'List Name',
+        ),
+        autofocus: true,
+        onSubmitted: (value) {
+          if (value.isNotEmpty) {
+            Navigator.of(context).pop(value);
+          }
+        },
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Cancel'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            if (_controller.text.isNotEmpty) {
+              Navigator.of(context).pop(_controller.text);
+            }
+          },
+          child: const Text('Save'),
         ),
       ],
     );

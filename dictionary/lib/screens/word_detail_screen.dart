@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../models/word_entry.dart';
 import '../models/word_list.dart';
 import '../services/favorites_service.dart';
-import '../services/flashcard_service.dart';
-import '../services/word_list_service.dart';
+import '../services/enhanced_word_list_service.dart';
+import '../services/enhanced_flashcard_service.dart';
 
 class WordDetailScreen extends StatefulWidget {
   final WordEntry wordEntry;
@@ -16,25 +16,24 @@ class WordDetailScreen extends StatefulWidget {
 
 class _WordDetailScreenState extends State<WordDetailScreen> {
   final FavoritesService _favoritesService = FavoritesService();
-  final FlashcardService _flashcardService = FlashcardService();
-  final WordListService _wordListService = WordListService();
+  final EnhancedWordListService _wordListService = EnhancedWordListService();
+  final EnhancedFlashcardService _flashcardService = EnhancedFlashcardService();
   bool _isLoading = false;
-  bool _isFlashcardLoading = false;
 
   @override
   void initState() {
     super.initState();
     _favoritesService.addListener(_onFavoritesChanged);
-    _flashcardService.addListener(_onFlashcardsChanged);
     _wordListService.addListener(_onWordListsChanged);
+    _flashcardService.addListener(_onFlashcardsChanged);
     _loadServices();
   }
 
   @override
   void dispose() {
     _favoritesService.removeListener(_onFavoritesChanged);
-    _flashcardService.removeListener(_onFlashcardsChanged);
     _wordListService.removeListener(_onWordListsChanged);
+    _flashcardService.removeListener(_onFlashcardsChanged);
     super.dispose();
   }
 
@@ -58,8 +57,8 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
 
   Future<void> _loadServices() async {
     await _favoritesService.loadFavorites();
-    await _flashcardService.loadFlashcards();
-    await _wordListService.loadWordLists();
+    await _wordListService.initialize();
+    await _flashcardService.initialize();
   }
 
   Future<void> _toggleFavorite() async {
@@ -86,37 +85,6 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
     }
   }
 
-  Future<void> _toggleFlashcard() async {
-    setState(() => _isFlashcardLoading = true);
-    
-    bool success;
-    final hasFlashcard = _flashcardService.hasFlashcard(widget.wordEntry.slug);
-    
-    if (hasFlashcard) {
-      final flashcard = _flashcardService.getFlashcard(widget.wordEntry.slug);
-      success = await _flashcardService.removeFlashcard(flashcard!.id);
-    } else {
-      success = await _flashcardService.addFlashcard(widget.wordEntry);
-    }
-    
-    if (mounted) {
-      setState(() => _isFlashcardLoading = false);
-      
-      if (success) {
-        final isNowFlashcard = _flashcardService.hasFlashcard(widget.wordEntry.slug);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              isNowFlashcard 
-                  ? 'Added "${widget.wordEntry.mainWord}" to flashcards'
-                  : 'Removed "${widget.wordEntry.mainWord}" from flashcards',
-            ),
-            duration: const Duration(seconds: 2),
-          ),
-        );
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,26 +112,6 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
             tooltip: _favoritesService.isFavorite(widget.wordEntry.slug)
                 ? 'Remove from favorites'
                 : 'Add to favorites',
-          ),
-          IconButton(
-            onPressed: _isFlashcardLoading ? null : _toggleFlashcard,
-            icon: _isFlashcardLoading
-                ? const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : Icon(
-                    _flashcardService.hasFlashcard(widget.wordEntry.slug)
-                        ? Icons.quiz
-                        : Icons.quiz_outlined,
-                    color: _flashcardService.hasFlashcard(widget.wordEntry.slug)
-                        ? Colors.green
-                        : null,
-                  ),
-            tooltip: _flashcardService.hasFlashcard(widget.wordEntry.slug)
-                ? 'Remove from flashcards'
-                : 'Add to flashcards',
           ),
           IconButton(
             onPressed: _showAddToListDialog,
@@ -466,7 +414,17 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
   }
 
   Widget _buildListTileForDialog(WordList list) {
-    final isAlreadyInList = _wordListService.isWordInList(list.id, widget.wordEntry.slug);
+    return FutureBuilder<List<int>>(
+      future: _wordListService.getListsContainingWord(widget.wordEntry.slug),
+      builder: (context, snapshot) {
+        final listsContaining = snapshot.data ?? [];
+        final isAlreadyInList = listsContaining.contains(list.id);
+        return _buildListTileContent(list, isAlreadyInList);
+      },
+    );
+  }
+
+  Widget _buildListTileContent(WordList list, bool isAlreadyInList) {
     
     return ListTile(
       leading: CircleAvatar(
@@ -480,7 +438,13 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
         ),
       ),
       title: Text(list.name),
-      subtitle: Text('${_wordListService.getWordCountInList(list.id)} words'),
+      subtitle: FutureBuilder<List<WordEntry>>(
+        future: _wordListService.getWordsInList(list.id),
+        builder: (context, snapshot) {
+          final wordCount = snapshot.data?.length ?? 0;
+          return Text('$wordCount words');
+        },
+      ),
       trailing: isAlreadyInList 
           ? const Icon(Icons.check_circle, color: Colors.green)
           : const Icon(Icons.add_circle_outline),
@@ -510,8 +474,8 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
       );
 
       // Ensure word lists are loaded before accessing them
-      if (!_wordListService.isLoaded) {
-        await _wordListService.loadWordLists();
+      if (!_wordListService.isInitialized) {
+        await _wordListService.initialize();
       }
       
       // Close loading dialog
@@ -584,11 +548,20 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
         widget.wordEntry,
       );
       
+      if (success) {
+        // Also create a flashcard for this word
+        await _wordListService.createFlashcardFromWord(
+          widget.wordEntry.slug,
+          [selectedList.id],
+          widget.wordEntry,
+        );
+      }
+      
       if (mounted) {
         if (success) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Added "${widget.wordEntry.mainWord}" to "${selectedList.name}"'),
+              content: Text('Added "${widget.wordEntry.mainWord}" to "${selectedList.name}" and created flashcard'),
             ),
           );
         } else {
