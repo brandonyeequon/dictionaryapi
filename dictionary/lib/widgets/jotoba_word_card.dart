@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/jotoba_word_entry.dart';
 import 'ruby_text_widget.dart';
+import 'pitch_accent_widget.dart';
 
 /// Word card widget specifically designed for Jotoba word entries
 class JotobaWordCard extends StatelessWidget {
@@ -27,7 +28,7 @@ class JotobaWordCard extends StatelessWidget {
               _buildHeader(context),
               const SizedBox(height: 8.0),
               _buildDefinition(context),
-              if (wordEntry.hasPitchAccent) ...[
+              if (wordEntry.hasPitchAccent || wordEntry.pitchParts.isNotEmpty) ...[
                 const SizedBox(height: 8.0),
                 _buildPitchAccent(context),
               ],
@@ -204,6 +205,25 @@ class JotobaWordCard extends StatelessWidget {
   
 
   Widget _buildPitchAccent(BuildContext context) {
+    if (wordEntry.pitchParts.isNotEmpty) {
+      return Row(
+        children: [
+          Icon(Icons.trending_up, size: 14.0, color: Colors.red[600]),
+          const SizedBox(width: 4.0),
+          MinimalPitchAccentWidget(
+            pitchParts: wordEntry.pitchParts,
+          ),
+          const SizedBox(width: 4.0),
+          Expanded(
+            child: CompactPitchAccentWidget(
+              pitchParts: wordEntry.pitchParts,
+              fontSize: 11,
+            ),
+          ),
+        ],
+      );
+    }
+    
     final pitchInfo = wordEntry.pitchAccent.isNotEmpty 
         ? wordEntry.pitchAccent.first.patternDescription 
         : '';

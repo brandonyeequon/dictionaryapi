@@ -4,6 +4,7 @@ import '../models/word_entry.dart';
 import '../models/word_list.dart';
 import '../services/enhanced_word_list_service.dart';
 import '../widgets/ruby_text_widget.dart';
+import '../widgets/pitch_accent_widget.dart';
 
 /// Simplified word detail screen for Jotoba word entries
 class WordDetailScreen extends StatelessWidget {
@@ -41,10 +42,6 @@ class WordDetailScreen extends StatelessWidget {
             _buildWordHeader(context),
             const SizedBox(height: 24),
             _buildDefinitions(context),
-            if (wordEntry.hasPitchAccent) ...[
-              const SizedBox(height: 24),
-              _buildPitchAccent(context),
-            ],
             if (wordEntry.hasAudio) ...[
               const SizedBox(height: 24),
               _buildAudioSection(context),
@@ -104,6 +101,12 @@ class WordDetailScreen extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                           color: Colors.grey[600],
                         ),
+                      ),
+                    const SizedBox(width: 16),
+                    if (wordEntry.pitchParts.isNotEmpty)
+                      PitchAccentWidget(
+                        pitchParts: wordEntry.pitchParts,
+                        fontSize: 18,
                       ),
                   ],
                 ),
@@ -204,49 +207,6 @@ class WordDetailScreen extends StatelessWidget {
                 ),
               );
             }),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPitchAccent(BuildContext context) {
-    return Card(
-      elevation: 1,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Icon(Icons.trending_up, color: Colors.purple[600]),
-                const SizedBox(width: 8),
-                Text(
-                  'Pitch Accent',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            ...wordEntry.pitchAccent.map((accent) => Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Reading: ${accent.reading}',
-                    style: const TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                    'Pattern: ${accent.patternDescription}',
-                    style: TextStyle(color: Colors.grey[700]),
-                  ),
-                ],
-              ),
-            )),
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'jotoba_reading.dart';
 import 'jotoba_sense.dart';
 import 'jotoba_pitch_accent.dart';
+import 'jotoba_pitch_part.dart';
 import 'jotoba_gloss.dart';
 
 /// Represents a word entry from Jotoba API
@@ -14,6 +15,7 @@ class JotobaWordEntry {
   final List<String> tags;
   final List<String> jlpt;
   final List<JotobaPitchAccent> pitchAccent;
+  final List<JotobaPitchPart> pitchParts;
   final int? frequency;
   final Map<String, dynamic>? collocations;
   final List<String>? alternativeSpellings;
@@ -28,6 +30,7 @@ class JotobaWordEntry {
     required this.tags,
     required this.jlpt,
     required this.pitchAccent,
+    required this.pitchParts,
     this.frequency,
     this.collocations,
     this.alternativeSpellings,
@@ -45,6 +48,7 @@ class JotobaWordEntry {
       tags: _parseStringList(json['tags']),
       jlpt: _parseStringList(json['jlpt']),
       pitchAccent: _parsePitchAccent(json),
+      pitchParts: _parsePitchParts(json),
       frequency: json['frequency'],
       collocations: json['collocations'],
       alternativeSpellings: _parseStringListNullable(json['alternative_spellings']),
@@ -232,6 +236,18 @@ class JotobaWordEntry {
     return [];
   }
 
+  static List<JotobaPitchPart> _parsePitchParts(Map<String, dynamic> json) {
+    // Handle the 'pitch' array from Jotoba API
+    if (json['pitch'] is List) {
+      final pitchData = json['pitch'] as List<dynamic>;
+      return pitchData
+          .whereType<Map<String, dynamic>>()
+          .map((p) => JotobaPitchPart.fromJson(p))
+          .toList();
+    }
+    return [];
+  }
+
   static bool _parseBool(dynamic value) {
     if (value is bool) return value;
     if (value is String) {
@@ -267,6 +283,7 @@ class JotobaWordEntry {
       'tags': tags,
       'jlpt': jlpt,
       'pitch_accent': pitchAccent.map((p) => p.toJson()).toList(),
+      'pitch': pitchParts.map((p) => p.toJson()).toList(),
       if (frequency != null) 'frequency': frequency,
       if (collocations != null) 'collocations': collocations,
       if (alternativeSpellings != null) 'alternative_spellings': alternativeSpellings,
