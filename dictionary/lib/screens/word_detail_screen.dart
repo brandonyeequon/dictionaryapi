@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/jotoba_word_entry.dart';
+import '../models/word_entry.dart';
+import '../models/word_list.dart';
+import '../services/enhanced_word_list_service.dart';
 import '../widgets/ruby_text_widget.dart';
 
 /// Simplified word detail screen for Jotoba word entries
@@ -14,6 +17,13 @@ class WordDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(wordEntry.primaryWord),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        actions: [
+          IconButton(
+            onPressed: () => _showAddToListDialog(context),
+            icon: const Icon(Icons.add),
+            tooltip: 'Add to List',
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -437,5 +447,105 @@ class WordDetailScreen extends StatelessWidget {
     
     // Default
     return Colors.grey[700]!;
+  }
+
+  Future<void> _showAddToListDialog(BuildContext context) async {
+    final wordListService = EnhancedWordListService();
+    await wordListService.initialize();
+    
+    final wordLists = wordListService.wordLists;
+    
+    if (wordLists.isEmpty) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('No word lists found. Create a list first in the Learn section.'),
+        ),
+      );
+      return;
+    }
+
+    if (!context.mounted) return;
+    final selectedList = await showDialog<WordList>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Add to Word List'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('Select a list to add "${wordEntry.primaryWord}":'),
+            const SizedBox(height: 16),
+            ...wordLists.map((list) => ListTile(
+              title: Text(list.name),
+              subtitle: Text(list.description ?? 'No description'),
+              onTap: () => Navigator.of(context).pop(list),
+            )),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Cancel'),
+          ),
+        ],
+      ),
+    );
+
+    if (selectedList != null && context.mounted) {
+      await _addWordToList(context, selectedList);
+    }
+  }
+
+  Future<void> _addWordToList(BuildContext context, WordList selectedList) async {
+    try {
+      final wordListService = EnhancedWordListService();
+      final convertedWord = _convertToWordEntry(wordEntry);
+      
+      final success = await wordListService.addWordToList(selectedList.id, convertedWord);
+      
+      if (!context.mounted) return;
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Added "${wordEntry.primaryWord}" to "${selectedList.name}"'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Failed to add word to list'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } catch (e) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  WordEntry _convertToWordEntry(JotobaWordEntry jotobaEntry) {
+    return WordEntry(
+      slug: jotobaEntry.slug ?? jotobaEntry.primaryWord,
+      isCommon: jotobaEntry.isCommon,
+      tags: jotobaEntry.tags,
+      jlpt: jotobaEntry.jlpt,
+      japanese: jotobaEntry.reading.map((r) => JapaneseReading(
+        word: r.kanji,
+        reading: r.kana,
+      )).toList(),
+      senses: jotobaEntry.senses.map((s) => WordSense(
+        englishDefinitions: s.allGlossTexts,
+        partsOfSpeech: s.partsOfSpeech,
+        tags: s.tags,
+        info: s.info,
+      )).toList(),
+    );
   }
 }

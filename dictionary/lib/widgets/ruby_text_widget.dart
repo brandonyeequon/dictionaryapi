@@ -68,7 +68,7 @@ class RubyTextWidget extends StatelessWidget {
 
   List<TextSegment> _parseFurigana(String text, String furigana) {
     final segments = <TextSegment>[];
-    final regex = RegExp(r'\[([^\|]+)\|([^\]]+)\]');
+    final regex = RegExp(r'\[([^\]]+)\]');
     
     int lastIndex = 0;
     
@@ -77,18 +77,23 @@ class RubyTextWidget extends StatelessWidget {
       if (match.start > lastIndex) {
         final beforeText = furigana.substring(lastIndex, match.start);
         if (beforeText.isNotEmpty) {
-          // Clean up any stray | characters
-          final cleanText = beforeText.replaceAll('|', '');
-          if (cleanText.isNotEmpty) {
-            segments.add(TextSegment(text: cleanText, reading: null));
-          }
+          segments.add(TextSegment(text: beforeText, reading: null));
         }
       }
       
-      // Add the kanji with its reading
-      final kanji = match.group(1)!;
-      final reading = match.group(2)!;
-      segments.add(TextSegment(text: kanji, reading: reading));
+      // Parse the bracket content which could be "kanji|reading" or "kanji|syllable|syllable"
+      final bracketContent = match.group(1)!;
+      final parts = bracketContent.split('|');
+      
+      if (parts.length >= 2) {
+        final kanji = parts[0];
+        // Join all reading parts (handles cases like [学校|がっ|こう])
+        final reading = parts.sublist(1).join('');
+        segments.add(TextSegment(text: kanji, reading: reading));
+      } else {
+        // If no pipe, treat as plain text
+        segments.add(TextSegment(text: bracketContent, reading: null));
+      }
       
       lastIndex = match.end;
     }
@@ -97,11 +102,7 @@ class RubyTextWidget extends StatelessWidget {
     if (lastIndex < furigana.length) {
       final remainingText = furigana.substring(lastIndex);
       if (remainingText.isNotEmpty) {
-        // Clean up any stray | characters
-        final cleanText = remainingText.replaceAll('|', '');
-        if (cleanText.isNotEmpty) {
-          segments.add(TextSegment(text: cleanText, reading: null));
-        }
+        segments.add(TextSegment(text: remainingText, reading: null));
       }
     }
     
