@@ -312,7 +312,7 @@ class JotobaWordCard extends StatelessWidget {
       if (!success) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to play audio for "${wordEntry.primaryWord}"'),
+            content: Text('Audio failed for "${wordEntry.primaryWord}"'),
             duration: const Duration(seconds: 2),
             backgroundColor: Colors.red,
           ),

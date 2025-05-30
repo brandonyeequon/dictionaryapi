@@ -242,9 +242,14 @@ class WordDetailScreen extends StatelessWidget {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to play audio for "${wordEntry.primaryWord}"'),
-            duration: const Duration(seconds: 2),
+            content: Text('Failed to play audio for "${wordEntry.primaryWord}". Check network connection.'),
+            duration: const Duration(seconds: 3),
             backgroundColor: Colors.red,
+            action: SnackBarAction(
+              label: 'Retry',
+              textColor: Colors.white,
+              onPressed: () => _playAudio(context),
+            ),
           ),
         );
       }
