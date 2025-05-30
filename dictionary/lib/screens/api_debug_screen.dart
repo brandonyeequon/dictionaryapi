@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../services/jisho_api_service.dart';
-import '../config/api_config.dart';
+import '../services/dictionary_service.dart';
 
-/// Debug screen for API configuration and connectivity testing
+/// Debug screen for Jotoba API connectivity testing
 /// 
-/// This screen provides detailed information about the current API configuration,
-/// platform detection, and allows testing of API connectivity. Useful for
-/// troubleshooting CORS and network issues.
+/// This screen provides detailed information about the current API configuration
+/// and allows testing of API connectivity.
 class ApiDebugScreen extends StatefulWidget {
   const ApiDebugScreen({super.key});
 
@@ -30,7 +28,7 @@ class _ApiDebugScreenState extends State<ApiDebugScreen> {
     setState(() => _isTestingConnectivity = true);
     
     try {
-      final result = await JishoApiService.testConnectivity();
+      final result = await DictionaryService.testConnectivity();
       setState(() {
         _connectivityResult = result;
         _isTestingConnectivity = false;
@@ -54,7 +52,7 @@ class _ApiDebugScreenState extends State<ApiDebugScreen> {
     
     try {
       final startTime = DateTime.now();
-      final response = await JishoApiService.searchWords(_testKeyword);
+      final response = await DictionaryService.searchWords(query: _testKeyword);
       final endTime = DateTime.now();
       final duration = endTime.difference(startTime);
       
@@ -64,9 +62,9 @@ class _ApiDebugScreenState extends State<ApiDebugScreen> {
           'keyword': _testKeyword,
           'responseTime': duration.inMilliseconds,
           'timestamp': endTime.toIso8601String(),
-          'resultsCount': response?.data.length ?? 0,
-          'hasResults': response?.data.isNotEmpty ?? false,
-          'apiInfo': JishoApiService.getApiInfo(),
+          'resultsCount': response?.resultCount ?? 0,
+          'hasResults': response?.hasResults ?? false,
+          'apiInfo': DictionaryService.getApiInfo(),
         };
         _isTestingConnectivity = false;
       });
@@ -78,7 +76,7 @@ class _ApiDebugScreenState extends State<ApiDebugScreen> {
           'keyword': _testKeyword,
           'error': e.toString(),
           'timestamp': endTime.toIso8601String(),
-          'apiInfo': JishoApiService.getApiInfo(),
+          'apiInfo': DictionaryService.getApiInfo(),
         };
         _isTestingConnectivity = false;
       });
@@ -118,7 +116,7 @@ class _ApiDebugScreenState extends State<ApiDebugScreen> {
   }
 
   Widget _buildApiConfigSection() {
-    final apiInfo = JishoApiService.getApiInfo();
+    final apiInfo = DictionaryService.getApiInfo();
     
     return Card(
       child: Padding(
@@ -143,9 +141,11 @@ class _ApiDebugScreenState extends State<ApiDebugScreen> {
               ],
             ),
             const SizedBox(height: 12),
-            _buildInfoRow('Current URL', apiInfo['currentUrl']),
-            _buildInfoRow('Is Web', apiInfo['isWeb'].toString()),
-            _buildInfoRow('Platform', apiInfo['platform']),
+            _buildInfoRow('Service', apiInfo['service']),
+            _buildInfoRow('Backend', apiInfo['backend']),
+            _buildInfoRow('Language', apiInfo['preferredLanguage']),
+            _buildInfoRow('API Base URL', apiInfo['jotoba']['apiBaseUrl']),
+            _buildInfoRow('Platform', apiInfo['jotoba']['platform']),
           ],
         ),
       ),
@@ -286,28 +286,19 @@ class _ApiDebugScreenState extends State<ApiDebugScreen> {
             ),
             _buildTroubleshootingItem(
               'No Results',
-              'Try different keywords or check Jisho.org status',
+              'Try different keywords or check Jotoba.de status',
             ),
             const SizedBox(height: 12),
-            if (ApiConfig.isWeb) ...[
-              const Text('Web Platform Recommendations:'),
-              const SizedBox(height: 8),
-              _buildTroubleshootingItem(
-                'Development',
-                'Ensure proxy is running locally on port 3000',
-              ),
-              _buildTroubleshootingItem(
-                'Production',
-                'Verify proxy is deployed on Vercel/hosting platform',
-              ),
-            ] else ...[
-              const Text('Mobile/Desktop Platform:'),
-              const SizedBox(height: 8),
-              _buildTroubleshootingItem(
-                'Direct API',
-                'No proxy needed - connects directly to Jisho.org',
-              ),
-            ],
+            const Text('API Recommendations:'),
+            const SizedBox(height: 8),
+            _buildTroubleshootingItem(
+              'Rate Limiting',
+              'Avoid making too many requests in quick succession',
+            ),
+            _buildTroubleshootingItem(
+              'Language Support',
+              'Try different target languages for better results',
+            ),
           ],
         ),
       ),

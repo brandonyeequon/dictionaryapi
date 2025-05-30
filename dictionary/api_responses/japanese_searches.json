@@ -1,0 +1,1134 @@
+[
+  {
+    "search_term": "家",
+    "category": "Japanese",
+    "timestamp": "2025-05-30T11:32:49.939559",
+    "response": {
+      "status_code": 200,
+      "headers": {
+        "access-control-allow-credentials": "true",
+        "connection": "keep-alive",
+        "date": "Fri, 30 May 2025 17:32:49 GMT",
+        "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+        "strict-transport-security": "max-age=63072000; preload",
+        "content-length": "5401",
+        "access-control-expose-headers": "content-type",
+        "content-type": "application/json",
+        "server": "openresty"
+      },
+      "body": {
+        "kanji": [
+          {
+            "literal": "家",
+            "meanings": [
+              "house",
+              "home",
+              "family",
+              "professional",
+              "expert",
+              "performer"
+            ],
+            "grade": 2,
+            "stroke_count": 10,
+            "frequency": 133,
+            "jlpt": 4,
+            "onyomi": [
+              "カ",
+              "ケ"
+            ],
+            "kunyomi": [
+              "いえ",
+              "や",
+              "うち"
+            ],
+            "chinese": [
+              "jia1",
+              "gu1"
+            ],
+            "korean_r": [
+              "ga"
+            ],
+            "korean_h": [
+              "가"
+            ],
+            "parts": [
+              "宀",
+              "豕"
+            ],
+            "radical": "宀"
+          },
+          {
+            "literal": "内",
+            "meanings": [
+              "inside",
+              "within",
+              "between",
+              "among",
+              "house",
+              "home"
+            ],
+            "grade": 2,
+            "stroke_count": 4,
+            "frequency": 44,
+            "jlpt": 3,
+            "onyomi": [
+              "ナイ",
+              "ダイ"
+            ],
+            "kunyomi": [
+              "うち"
+            ],
+            "chinese": [
+              "nei4"
+            ],
+            "korean_r": [
+              "nae",
+              "nab"
+            ],
+            "korean_h": [
+              "내",
+              "납"
+            ],
+            "parts": [
+              "人",
+              "冂"
+            ],
+            "radical": "冂"
+          },
+          {
+            "literal": "屋",
+            "meanings": [
+              "roof",
+              "house",
+              "shop",
+              "dealer",
+              "seller"
+            ],
+            "grade": 3,
+            "stroke_count": 9,
+            "frequency": 616,
+            "jlpt": 4,
+            "onyomi": [
+              "オク"
+            ],
+            "kunyomi": [
+              "や"
+            ],
+            "chinese": [
+              "wu1"
+            ],
+            "korean_r": [
+              "og"
+            ],
+            "korean_h": [
+              "옥"
+            ],
+            "parts": [
+              "至",
+              "土",
+              "厶",
+              "尸"
+            ],
+            "radical": "尸"
+          }
+        ],
+        "words": [
+          {
+            "reading": {
+              "kana": "いえ",
+              "kanji": "家",
+              "furigana": "[家|いえ]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "house",
+                  "residence",
+                  "dwelling",
+                  "home"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "family",
+                  "household"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "lineage",
+                  "family name"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1191730",
+            "pitch": [
+              {
+                "part": "い",
+                "high": false
+              },
+              {
+                "part": "え",
+                "high": true
+              },
+              {
+                "part": "",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "うち",
+              "kanji": "家",
+              "furigana": "[家|うち]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "one's house",
+                  "one's home",
+                  "one's family",
+                  "one's household"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "misc": "UsuallyWrittenInKana",
+                "xref": "内・うち・7"
+              },
+              {
+                "glosses": [
+                  "house"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "misc": "UsuallyWrittenInKana"
+              }
+            ],
+            "pitch": [
+              {
+                "part": "う",
+                "high": false
+              },
+              {
+                "part": "ち",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "け",
+              "kanji": "家",
+              "furigana": "[家|け]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "house",
+                  "family"
+                ],
+                "pos": [
+                  "Suffix"
+                ],
+                "language": "English",
+                "information": "after a surname"
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "か",
+              "kanji": "家",
+              "furigana": "[家|か]"
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "-ist",
+                  "-er"
+                ],
+                "pos": [
+                  "Suffix"
+                ],
+                "language": "English",
+                "information": "used after a noun indicating someone's occupation, pursuits, disposition, etc.",
+                "xref": "政治家"
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "ち",
+              "kanji": "家",
+              "furigana": "[家|ち]"
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "'s house",
+                  "'s home"
+                ],
+                "pos": [
+                  "Suffix"
+                ],
+                "language": "English",
+                "misc": "Colloquialism",
+                "xref": "ん家"
+              }
+            ],
+            "pitch": [
+              {
+                "part": "ち",
+                "high": false
+              },
+              {
+                "part": "",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "うち",
+              "kanji": "内",
+              "furigana": "[内|うち]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "inside",
+                  "within"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  },
+                  "Adverb"
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "while (e.g. one is young)",
+                  "during",
+                  "within (e.g. a day)",
+                  "in the course of"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  },
+                  "Adverb"
+                ],
+                "language": "English",
+                "misc": "UsuallyWrittenInKana"
+              },
+              {
+                "glosses": [
+                  "among",
+                  "amongst",
+                  "(out) of",
+                  "between"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  },
+                  "Adverb"
+                ],
+                "language": "English",
+                "information": "as 〜のうち",
+                "misc": "UsuallyWrittenInKana"
+              },
+              {
+                "glosses": [
+                  "in (secret, chaos, poverty, etc.)",
+                  "amidst",
+                  "with (e.g. success)"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "information": "also 裡, 裏; as 〜のうちに after a noun representing a state or condition",
+                "misc": "UsuallyWrittenInKana"
+              },
+              {
+                "glosses": [
+                  "within oneself",
+                  "one's feelings",
+                  "inner thoughts"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "we",
+                  "our company",
+                  "our organization"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "antonym": "よそ・2",
+                "misc": "UsuallyWrittenInKana"
+              },
+              {
+                "glosses": [
+                  "one's home",
+                  "one's family"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "information": "also 家",
+                "misc": "UsuallyWrittenInKana",
+                "xref": "家・うち・2"
+              },
+              {
+                "glosses": [
+                  "my spouse",
+                  "my husband",
+                  "my wife"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "signed on behalf of (husband's name) by his wife"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "information": "in a letter after the husband's name"
+              },
+              {
+                "glosses": [
+                  "I",
+                  "me"
+                ],
+                "pos": [
+                  "Pronoun"
+                ],
+                "language": "English",
+                "dialect": "Kansai",
+                "information": "primarily used by women and children",
+                "misc": "UsuallyWrittenInKana"
+              },
+              {
+                "glosses": [
+                  "imperial palace grounds"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "misc": "Archaism"
+              },
+              {
+                "glosses": [
+                  "emperor"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "misc": "Archaism"
+              }
+            ],
+            "audio": "/resource/audio/tofugu/1457730",
+            "pitch": [
+              {
+                "part": "う",
+                "high": true
+              },
+              {
+                "part": "ち",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "や",
+              "kanji": "屋",
+              "furigana": "[屋|や]"
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "shop",
+                  "store",
+                  "restaurant"
+                ],
+                "pos": [
+                  "Suffix"
+                ],
+                "language": "English",
+                "information": "usu. 屋",
+                "xref": "パン屋"
+              },
+              {
+                "glosses": [
+                  "someone who sells (something) or works as (something)"
+                ],
+                "pos": [
+                  "Suffix"
+                ],
+                "language": "English",
+                "information": "usu. 屋, can be derog.",
+                "xref": "殺し屋"
+              },
+              {
+                "glosses": [
+                  "someone with a (certain) personality trait"
+                ],
+                "pos": [
+                  "Suffix"
+                ],
+                "language": "English",
+                "information": "usu. 屋",
+                "xref": "照れ屋"
+              },
+              {
+                "glosses": [
+                  "house"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "information": "usu. 家"
+              },
+              {
+                "glosses": [
+                  "roof"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "んち",
+              "kanji": "ん家",
+              "furigana": "ん[家|ち]"
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "'s house",
+                  "'s home"
+                ],
+                "pos": [
+                  "Expr",
+                  "Suffix"
+                ],
+                "language": "English",
+                "information": "from 〜のうち",
+                "misc": "Colloquialism"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "search_term": "水",
+    "category": "Japanese",
+    "timestamp": "2025-05-30T11:32:50.891848",
+    "response": {
+      "status_code": 200,
+      "headers": {
+        "access-control-allow-credentials": "true",
+        "connection": "keep-alive",
+        "date": "Fri, 30 May 2025 17:32:50 GMT",
+        "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+        "strict-transport-security": "max-age=63072000; preload",
+        "content-length": "1567",
+        "access-control-expose-headers": "content-type",
+        "content-type": "application/json",
+        "server": "openresty"
+      },
+      "body": {
+        "kanji": [
+          {
+            "literal": "水",
+            "meanings": [
+              "water"
+            ],
+            "grade": 1,
+            "stroke_count": 4,
+            "frequency": 223,
+            "jlpt": 5,
+            "onyomi": [
+              "スイ"
+            ],
+            "kunyomi": [
+              "みず",
+              "みず-"
+            ],
+            "chinese": [
+              "shui3"
+            ],
+            "korean_r": [
+              "su"
+            ],
+            "korean_h": [
+              "수"
+            ],
+            "parts": [
+              "水"
+            ],
+            "radical": "水"
+          }
+        ],
+        "words": [
+          {
+            "reading": {
+              "kana": "みず",
+              "kanji": "水",
+              "furigana": "[水|みず]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "water (esp. cool or cold)"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "xref": "湯・ゆ・1"
+              },
+              {
+                "glosses": [
+                  "fluid (esp. in an animal tissue)",
+                  "liquid"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "flood",
+                  "floodwaters"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "water offered to wrestlers just prior to a bout"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "field": "Sumo",
+                "xref": "力水"
+              },
+              {
+                "glosses": [
+                  "break granted to wrestlers engaged in a prolonged bout"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "field": "Sumo",
+                "xref": "水入り"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1371260",
+            "pitch": [
+              {
+                "part": "み",
+                "high": false
+              },
+              {
+                "part": "ず",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "すい",
+              "kanji": "水",
+              "furigana": "[水|すい]"
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "Wednesday"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "misc": "Abbreviation",
+                "xref": "水曜日"
+              },
+              {
+                "glosses": [
+                  "shaved ice (served with flavored syrup)"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "xref": "氷水・2"
+              },
+              {
+                "glosses": [
+                  "water (fifth of the five elements)"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "xref": "五行・1"
+              }
+            ],
+            "pitch": [
+              {
+                "part": "す",
+                "high": true
+              },
+              {
+                "part": "い",
+                "high": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "search_term": "本",
+    "category": "Japanese",
+    "timestamp": "2025-05-30T11:32:51.835937",
+    "response": {
+      "status_code": 200,
+      "headers": {
+        "access-control-allow-credentials": "true",
+        "connection": "keep-alive",
+        "date": "Fri, 30 May 2025 17:32:51 GMT",
+        "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+        "strict-transport-security": "max-age=63072000; preload",
+        "content-length": "2763",
+        "access-control-expose-headers": "content-type",
+        "content-type": "application/json",
+        "server": "openresty"
+      },
+      "body": {
+        "kanji": [
+          {
+            "literal": "本",
+            "meanings": [
+              "book",
+              "present",
+              "main",
+              "origin",
+              "true",
+              "real",
+              "counter for long cylindrical things"
+            ],
+            "grade": 1,
+            "stroke_count": 5,
+            "frequency": 10,
+            "jlpt": 5,
+            "variant": [
+              "1-52-81"
+            ],
+            "onyomi": [
+              "ホン"
+            ],
+            "kunyomi": [
+              "もと"
+            ],
+            "chinese": [
+              "ben3"
+            ],
+            "korean_r": [
+              "bon"
+            ],
+            "korean_h": [
+              "본"
+            ],
+            "parts": [
+              "一",
+              "木"
+            ],
+            "radical": "木"
+          },
+          {
+            "literal": "元",
+            "meanings": [
+              "beginning",
+              "former time",
+              "origin"
+            ],
+            "grade": 2,
+            "stroke_count": 4,
+            "frequency": 192,
+            "jlpt": 4,
+            "onyomi": [
+              "ゲン",
+              "ガン"
+            ],
+            "kunyomi": [
+              "もと"
+            ],
+            "chinese": [
+              "yuan2"
+            ],
+            "korean_r": [
+              "weon"
+            ],
+            "korean_h": [
+              "원"
+            ],
+            "parts": [
+              "二",
+              "儿",
+              "元"
+            ],
+            "radical": "儿"
+          }
+        ],
+        "words": [
+          {
+            "reading": {
+              "kana": "ほん",
+              "kanji": "本",
+              "furigana": "[本|ほん]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "book",
+                  "volume",
+                  "script"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "this",
+                  "present",
+                  "current",
+                  "... in question",
+                  "... at issue"
+                ],
+                "pos": [
+                  "Prefix"
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "main",
+                  "head",
+                  "principal"
+                ],
+                "pos": [
+                  "Prefix"
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "real",
+                  "genuine",
+                  "regular",
+                  "proper"
+                ],
+                "pos": [
+                  "Prefix"
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "counter for long, cylindrical things",
+                  "counter for films, TV shows, etc.",
+                  "counter for goals, home runs, etc.",
+                  "counter for telephone calls"
+                ],
+                "pos": [
+                  "Counter"
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1522150",
+            "pitch": [
+              {
+                "part": "ほ",
+                "high": true
+              },
+              {
+                "part": "ん",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "もと",
+              "kanji": "元",
+              "furigana": "[元|もと]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "origin",
+                  "source",
+                  "beginning"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "information": "esp. 元"
+              },
+              {
+                "glosses": [
+                  "basis",
+                  "base",
+                  "foundation",
+                  "root"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "information": "oft. 基"
+              },
+              {
+                "glosses": [
+                  "cause"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "information": "also written as 因, 原"
+              },
+              {
+                "glosses": [
+                  "(raw) material",
+                  "ingredient",
+                  "base",
+                  "mix (e.g. for a cake)",
+                  "(soup) stock"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "information": "esp. 素"
+              },
+              {
+                "glosses": [
+                  "(one's) side"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "capital",
+                  "principal",
+                  "cost price"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "root (of a plant)",
+                  "(tree) trunk"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "part (of a brush, chopsticks, etc.) one holds (with the hand)"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "first three lines of a waka"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "xref": "和歌"
+              },
+              {
+                "glosses": [
+                  "counter for plants or trees"
+                ],
+                "pos": [
+                  "Counter"
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "counter for falcons (in falconry)"
+                ],
+                "pos": [
+                  "Counter"
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/tofugu/1260670",
+            "pitch": [
+              {
+                "part": "も",
+                "high": true
+              },
+              {
+                "part": "と",
+                "high": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+]

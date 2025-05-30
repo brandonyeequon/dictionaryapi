@@ -1,0 +1,3994 @@
+[
+  {
+    "search_term": "eat",
+    "category": "English",
+    "timestamp": "2025-05-30T11:32:46.120304",
+    "response": {
+      "status_code": 200,
+      "headers": {
+        "access-control-allow-credentials": "true",
+        "connection": "keep-alive",
+        "date": "Fri, 30 May 2025 17:32:45 GMT",
+        "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+        "strict-transport-security": "max-age=63072000; preload",
+        "content-length": "13568",
+        "access-control-expose-headers": "content-type",
+        "content-type": "application/json",
+        "server": "openresty"
+      },
+      "body": {
+        "kanji": [
+          {
+            "literal": "食",
+            "meanings": [
+              "eat",
+              "food"
+            ],
+            "grade": 2,
+            "stroke_count": 9,
+            "frequency": 328,
+            "jlpt": 5,
+            "onyomi": [
+              "ショク",
+              "ジキ"
+            ],
+            "kunyomi": [
+              "く.う",
+              "く.らう",
+              "た.べる",
+              "は.む"
+            ],
+            "chinese": [
+              "shi2",
+              "si4"
+            ],
+            "korean_r": [
+              "sig",
+              "sa"
+            ],
+            "korean_h": [
+              "식",
+              "사"
+            ],
+            "parts": [
+              "食"
+            ],
+            "radical": "食"
+          },
+          {
+            "literal": "召",
+            "meanings": [
+              "seduce",
+              "call",
+              "send for",
+              "wear",
+              "put on",
+              "ride in",
+              "buy",
+              "eat",
+              "drink",
+              "catch (cold)"
+            ],
+            "grade": 8,
+            "stroke_count": 5,
+            "frequency": 1540,
+            "jlpt": 2,
+            "onyomi": [
+              "ショウ"
+            ],
+            "kunyomi": [
+              "め.す"
+            ],
+            "chinese": [
+              "zhao4",
+              "shao4",
+              "zhao1"
+            ],
+            "korean_r": [
+              "so",
+              "jo"
+            ],
+            "korean_h": [
+              "소",
+              "조"
+            ],
+            "parts": [
+              "口",
+              "刀"
+            ],
+            "radical": "口"
+          },
+          {
+            "literal": "上",
+            "meanings": [
+              "above",
+              "up"
+            ],
+            "grade": 1,
+            "stroke_count": 3,
+            "frequency": 35,
+            "jlpt": 5,
+            "variant": [
+              "1-16-02"
+            ],
+            "onyomi": [
+              "ジョウ",
+              "ショウ",
+              "シャン"
+            ],
+            "kunyomi": [
+              "うえ",
+              "-うえ",
+              "うわ-",
+              "かみ",
+              "あ.げる",
+              "-あ.げる",
+              "あ.がる",
+              "-あ.がる",
+              "あ.がり",
+              "-あ.がり",
+              "のぼ.る",
+              "のぼ.り",
+              "のぼ.せる",
+              "のぼ.す",
+              "たてまつ.る"
+            ],
+            "chinese": [
+              "shang4",
+              "shang3"
+            ],
+            "korean_r": [
+              "sang"
+            ],
+            "korean_h": [
+              "상"
+            ],
+            "parts": [
+              "一",
+              "卜"
+            ],
+            "radical": "一"
+          },
+          {
+            "literal": "取",
+            "meanings": [
+              "take",
+              "fetch",
+              "take up"
+            ],
+            "grade": 3,
+            "stroke_count": 8,
+            "frequency": 122,
+            "jlpt": 3,
+            "onyomi": [
+              "シュ"
+            ],
+            "kunyomi": [
+              "と.る",
+              "と.り",
+              "と.り-",
+              "とり",
+              "-ど.り"
+            ],
+            "chinese": [
+              "qu3"
+            ],
+            "korean_r": [
+              "chwi"
+            ],
+            "korean_h": [
+              "취"
+            ],
+            "parts": [
+              "耳",
+              "又"
+            ],
+            "radical": "又"
+          },
+          {
+            "literal": "口",
+            "meanings": [
+              "mouth"
+            ],
+            "grade": 1,
+            "stroke_count": 3,
+            "frequency": 284,
+            "jlpt": 4,
+            "onyomi": [
+              "コウ",
+              "ク"
+            ],
+            "kunyomi": [
+              "くち"
+            ],
+            "chinese": [
+              "kou3"
+            ],
+            "korean_r": [
+              "gu"
+            ],
+            "korean_h": [
+              "구"
+            ],
+            "parts": [
+              "囗",
+              "口"
+            ],
+            "radical": "口"
+          },
+          {
+            "literal": "入",
+            "meanings": [
+              "enter",
+              "insert"
+            ],
+            "grade": 1,
+            "stroke_count": 2,
+            "frequency": 56,
+            "jlpt": 5,
+            "onyomi": [
+              "ニュウ",
+              "ジュ"
+            ],
+            "kunyomi": [
+              "い.る",
+              "-い.る",
+              "-い.り",
+              "い.れる",
+              "-い.れ",
+              "はい.る"
+            ],
+            "chinese": [
+              "ru4"
+            ],
+            "korean_r": [
+              "ib"
+            ],
+            "korean_h": [
+              "입"
+            ],
+            "parts": [
+              "入"
+            ],
+            "radical": "入"
+          },
+          {
+            "literal": "運",
+            "meanings": [
+              "carry",
+              "luck",
+              "destiny",
+              "fate",
+              "lot",
+              "transport",
+              "progress",
+              "advance"
+            ],
+            "grade": 3,
+            "stroke_count": 11,
+            "frequency": 255,
+            "jlpt": 4,
+            "onyomi": [
+              "ウン"
+            ],
+            "kunyomi": [
+              "はこ.ぶ"
+            ],
+            "chinese": [
+              "yun4"
+            ],
+            "korean_r": [
+              "un"
+            ],
+            "korean_h": [
+              "운"
+            ],
+            "parts": [
+              "⻌",
+              "車",
+              "冖"
+            ],
+            "radical": "辵"
+          }
+        ],
+        "words": [
+          {
+            "reading": {
+              "kana": "たべる",
+              "kanji": "食べる",
+              "furigana": "[食|た]べる"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "to eat"
+                ],
+                "pos": [
+                  {
+                    "Verb": "Ichidan"
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to live on (e.g. a salary)",
+                  "to live off",
+                  "to subsist on"
+                ],
+                "pos": [
+                  {
+                    "Verb": "Ichidan"
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1358280",
+            "pitch": [
+              {
+                "part": "た",
+                "high": false
+              },
+              {
+                "part": "べ",
+                "high": true
+              },
+              {
+                "part": "る",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "めしあがる",
+              "kanji": "召し上がる",
+              "furigana": "[召|め]し[上|あ]がる"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "to eat",
+                  "to drink"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English",
+                "misc": "HonorificLanguage"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1346370",
+            "pitch": [
+              {
+                "part": "め",
+                "high": false
+              },
+              {
+                "part": "しあが",
+                "high": true
+              },
+              {
+                "part": "る",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "くう",
+              "kanji": "食う",
+              "furigana": "[食|く]う"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "to eat"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "U"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English",
+                "misc": "MaleTermOrLanguage"
+              },
+              {
+                "glosses": [
+                  "to live",
+                  "to make a living",
+                  "to survive"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "U"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to bite",
+                  "to sting (as insects do)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "U"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to tease",
+                  "to torment",
+                  "to taunt",
+                  "to make light of",
+                  "to make fun of"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "U"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to encroach on",
+                  "to eat into",
+                  "to consume"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "U"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to defeat a superior",
+                  "to threaten a position"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "U"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to consume time",
+                  "to consume resources"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "U"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to receive something (usu. an unfavourable event)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "U"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English",
+                "misc": "Colloquialism"
+              },
+              {
+                "glosses": [
+                  "to have sexual relations with a woman, esp. for the first time"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "U"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English",
+                "misc": "MaleTermOrLanguage"
+              }
+            ],
+            "pitch": [
+              {
+                "part": "く",
+                "high": true
+              },
+              {
+                "part": "う",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "とる",
+              "kanji": "取る",
+              "furigana": "[取|と]る"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "to take",
+                  "to pick up",
+                  "to grab",
+                  "to catch",
+                  "to hold"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to pass",
+                  "to hand",
+                  "to give"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to get",
+                  "to obtain",
+                  "to acquire",
+                  "to win",
+                  "to receive",
+                  "to earn",
+                  "to take (e.g. a vacation)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to adopt (a method, proposal, etc.)",
+                  "to take (a measure, attitude, etc.)",
+                  "to choose"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to remove",
+                  "to get rid of",
+                  "to take off"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to take away",
+                  "to steal",
+                  "to rob"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to eat",
+                  "to have (e.g. lunch)",
+                  "to take (e.g. vitamins)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English",
+                "xref": "摂る"
+              },
+              {
+                "glosses": [
+                  "to pick (e.g. flowers)",
+                  "to gather",
+                  "to extract (e.g. juice)",
+                  "to catch (e.g. fish)",
+                  "to harvest (a crop)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to take up (time, space)",
+                  "to occupy",
+                  "to spare",
+                  "to set aside"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to secure",
+                  "to reserve",
+                  "to save",
+                  "to put aside",
+                  "to keep"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to take (e.g. a joke)",
+                  "to interpret",
+                  "to understand",
+                  "to make out",
+                  "to grasp"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to record",
+                  "to take down"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to subscribe to (e.g. a newspaper)",
+                  "to take",
+                  "to buy",
+                  "to get"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to order",
+                  "to have delivered"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to charge",
+                  "to fine",
+                  "to take (tax)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to take (e.g. a wife)",
+                  "to take on (e.g. an apprentice)",
+                  "to adopt",
+                  "to accept"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to take control of",
+                  "to take (the rudder)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to compete (in sumo, cards, etc.)",
+                  "to play"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1326980",
+            "pitch": [
+              {
+                "part": "と",
+                "high": true
+              },
+              {
+                "part": "る",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "しょくする",
+              "kanji": "食する",
+              "furigana": "[食|しょく]する"
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "to eat"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Irregular": "SuruSpecial"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "pitch": [
+              {
+                "part": "しょ",
+                "high": false
+              },
+              {
+                "part": "くす",
+                "high": true
+              },
+              {
+                "part": "る",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "はむ",
+              "kanji": "食む",
+              "furigana": "[食|は]む"
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "to eat (fodder, grass, etc.)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Mu"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English",
+                "misc": "UsuallyWrittenInKana"
+              },
+              {
+                "glosses": [
+                  "to receive (a salary)",
+                  "to receive a stipend from one's lord"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Mu"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English",
+                "misc": "UsuallyWrittenInKana"
+              }
+            ],
+            "pitch": [
+              {
+                "part": "は",
+                "high": true
+              },
+              {
+                "part": "む",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "あがる",
+              "kanji": "上がる",
+              "furigana": "[上|あ]がる"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "to rise",
+                  "to go up",
+                  "to come up",
+                  "to ascend",
+                  "to be raised"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English",
+                "antonym": "下がる・1",
+                "xref": "揚がる・5"
+              },
+              {
+                "glosses": [
+                  "to enter (esp. from outdoors)",
+                  "to come in",
+                  "to go in"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to enter (a school)",
+                  "to advance to the next grade"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to get out (of water)",
+                  "to come ashore",
+                  "to be washed ashore"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English",
+                "xref": "揚がる・6"
+              },
+              {
+                "glosses": [
+                  "to float atop the water",
+                  "to surface from the sea (e.g. of a corpse)",
+                  "to rise to the surface"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English",
+                "xref": "揚がる・7"
+              },
+              {
+                "glosses": [
+                  "to increase",
+                  "to be raised (e.g. of a salary)",
+                  "to rise"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English",
+                "information": "occ. as 騰る in ref. to money"
+              },
+              {
+                "glosses": [
+                  "to improve",
+                  "to make progress"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to be promoted",
+                  "to advance"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to be made (of profit, etc.)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to occur (esp. of a favourable result)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to be adequate (to cover expenses, etc.)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English",
+                "information": "often as 〜で上がる"
+              },
+              {
+                "glosses": [
+                  "to be finished",
+                  "to be done",
+                  "to be over"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to stop (of rain)",
+                  "to clear up (of weather)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to stop (working properly)",
+                  "to cut out",
+                  "to give out",
+                  "to die"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to win (in a card game, etc.)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to be spoken loudly",
+                  "to be raised loudly (of a voice)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English",
+                "xref": "揚がる・8"
+              },
+              {
+                "glosses": [
+                  "to get nervous",
+                  "to get stage fright"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English",
+                "information": "esp. アガる",
+                "misc": "Colloquialism"
+              },
+              {
+                "glosses": [
+                  "to be offered (to the gods, etc.)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to go",
+                  "to visit"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English",
+                "misc": "HumbleLanguage"
+              },
+              {
+                "glosses": [
+                  "to eat",
+                  "to drink"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Transitive"
+                  }
+                ],
+                "language": "English",
+                "misc": "HonorificLanguage"
+              },
+              {
+                "glosses": [
+                  "to serve (in one's master's home)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to enter a red light district",
+                  "to amuse oneself in a red light district",
+                  "to visit a brothel"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English",
+                "xref": "揚がる・9"
+              },
+              {
+                "glosses": [
+                  "to arise vigorously (e.g. of voices in excitement)",
+                  "to become excited",
+                  "to be in uproar (e.g. of a crowd)"
+                ],
+                "pos": [
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English",
+                "xref": "挙がる・5"
+              },
+              {
+                "glosses": [
+                  "to be complete",
+                  "to finish"
+                ],
+                "pos": [
+                  "Suffix",
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  }
+                ],
+                "language": "English",
+                "information": "after the -masu stem of a verb",
+                "xref": "出来上がる・1"
+              },
+              {
+                "glosses": [
+                  "adds the connotation of an action happening strongly or violently"
+                ],
+                "pos": [
+                  "Suffix",
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  }
+                ],
+                "language": "English",
+                "information": "after the -masu stem of a verb"
+              },
+              {
+                "glosses": [
+                  "above",
+                  "north of"
+                ],
+                "pos": [
+                  "Expr"
+                ],
+                "language": "English",
+                "information": "as ～上ル; in the Kyoto address system"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1352290",
+            "pitch": [
+              {
+                "part": "あ",
+                "high": false
+              },
+              {
+                "part": "がる",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "イートイン",
+              "furigana": null
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "consuming food or drink on the premises (as opposed to taking it home)"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  },
+                  {
+                    "Verb": {
+                      "Irregular": "NounOrAuxSuru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "dine-in (restaurant)",
+                  "eat-in"
+                ],
+                "pos": [
+                  {
+                    "Adjective": "No"
+                  }
+                ],
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "くちにはいる",
+              "kanji": "口に入る",
+              "furigana": "[口|くち]に[入|はい]る"
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "to ingest",
+                  "to eat",
+                  "to enter the mouth"
+                ],
+                "pos": [
+                  "Expr",
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "to be able to eat"
+                ],
+                "pos": [
+                  "Expr",
+                  {
+                    "Verb": {
+                      "Godan": "Ru"
+                    }
+                  }
+                ],
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "くちにはこぶ",
+              "kanji": "口に運ぶ",
+              "furigana": "[口|くち]に[運|はこ]ぶ"
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "to put into the mouth",
+                  "to eat"
+                ],
+                "pos": [
+                  "Expr",
+                  {
+                    "Verb": {
+                      "Godan": "Bu"
+                    }
+                  }
+                ],
+                "language": "English"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "search_term": "school",
+    "category": "English",
+    "timestamp": "2025-05-30T11:32:47.088101",
+    "response": {
+      "status_code": 200,
+      "headers": {
+        "access-control-allow-credentials": "true",
+        "connection": "keep-alive",
+        "date": "Fri, 30 May 2025 17:32:47 GMT",
+        "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+        "strict-transport-security": "max-age=63072000; preload",
+        "content-length": "6564",
+        "access-control-expose-headers": "content-type",
+        "content-type": "application/json",
+        "server": "openresty"
+      },
+      "body": {
+        "kanji": [
+          {
+            "literal": "学",
+            "meanings": [
+              "study",
+              "learning",
+              "science"
+            ],
+            "grade": 1,
+            "stroke_count": 8,
+            "frequency": 63,
+            "jlpt": 5,
+            "variant": [
+              "1-53-60",
+              "1-53-61",
+              "1-33-55"
+            ],
+            "onyomi": [
+              "ガク"
+            ],
+            "kunyomi": [
+              "まな.ぶ"
+            ],
+            "chinese": [
+              "xue2"
+            ],
+            "korean_r": [
+              "hag"
+            ],
+            "korean_h": [
+              "학"
+            ],
+            "parts": [
+              "子",
+              "⺌",
+              "冖"
+            ],
+            "radical": "子"
+          },
+          {
+            "literal": "校",
+            "meanings": [
+              "exam",
+              "school",
+              "printing",
+              "proof",
+              "correction"
+            ],
+            "grade": 1,
+            "stroke_count": 10,
+            "frequency": 294,
+            "jlpt": 5,
+            "onyomi": [
+              "コウ",
+              "キョウ"
+            ],
+            "chinese": [
+              "xiao4",
+              "jiao4"
+            ],
+            "korean_r": [
+              "gyo",
+              "hyo"
+            ],
+            "korean_h": [
+              "교",
+              "효"
+            ],
+            "parts": [
+              "父",
+              "木",
+              "亠"
+            ],
+            "radical": "木"
+          },
+          {
+            "literal": "科",
+            "meanings": [
+              "department",
+              "course",
+              "section"
+            ],
+            "grade": 2,
+            "stroke_count": 9,
+            "frequency": 531,
+            "jlpt": 3,
+            "onyomi": [
+              "カ"
+            ],
+            "chinese": [
+              "ke1"
+            ],
+            "korean_r": [
+              "gwa"
+            ],
+            "korean_h": [
+              "과"
+            ],
+            "parts": [
+              "禾",
+              "斗"
+            ],
+            "radical": "禾"
+          },
+          {
+            "literal": "教",
+            "meanings": [
+              "teach",
+              "faith",
+              "doctrine"
+            ],
+            "grade": 2,
+            "stroke_count": 11,
+            "frequency": 166,
+            "jlpt": 4,
+            "onyomi": [
+              "キョウ"
+            ],
+            "kunyomi": [
+              "おし.える",
+              "おそ.わる"
+            ],
+            "chinese": [
+              "jiao4",
+              "jiao1"
+            ],
+            "korean_r": [
+              "gyo"
+            ],
+            "korean_h": [
+              "교"
+            ],
+            "parts": [
+              "子",
+              "⺹",
+              "攵",
+              "𠂉"
+            ],
+            "radical": "攴"
+          },
+          {
+            "literal": "室",
+            "meanings": [
+              "room",
+              "apartment",
+              "chamber",
+              "greenhouse",
+              "cellar"
+            ],
+            "grade": 2,
+            "stroke_count": 9,
+            "frequency": 550,
+            "jlpt": 4,
+            "onyomi": [
+              "シツ"
+            ],
+            "kunyomi": [
+              "むろ"
+            ],
+            "chinese": [
+              "shi4"
+            ],
+            "korean_r": [
+              "sil"
+            ],
+            "korean_h": [
+              "실"
+            ],
+            "parts": [
+              "至",
+              "土",
+              "厶",
+              "宀"
+            ],
+            "radical": "宀"
+          },
+          {
+            "literal": "高",
+            "meanings": [
+              "tall",
+              "high",
+              "expensive"
+            ],
+            "grade": 2,
+            "stroke_count": 10,
+            "frequency": 65,
+            "jlpt": 5,
+            "onyomi": [
+              "コウ"
+            ],
+            "kunyomi": [
+              "たか.い",
+              "たか",
+              "-だか",
+              "たか.まる",
+              "たか.める"
+            ],
+            "chinese": [
+              "gao1"
+            ],
+            "korean_r": [
+              "go"
+            ],
+            "korean_h": [
+              "고"
+            ],
+            "parts": [
+              "口",
+              "高",
+              "亠",
+              "冂"
+            ],
+            "radical": "高"
+          },
+          {
+            "literal": "園",
+            "meanings": [
+              "park",
+              "garden",
+              "yard",
+              "farm"
+            ],
+            "grade": 2,
+            "stroke_count": 13,
+            "frequency": 628,
+            "jlpt": 3,
+            "variant": [
+              "1-17-82",
+              "3675"
+            ],
+            "onyomi": [
+              "エン"
+            ],
+            "kunyomi": [
+              "その"
+            ],
+            "chinese": [
+              "yuan2"
+            ],
+            "korean_r": [
+              "weon"
+            ],
+            "korean_h": [
+              "원"
+            ],
+            "parts": [
+              "衣",
+              "口",
+              "土",
+              "囗"
+            ],
+            "radical": "囗"
+          },
+          {
+            "literal": "大",
+            "meanings": [
+              "large",
+              "big"
+            ],
+            "grade": 1,
+            "stroke_count": 3,
+            "frequency": 7,
+            "jlpt": 5,
+            "onyomi": [
+              "ダイ",
+              "タイ"
+            ],
+            "kunyomi": [
+              "おお-",
+              "おお.きい",
+              "-おお.いに"
+            ],
+            "chinese": [
+              "da4",
+              "dai4"
+            ],
+            "korean_r": [
+              "dae",
+              "da",
+              "tae"
+            ],
+            "korean_h": [
+              "대",
+              "다",
+              "태"
+            ],
+            "parts": [
+              "大"
+            ],
+            "radical": "大"
+          },
+          {
+            "literal": "院",
+            "meanings": [
+              "Inst.",
+              "institution",
+              "temple",
+              "mansion",
+              "school"
+            ],
+            "grade": 3,
+            "stroke_count": 10,
+            "frequency": 150,
+            "jlpt": 4,
+            "onyomi": [
+              "イン"
+            ],
+            "chinese": [
+              "yuan4"
+            ],
+            "korean_r": [
+              "weon"
+            ],
+            "korean_h": [
+              "원"
+            ],
+            "parts": [
+              "二",
+              "儿",
+              "宀",
+              "⻖",
+              "元"
+            ],
+            "radical": "阜"
+          },
+          {
+            "literal": "派",
+            "meanings": [
+              "faction",
+              "group",
+              "party",
+              "clique",
+              "sect",
+              "school"
+            ],
+            "grade": 6,
+            "stroke_count": 9,
+            "frequency": 164,
+            "jlpt": 1,
+            "onyomi": [
+              "ハ"
+            ],
+            "chinese": [
+              "pai4",
+              "pa1"
+            ],
+            "korean_r": [
+              "pa"
+            ],
+            "korean_h": [
+              "파"
+            ],
+            "parts": [
+              "斤",
+              "⺡",
+              "厂"
+            ],
+            "radical": "水"
+          }
+        ],
+        "words": [
+          {
+            "reading": {
+              "kana": "がっこう",
+              "kanji": "学校",
+              "furigana": "[学校|がっ|こう]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "school"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1206730",
+            "pitch": [
+              {
+                "part": "が",
+                "high": false
+              },
+              {
+                "part": "っこう",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "か",
+              "kanji": "科",
+              "furigana": "[科|か]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "department",
+                  "section",
+                  "faculty",
+                  "school",
+                  "arm"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  },
+                  {
+                    "Noun": "Suffix"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "course (of study)",
+                  "branch of study",
+                  "specialization"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  },
+                  {
+                    "Noun": "Suffix"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "(taxonomical) family"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  },
+                  {
+                    "Noun": "Suffix"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "pitch": [
+              {
+                "part": "か",
+                "high": true
+              },
+              {
+                "part": "",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "スクール",
+              "furigana": null
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "school"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "こう",
+              "kanji": "校",
+              "furigana": "[校|こう]"
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "school"
+                ],
+                "pos": [
+                  "Suffix",
+                  "Counter"
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "proofreading",
+                  "proof"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  },
+                  "Counter"
+                ],
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "きょうしつ",
+              "kanji": "教室",
+              "furigana": "[教室|きょう|しつ]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "classroom",
+                  "lecture room"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "department (in a university)"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "class",
+                  "lessons",
+                  "course"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "school (for a particular discipline)",
+                  "teaching establishment"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "xref": "音楽教室"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1237150",
+            "pitch": [
+              {
+                "part": "きょ",
+                "high": false
+              },
+              {
+                "part": "うしつ",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "こうこう",
+              "kanji": "高校",
+              "furigana": "[高校|こう|こう]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "senior high school",
+                  "high school"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "misc": "Abbreviation",
+                "xref": "高等学校"
+              }
+            ],
+            "audio": "/resource/audio/tofugu/1283500",
+            "pitch": [
+              {
+                "part": "こ",
+                "high": false
+              },
+              {
+                "part": "うこう",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "がくえん",
+              "kanji": "学園",
+              "furigana": "[学園|がく|えん]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "educational institution",
+                  "school",
+                  "academy",
+                  "campus"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "pitch": [
+              {
+                "part": "が",
+                "high": false
+              },
+              {
+                "part": "くえん",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "だいがくいん",
+              "kanji": "大学院",
+              "furigana": "[大学院|だい|がく|いん]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "graduate school"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1413250"
+          },
+          {
+            "reading": {
+              "kana": "は",
+              "kanji": "派",
+              "furigana": "[派|は]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "group",
+                  "faction",
+                  "clique",
+                  "coterie"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  },
+                  {
+                    "Noun": "Suffix"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "(political) faction",
+                  "wing",
+                  "camp"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  },
+                  {
+                    "Noun": "Suffix"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "school (of thought, painting, etc.)"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  },
+                  {
+                    "Noun": "Suffix"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "sect",
+                  "denomination"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  },
+                  {
+                    "Noun": "Suffix"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "pitch": [
+              {
+                "part": "は",
+                "high": true
+              },
+              {
+                "part": "",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "りゅうは",
+              "kanji": "流派",
+              "furigana": "[流派|りゅう|は]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "school (of painting, ikebana, etc.)"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1552520",
+            "pitch": [
+              {
+                "part": "りゅ",
+                "high": true
+              },
+              {
+                "part": "うは",
+                "high": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "search_term": "friend",
+    "category": "English",
+    "timestamp": "2025-05-30T11:32:48.035037",
+    "response": {
+      "status_code": 200,
+      "headers": {
+        "access-control-allow-credentials": "true",
+        "connection": "keep-alive",
+        "date": "Fri, 30 May 2025 17:32:47 GMT",
+        "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+        "strict-transport-security": "max-age=63072000; preload",
+        "content-length": "6824",
+        "access-control-expose-headers": "content-type",
+        "content-type": "application/json",
+        "server": "openresty"
+      },
+      "body": {
+        "kanji": [
+          {
+            "literal": "友",
+            "meanings": [
+              "friend"
+            ],
+            "grade": 2,
+            "stroke_count": 4,
+            "frequency": 622,
+            "jlpt": 5,
+            "onyomi": [
+              "ユウ"
+            ],
+            "kunyomi": [
+              "とも"
+            ],
+            "chinese": [
+              "you3"
+            ],
+            "korean_r": [
+              "u"
+            ],
+            "korean_h": [
+              "우"
+            ],
+            "parts": [
+              "ノ",
+              "一",
+              "又"
+            ],
+            "radical": "又"
+          },
+          {
+            "literal": "人",
+            "meanings": [
+              "person"
+            ],
+            "grade": 1,
+            "stroke_count": 2,
+            "frequency": 5,
+            "jlpt": 5,
+            "onyomi": [
+              "ジン",
+              "ニン"
+            ],
+            "kunyomi": [
+              "ひと",
+              "-り",
+              "-と"
+            ],
+            "chinese": [
+              "ren2"
+            ],
+            "korean_r": [
+              "in"
+            ],
+            "korean_h": [
+              "인"
+            ],
+            "parts": [
+              "人"
+            ],
+            "radical": "人"
+          },
+          {
+            "literal": "達",
+            "meanings": [
+              "accomplished",
+              "reach",
+              "arrive",
+              "attain"
+            ],
+            "grade": 4,
+            "stroke_count": 11,
+            "frequency": 500,
+            "jlpt": 3,
+            "variant": [
+              "1-77-93"
+            ],
+            "onyomi": [
+              "タツ",
+              "ダ"
+            ],
+            "kunyomi": [
+              "-たち"
+            ],
+            "chinese": [
+              "da2"
+            ],
+            "korean_r": [
+              "dal"
+            ],
+            "korean_h": [
+              "달"
+            ],
+            "parts": [
+              "王",
+              "⻌",
+              "土",
+              "丷",
+              "羊"
+            ],
+            "radical": "辵"
+          },
+          {
+            "literal": "仲",
+            "meanings": [
+              "go-between",
+              "relationship"
+            ],
+            "grade": 4,
+            "stroke_count": 6,
+            "frequency": 919,
+            "jlpt": 2,
+            "onyomi": [
+              "チュウ"
+            ],
+            "kunyomi": [
+              "なか"
+            ],
+            "chinese": [
+              "zhong4"
+            ],
+            "korean_r": [
+              "jung"
+            ],
+            "korean_h": [
+              "중"
+            ],
+            "parts": [
+              "｜",
+              "⺅",
+              "口"
+            ],
+            "radical": "人"
+          },
+          {
+            "literal": "間",
+            "meanings": [
+              "interval",
+              "space"
+            ],
+            "grade": 2,
+            "stroke_count": 12,
+            "frequency": 33,
+            "jlpt": 5,
+            "variant": [
+              "3853"
+            ],
+            "onyomi": [
+              "カン",
+              "ケン"
+            ],
+            "kunyomi": [
+              "あいだ",
+              "ま",
+              "あい"
+            ],
+            "chinese": [
+              "jian1",
+              "jian4"
+            ],
+            "korean_r": [
+              "gan"
+            ],
+            "korean_h": [
+              "간"
+            ],
+            "parts": [
+              "日",
+              "門"
+            ],
+            "radical": "門"
+          },
+          {
+            "literal": "知",
+            "meanings": [
+              "know",
+              "wisdom"
+            ],
+            "grade": 2,
+            "stroke_count": 8,
+            "frequency": 205,
+            "jlpt": 4,
+            "onyomi": [
+              "チ"
+            ],
+            "kunyomi": [
+              "し.る",
+              "し.らせる"
+            ],
+            "chinese": [
+              "zhi1",
+              "zhi4"
+            ],
+            "korean_r": [
+              "ji"
+            ],
+            "korean_h": [
+              "지"
+            ],
+            "parts": [
+              "口",
+              "矢",
+              "𠂉"
+            ],
+            "radical": "矢"
+          },
+          {
+            "literal": "親",
+            "meanings": [
+              "parent",
+              "intimacy",
+              "relative",
+              "familiarity",
+              "dealer (cards)"
+            ],
+            "grade": 2,
+            "stroke_count": 16,
+            "frequency": 406,
+            "jlpt": 4,
+            "onyomi": [
+              "シン"
+            ],
+            "kunyomi": [
+              "おや",
+              "おや-",
+              "した.しい",
+              "した.しむ"
+            ],
+            "chinese": [
+              "qin1",
+              "qing4"
+            ],
+            "korean_r": [
+              "chin"
+            ],
+            "korean_h": [
+              "친"
+            ],
+            "parts": [
+              "見",
+              "辛",
+              "丷",
+              "木",
+              "立",
+              "亠"
+            ],
+            "radical": "見"
+          },
+          {
+            "literal": "兄",
+            "meanings": [
+              "elder brother",
+              "big brother"
+            ],
+            "grade": 2,
+            "stroke_count": 5,
+            "frequency": 1219,
+            "jlpt": 4,
+            "onyomi": [
+              "ケイ",
+              "キョウ"
+            ],
+            "kunyomi": [
+              "あに"
+            ],
+            "chinese": [
+              "xiong1"
+            ],
+            "korean_r": [
+              "hyeong"
+            ],
+            "korean_h": [
+              "형"
+            ],
+            "parts": [
+              "口",
+              "儿"
+            ],
+            "radical": "儿"
+          },
+          {
+            "literal": "弟",
+            "meanings": [
+              "younger brother",
+              "faithful service to elders"
+            ],
+            "grade": 2,
+            "stroke_count": 7,
+            "frequency": 1161,
+            "jlpt": 4,
+            "onyomi": [
+              "テイ",
+              "ダイ",
+              "デ"
+            ],
+            "kunyomi": [
+              "おとうと"
+            ],
+            "chinese": [
+              "di4"
+            ],
+            "korean_r": [
+              "je"
+            ],
+            "korean_h": [
+              "제"
+            ],
+            "parts": [
+              "｜",
+              "ノ",
+              "弓",
+              "丷"
+            ],
+            "radical": "弓"
+          },
+          {
+            "literal": "味",
+            "meanings": [
+              "flavor",
+              "taste"
+            ],
+            "grade": 3,
+            "stroke_count": 8,
+            "frequency": 442,
+            "jlpt": 4,
+            "onyomi": [
+              "ミ"
+            ],
+            "kunyomi": [
+              "あじ",
+              "あじ.わう"
+            ],
+            "chinese": [
+              "wei4"
+            ],
+            "korean_r": [
+              "mi"
+            ],
+            "korean_h": [
+              "미"
+            ],
+            "parts": [
+              "｜",
+              "口",
+              "二",
+              "ハ",
+              "木",
+              "亠"
+            ],
+            "radical": "口"
+          }
+        ],
+        "words": [
+          {
+            "reading": {
+              "kana": "ゆうじん",
+              "kanji": "友人",
+              "furigana": "[友人|ゆう|じん]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "friend"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "information": "more formal than 友達",
+                "xref": "友達"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1540150",
+            "pitch": [
+              {
+                "part": "ゆ",
+                "high": false
+              },
+              {
+                "part": "うじん",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "ともだち",
+              "kanji": "友達",
+              "furigana": "[友達|とも|だち]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "friend",
+                  "companion"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1540170",
+            "pitch": [
+              {
+                "part": "と",
+                "high": false
+              },
+              {
+                "part": "もだち",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "なかま",
+              "kanji": "仲間",
+              "furigana": "[仲間|なか|ま]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "companion",
+                  "fellow",
+                  "friend",
+                  "mate",
+                  "comrade",
+                  "partner",
+                  "colleague",
+                  "coworker",
+                  "associate"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "group",
+                  "company",
+                  "circle",
+                  "set",
+                  "gang"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "member of the same category (family, class)"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1425790",
+            "pitch": [
+              {
+                "part": "な",
+                "high": false
+              },
+              {
+                "part": "かま",
+                "high": true
+              },
+              {
+                "part": "",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "おともだち",
+              "kanji": "お友達",
+              "furigana": "お[友達|とも|だち]"
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "friend"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "misc": "PoliteLanguage"
+              },
+              {
+                "glosses": [
+                  "child (one does not know)",
+                  "another child",
+                  "other children"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "information": "used by parents, guardians, etc."
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "とも",
+              "kanji": "友",
+              "furigana": "[友|とも]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "friend",
+                  "companion",
+                  "comrade",
+                  "pal"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "accompaniment",
+                  "companion (e.g. book)",
+                  "complement",
+                  "accessory"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "pitch": [
+              {
+                "part": "と",
+                "high": true
+              },
+              {
+                "part": "も",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "フレンド",
+              "furigana": null
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "friend"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "ちじん",
+              "kanji": "知人",
+              "furigana": "[知人|ち|じん]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "friend",
+                  "acquaintance"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1420620",
+            "pitch": [
+              {
+                "part": "ち",
+                "high": false
+              },
+              {
+                "part": "じん",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "しんゆう",
+              "kanji": "親友",
+              "furigana": "[親友|しん|ゆう]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "close friend",
+                  "bosom friend",
+                  "buddy",
+                  "crony",
+                  "chum"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1365410",
+            "pitch": [
+              {
+                "part": "し",
+                "high": false
+              },
+              {
+                "part": "んゆう",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "きょうだい",
+              "kanji": "兄弟",
+              "furigana": "[兄弟|きょう|だい]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "siblings",
+                  "brothers and sisters"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "xref": "ご兄弟"
+              },
+              {
+                "glosses": [
+                  "brothers"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "siblings-in-law",
+                  "brothers-in-law",
+                  "sisters-in-law"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "mate",
+                  "friend"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "misc": "FamiliarLanguage"
+              }
+            ],
+            "audio": "/resource/audio/tofugu/1249960",
+            "pitch": [
+              {
+                "part": "きょ",
+                "high": true
+              },
+              {
+                "part": "うだい",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "みかた",
+              "kanji": "味方",
+              "furigana": "[味方|み|かた]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "friend",
+                  "ally",
+                  "supporter"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  },
+                  {
+                    "Adjective": "No"
+                  }
+                ],
+                "language": "English",
+                "antonym": "敵・1"
+              },
+              {
+                "glosses": [
+                  "taking sides (with)",
+                  "supporting",
+                  "standing by",
+                  "backing up"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  },
+                  {
+                    "Verb": {
+                      "Irregular": "NounOrAuxSuru"
+                    }
+                  },
+                  {
+                    "Verb": "Intransitive"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/tofugu/1527070",
+            "pitch": [
+              {
+                "part": "み",
+                "high": false
+              },
+              {
+                "part": "かた",
+                "high": true
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "search_term": "simple",
+    "category": "English",
+    "timestamp": "2025-05-30T11:32:48.982799",
+    "response": {
+      "status_code": 200,
+      "headers": {
+        "connection": "keep-alive",
+        "access-control-allow-credentials": "true",
+        "date": "Fri, 30 May 2025 17:32:48 GMT",
+        "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+        "strict-transport-security": "max-age=63072000; preload",
+        "content-length": "6062",
+        "access-control-expose-headers": "content-type",
+        "content-type": "application/json",
+        "server": "openresty"
+      },
+      "body": {
+        "kanji": [
+          {
+            "literal": "簡",
+            "meanings": [
+              "simplicity",
+              "brevity"
+            ],
+            "grade": 6,
+            "stroke_count": 18,
+            "frequency": 983,
+            "jlpt": 2,
+            "variant": [
+              "3853"
+            ],
+            "onyomi": [
+              "カン",
+              "ケン"
+            ],
+            "kunyomi": [
+              "えら.ぶ",
+              "ふだ"
+            ],
+            "chinese": [
+              "jian3"
+            ],
+            "korean_r": [
+              "gan"
+            ],
+            "korean_h": [
+              "간"
+            ],
+            "parts": [
+              "竹",
+              "日",
+              "門",
+              "𠂉"
+            ],
+            "radical": "竹"
+          },
+          {
+            "literal": "単",
+            "meanings": [
+              "simple",
+              "one",
+              "single",
+              "merely"
+            ],
+            "grade": 4,
+            "stroke_count": 9,
+            "frequency": 586,
+            "jlpt": 3,
+            "variant": [
+              "1-51-37",
+              "1-22-28"
+            ],
+            "onyomi": [
+              "タン"
+            ],
+            "kunyomi": [
+              "ひとえ"
+            ],
+            "chinese": [
+              "dan1",
+              "chan2"
+            ],
+            "korean_r": [
+              "dan",
+              "seon"
+            ],
+            "korean_h": [
+              "단",
+              "선"
+            ],
+            "parts": [
+              "十",
+              "⺌",
+              "田"
+            ],
+            "radical": "十"
+          },
+          {
+            "literal": "純",
+            "meanings": [
+              "genuine",
+              "purity",
+              "innocence",
+              "net (profit)"
+            ],
+            "grade": 6,
+            "stroke_count": 10,
+            "frequency": 1044,
+            "jlpt": 2,
+            "onyomi": [
+              "ジュン"
+            ],
+            "chinese": [
+              "chun2"
+            ],
+            "korean_r": [
+              "sun",
+              "jun"
+            ],
+            "korean_h": [
+              "순",
+              "준"
+            ],
+            "parts": [
+              "糸",
+              "幺",
+              "小",
+              "屯"
+            ],
+            "radical": "糸"
+          },
+          {
+            "literal": "易",
+            "meanings": [
+              "easy",
+              "ready to",
+              "simple",
+              "fortune-telling",
+              "divination"
+            ],
+            "grade": 5,
+            "stroke_count": 8,
+            "frequency": 571,
+            "jlpt": 3,
+            "onyomi": [
+              "エキ",
+              "イ"
+            ],
+            "kunyomi": [
+              "やさ.しい",
+              "やす.い"
+            ],
+            "chinese": [
+              "yi4"
+            ],
+            "korean_r": [
+              "yeog",
+              "i"
+            ],
+            "korean_h": [
+              "역",
+              "이"
+            ],
+            "parts": [
+              "日",
+              "勿",
+              "勹",
+              "ノ"
+            ],
+            "radical": "日"
+          },
+          {
+            "literal": "容",
+            "meanings": [
+              "contain",
+              "form",
+              "looks"
+            ],
+            "grade": 5,
+            "stroke_count": 10,
+            "frequency": 264,
+            "jlpt": 3,
+            "onyomi": [
+              "ヨウ"
+            ],
+            "kunyomi": [
+              "い.れる"
+            ],
+            "chinese": [
+              "rong2"
+            ],
+            "korean_r": [
+              "yong"
+            ],
+            "korean_h": [
+              "용"
+            ],
+            "parts": [
+              "穴",
+              "口",
+              "谷",
+              "ハ",
+              "𠆢",
+              "宀"
+            ],
+            "radical": "宀"
+          },
+          {
+            "literal": "素",
+            "meanings": [
+              "elementary",
+              "principle",
+              "naked",
+              "uncovered"
+            ],
+            "grade": 5,
+            "stroke_count": 10,
+            "frequency": 660,
+            "jlpt": 1,
+            "onyomi": [
+              "ソ",
+              "ス"
+            ],
+            "kunyomi": [
+              "もと"
+            ],
+            "chinese": [
+              "su4"
+            ],
+            "korean_r": [
+              "so"
+            ],
+            "korean_h": [
+              "소"
+            ],
+            "parts": [
+              "糸",
+              "幺",
+              "小",
+              "土",
+              "亠",
+              "二"
+            ],
+            "radical": "糸"
+          },
+          {
+            "literal": "朴",
+            "meanings": [
+              "crude",
+              "simple",
+              "plain",
+              "docile"
+            ],
+            "grade": 8,
+            "stroke_count": 6,
+            "frequency": 1626,
+            "jlpt": 1,
+            "onyomi": [
+              "ボク"
+            ],
+            "kunyomi": [
+              "ほう",
+              "ほお",
+              "えのき"
+            ],
+            "chinese": [
+              "po4",
+              "piao2",
+              "pu3",
+              "pu2"
+            ],
+            "korean_r": [
+              "bag"
+            ],
+            "korean_h": [
+              "박"
+            ],
+            "parts": [
+              "卜",
+              "木"
+            ],
+            "radical": "木"
+          },
+          {
+            "literal": "略",
+            "meanings": [
+              "abbreviation",
+              "omission",
+              "outline",
+              "shorten",
+              "capture",
+              "plunder"
+            ],
+            "grade": 5,
+            "stroke_count": 11,
+            "frequency": 774,
+            "jlpt": 2,
+            "variant": [
+              "1-65-32"
+            ],
+            "onyomi": [
+              "リャク"
+            ],
+            "kunyomi": [
+              "ほぼ",
+              "はぶ.く",
+              "おか.す",
+              "おさ.める",
+              "はかりごと",
+              "はか.る"
+            ],
+            "chinese": [
+              "lu:e4"
+            ],
+            "korean_r": [
+              "ryag"
+            ],
+            "korean_h": [
+              "략"
+            ],
+            "parts": [
+              "口",
+              "田",
+              "夂"
+            ],
+            "radical": "田"
+          },
+          {
+            "literal": "便",
+            "meanings": [
+              "convenience",
+              "facility",
+              "excrement",
+              "feces",
+              "letter",
+              "chance"
+            ],
+            "grade": 4,
+            "stroke_count": 9,
+            "frequency": 729,
+            "jlpt": 3,
+            "onyomi": [
+              "ベン",
+              "ビン"
+            ],
+            "kunyomi": [
+              "たよ.り"
+            ],
+            "chinese": [
+              "bian4",
+              "pian2"
+            ],
+            "korean_r": [
+              "pyeon",
+              "byeon"
+            ],
+            "korean_h": [
+              "편",
+              "변"
+            ],
+            "parts": [
+              "｜",
+              "ノ",
+              "一",
+              "⺅",
+              "日",
+              "田"
+            ],
+            "radical": "人"
+          }
+        ],
+        "words": [
+          {
+            "reading": {
+              "kana": "かんたん",
+              "kanji": "簡単",
+              "furigana": "[簡単|かん|たん]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "simple",
+                  "easy",
+                  "uncomplicated"
+                ],
+                "pos": [
+                  {
+                    "Adjective": "Na"
+                  },
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "brief",
+                  "quick",
+                  "light"
+                ],
+                "pos": [
+                  {
+                    "Adjective": "Na"
+                  },
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/tofugu/1214330",
+            "pitch": [
+              {
+                "part": "か",
+                "high": false
+              },
+              {
+                "part": "んたん",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "シンプル",
+              "furigana": null
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "simple",
+                  "plain"
+                ],
+                "pos": [
+                  {
+                    "Adjective": "Na"
+                  }
+                ],
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "たんじゅん",
+              "kanji": "単純",
+              "furigana": "[単純|たん|じゅん]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "simple",
+                  "plain",
+                  "uncomplicated",
+                  "straightforward",
+                  "simple-minded",
+                  "naive"
+                ],
+                "pos": [
+                  {
+                    "Adjective": "Na"
+                  },
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "antonym": "複雑"
+              }
+            ],
+            "audio": "/resource/audio/tofugu/1417550",
+            "pitch": [
+              {
+                "part": "た",
+                "high": false
+              },
+              {
+                "part": "んじゅん",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "かんい",
+              "kanji": "簡易",
+              "furigana": "[簡易|かん|い]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "simple",
+                  "simplified"
+                ],
+                "pos": [
+                  {
+                    "Adjective": "Na"
+                  },
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "easy",
+                  "plain"
+                ],
+                "pos": [
+                  {
+                    "Adjective": "Na"
+                  },
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/tofugu/1214270",
+            "pitch": [
+              {
+                "part": "か",
+                "high": true
+              },
+              {
+                "part": "んい",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "ようい",
+              "kanji": "容易",
+              "furigana": "[容易|よう|い]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "easy",
+                  "simple",
+                  "plain"
+                ],
+                "pos": [
+                  {
+                    "Adjective": "Na"
+                  },
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/tofugu/1545350",
+            "pitch": [
+              {
+                "part": "よ",
+                "high": false
+              },
+              {
+                "part": "うい",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "かんそ",
+              "kanji": "簡素",
+              "furigana": "[簡素|かん|そ]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "simple",
+                  "plain",
+                  "modest"
+                ],
+                "pos": [
+                  {
+                    "Adjective": "Na"
+                  },
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "pitch": [
+              {
+                "part": "か",
+                "high": true
+              },
+              {
+                "part": "んそ",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "たんなる",
+              "kanji": "単なる",
+              "furigana": "[単|たん]なる"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "mere",
+                  "simple",
+                  "sheer"
+                ],
+                "pos": [
+                  {
+                    "Adjective": "PreNoun"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "pitch": [
+              {
+                "part": "た",
+                "high": true
+              },
+              {
+                "part": "んなる",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "そぼく",
+              "kanji": "素朴",
+              "furigana": "[素朴|そ|ぼく]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "simple",
+                  "artless",
+                  "naive",
+                  "unsophisticated"
+                ],
+                "pos": [
+                  {
+                    "Adjective": "Na"
+                  },
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/tofugu/1397390",
+            "pitch": [
+              {
+                "part": "そ",
+                "high": false
+              },
+              {
+                "part": "ぼく",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "かんりゃく",
+              "kanji": "簡略",
+              "furigana": "[簡略|かん|りゃく]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "simple",
+                  "brief"
+                ],
+                "pos": [
+                  {
+                    "Adjective": "Na"
+                  },
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "pitch": [
+              {
+                "part": "か",
+                "high": false
+              },
+              {
+                "part": "んりゃく",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "かんべん",
+              "kanji": "簡便",
+              "furigana": "[簡便|かん|べん]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "simple",
+                  "easy",
+                  "convenient",
+                  "handy"
+                ],
+                "pos": [
+                  {
+                    "Adjective": "Na"
+                  },
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ],
+            "pitch": [
+              {
+                "part": "か",
+                "high": false
+              },
+              {
+                "part": "んべん",
+                "high": true
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+]

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import '../models/word_entry.dart';
-import '../services/jisho_api_service.dart';
-import '../widgets/word_card.dart';
+import '../models/jotoba_word_entry.dart';
+import '../models/jotoba_kanji_entry.dart';
+import '../models/jotoba_unified_response.dart';
+import '../services/dictionary_service.dart';
+import '../widgets/jotoba_word_card.dart';
+import '../widgets/jotoba_kanji_card.dart';
 import '../widgets/search_bar_widget.dart';
 import 'word_detail_screen.dart';
 import 'favorites_screen.dart';
@@ -17,7 +20,7 @@ class DictionaryScreen extends StatefulWidget {
 
 class _DictionaryScreenState extends State<DictionaryScreen> {
   final TextEditingController _searchController = TextEditingController();
-  List<WordEntry> _searchResults = [];
+  JotobaUnifiedResponse? _searchResults;
   bool _isLoading = false;
   String? _errorMessage;
   String _lastSearchTerm = '';
@@ -38,16 +41,16 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
     });
 
     try {
-      final response = await JishoApiService.searchWords(searchTerm);
+      final response = await DictionaryService.searchUnified(query: searchTerm);
       
-      if (response != null && response.isSuccessful) {
+      if (response != null && response.hasResults) {
         setState(() {
-          _searchResults = response.data;
+          _searchResults = response;
           _isLoading = false;
         });
       } else {
         setState(() {
-          _searchResults = [];
+          _searchResults = null;
           _errorMessage = 'No results found for "$searchTerm"';
           _isLoading = false;
         });
@@ -67,7 +70,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
       }
       
       setState(() {
-        _searchResults = [];
+        _searchResults = null;
         _errorMessage = errorMsg;
         _isLoading = false;
       });
@@ -77,7 +80,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
   void _clearSearch() {
     _searchController.clear();
     setState(() {
-      _searchResults = [];
+      _searchResults = null;
       _errorMessage = null;
       _lastSearchTerm = '';
     });
@@ -217,7 +220,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
       );
     }
 
-    if (_searchResults.isEmpty && _lastSearchTerm.isEmpty) {
+    if (_searchResults == null && _lastSearchTerm.isEmpty) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -250,7 +253,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
       );
     }
 
-    if (_searchResults.isEmpty) {
+    if (_searchResults == null || !_searchResults!.hasResults) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -282,26 +285,131 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
       );
     }
 
+    final results = _searchResults!;
+    final allResults = results.allResults;
+    
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      itemCount: _searchResults.length,
+      itemCount: allResults.length + (results.hasWords && results.hasKanji ? 2 : 0),
       itemBuilder: (context, index) {
-        final wordEntry = _searchResults[index];
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: WordCard(
-            wordEntry: wordEntry,
-            onTap: () => _showWordDetails(wordEntry),
-          ),
-        );
+        // Add section headers if we have both words and kanji
+        if (results.hasWords && results.hasKanji) {
+          if (index == 0) {
+            return _buildSectionHeader('Words (${results.wordCount})');
+          }
+          if (index == results.wordCount + 1) {
+            return _buildSectionHeader('Kanji (${results.kanjiCount})');
+          }
+          
+          // Adjust index for actual content
+          if (index <= results.wordCount) {
+            final wordEntry = results.words[index - 1];
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: JotobaWordCard(
+                wordEntry: wordEntry,
+                onTap: () => _showWordDetails(wordEntry),
+              ),
+            );
+          } else {
+            final kanjiEntry = results.kanji[index - results.wordCount - 2];
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: JotobaKanjiCard(
+                kanjiEntry: kanjiEntry,
+                onTap: () => _showKanjiDetails(kanjiEntry),
+              ),
+            );
+          }
+        } else {
+          // No section headers needed
+          final item = allResults[index];
+          if (item is JotobaWordEntry) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: JotobaWordCard(
+                wordEntry: item,
+                onTap: () => _showWordDetails(item),
+              ),
+            );
+          } else if (item is JotobaKanjiEntry) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: JotobaKanjiCard(
+                kanjiEntry: item,
+                onTap: () => _showKanjiDetails(item),
+              ),
+            );
+          }
+          return const SizedBox.shrink();
+        }
       },
     );
   }
 
-  void _showWordDetails(WordEntry wordEntry) {
+  Widget _buildSectionHeader(String title) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(4, 16, 4, 8),
+      child: Text(
+        title,
+        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+          fontWeight: FontWeight.bold,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+      ),
+    );
+  }
+
+  void _showWordDetails(JotobaWordEntry wordEntry) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => WordDetailScreen(wordEntry: wordEntry),
+      ),
+    );
+  }
+
+  void _showKanjiDetails(JotobaKanjiEntry kanjiEntry) {
+    // For now, show kanji details in a simple dialog
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          kanjiEntry.kanji,
+          style: const TextStyle(fontSize: 48),
+          textAlign: TextAlign.center,
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Meanings: ${kanjiEntry.meanings.join(', ')}',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              const SizedBox(height: 8),
+              if (kanjiEntry.hasOnReadings)
+                Text('On readings: ${kanjiEntry.onReadings.join(', ')}'),
+              if (kanjiEntry.hasKunReadings)
+                Text('Kun readings: ${kanjiEntry.kunReadings.join(', ')}'),
+              const SizedBox(height: 8),
+              if (kanjiEntry.strokeCount != null)
+                Text('Stroke count: ${kanjiEntry.strokeCount}'),
+              if (kanjiEntry.hasGrade)
+                Text('Grade: ${kanjiEntry.grade}'),
+              if (kanjiEntry.hasJlptLevel)
+                Text('JLPT: N${kanjiEntry.jlptLevel}'),
+              if (kanjiEntry.frequency != null)
+                Text('Frequency: #${kanjiEntry.frequency}'),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Close'),
+          ),
+        ],
       ),
     );
   }

@@ -3,7 +3,6 @@ import '../models/word_list.dart';
 import '../models/word_entry.dart';
 import '../services/word_list_service.dart';
 import '../widgets/word_card.dart';
-import 'word_detail_screen.dart';
 import 'list_study_session_screen.dart';
 
 class WordListDetailScreen extends StatefulWidget {
@@ -297,11 +296,15 @@ class _WordListDetailScreenState extends State<WordListDetailScreen> {
   }
 
   void _showWordDetails(WordEntry wordEntry) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => WordDetailScreen(wordEntry: wordEntry),
-      ),
+    // Temporarily disabled during Jotoba migration
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Word details temporarily unavailable during API migration')),
     );
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => WordDetailScreen(wordEntry: wordEntry),
+    //   ),
+    // );
   }
 
   void _startStudySession(bool useSpacedRepetition) {

@@ -42,11 +42,11 @@ class FlashcardWidget extends StatelessWidget {
                     colors: isShowingFront
                         ? [
                             Theme.of(context).colorScheme.primaryContainer,
-                            Theme.of(context).colorScheme.primaryContainer.withOpacity(0.7),
+                            Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.7),
                           ]
                         : [
                             Theme.of(context).colorScheme.secondaryContainer,
-                            Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.7),
+                            Theme.of(context).colorScheme.secondaryContainer.withValues(alpha: 0.7),
                           ],
                   ),
                 ),
@@ -86,7 +86,7 @@ class FlashcardWidget extends StatelessWidget {
           Text(
             flashcard.reading,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(0.8),
+              color: Theme.of(context).colorScheme.onPrimaryContainer.withValues(alpha: 0.8),
             ),
             textAlign: TextAlign.center,
           ),
@@ -102,7 +102,7 @@ class FlashcardWidget extends StatelessWidget {
                 tag,
                 style: const TextStyle(fontSize: 12),
               ),
-              backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+              backgroundColor: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
             )).toList(),
           ),
         
@@ -113,7 +113,7 @@ class FlashcardWidget extends StatelessWidget {
           Text(
             'Tap to reveal answer',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
+              color: Theme.of(context).colorScheme.onPrimaryContainer.withValues(alpha: 0.6),
             ),
           ),
       ],
@@ -149,7 +149,7 @@ class FlashcardWidget extends StatelessWidget {
                 tag,
                 style: const TextStyle(fontSize: 12),
               ),
-              backgroundColor: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+              backgroundColor: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.2),
             )).toList(),
           ),
       ],
@@ -160,7 +160,7 @@ class FlashcardWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface.withOpacity(0.5),
+        color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -192,7 +192,7 @@ class FlashcardWidget extends StatelessWidget {
           Text(
             'Next review: ${_formatNextReview()}',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Theme.of(context).colorScheme.onSecondaryContainer.withOpacity(0.7),
+              color: Theme.of(context).colorScheme.onSecondaryContainer.withValues(alpha: 0.7),
             ),
           ),
         ],
@@ -206,7 +206,7 @@ class FlashcardWidget extends StatelessWidget {
         Icon(
           icon,
           size: 20,
-          color: Theme.of(context).colorScheme.onSecondaryContainer.withOpacity(0.7),
+          color: Theme.of(context).colorScheme.onSecondaryContainer.withValues(alpha: 0.7),
         ),
         const SizedBox(height: 4),
         Text(
@@ -219,7 +219,7 @@ class FlashcardWidget extends StatelessWidget {
         Text(
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: Theme.of(context).colorScheme.onSecondaryContainer.withOpacity(0.7),
+            color: Theme.of(context).colorScheme.onSecondaryContainer.withValues(alpha: 0.7),
           ),
         ),
       ],

@@ -1,145 +1,49 @@
 import 'package:flutter/material.dart';
-import '../models/word_entry.dart';
-import '../models/word_list.dart';
-import '../services/favorites_service.dart';
-import '../services/enhanced_word_list_service.dart';
-import '../services/enhanced_flashcard_service.dart';
+import '../models/jotoba_word_entry.dart';
+import '../widgets/ruby_text_widget.dart';
 
-class WordDetailScreen extends StatefulWidget {
-  final WordEntry wordEntry;
+/// Simplified word detail screen for Jotoba word entries
+class WordDetailScreen extends StatelessWidget {
+  final JotobaWordEntry wordEntry;
 
   const WordDetailScreen({super.key, required this.wordEntry});
-
-  @override
-  State<WordDetailScreen> createState() => _WordDetailScreenState();
-}
-
-class _WordDetailScreenState extends State<WordDetailScreen> {
-  final FavoritesService _favoritesService = FavoritesService();
-  final EnhancedWordListService _wordListService = EnhancedWordListService();
-  final EnhancedFlashcardService _flashcardService = EnhancedFlashcardService();
-  bool _isLoading = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _favoritesService.addListener(_onFavoritesChanged);
-    _wordListService.addListener(_onWordListsChanged);
-    _flashcardService.addListener(_onFlashcardsChanged);
-    _loadServices();
-  }
-
-  @override
-  void dispose() {
-    _favoritesService.removeListener(_onFavoritesChanged);
-    _wordListService.removeListener(_onWordListsChanged);
-    _flashcardService.removeListener(_onFlashcardsChanged);
-    super.dispose();
-  }
-
-  void _onFavoritesChanged() {
-    if (mounted) {
-      setState(() {});
-    }
-  }
-
-  void _onFlashcardsChanged() {
-    if (mounted) {
-      setState(() {});
-    }
-  }
-
-  void _onWordListsChanged() {
-    if (mounted) {
-      setState(() {});
-    }
-  }
-
-  Future<void> _loadServices() async {
-    await _favoritesService.loadFavorites();
-    await _wordListService.initialize();
-    await _flashcardService.initialize();
-  }
-
-  Future<void> _toggleFavorite() async {
-    setState(() => _isLoading = true);
-    
-    final success = await _favoritesService.toggleFavorite(widget.wordEntry);
-    
-    if (mounted) {
-      setState(() => _isLoading = false);
-      
-      if (success) {
-        final isFavorite = _favoritesService.isFavorite(widget.wordEntry.slug);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              isFavorite 
-                  ? 'Added "${widget.wordEntry.mainWord}" to favorites'
-                  : 'Removed "${widget.wordEntry.mainWord}" from favorites',
-            ),
-            duration: const Duration(seconds: 2),
-          ),
-        );
-      }
-    }
-  }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.wordEntry.mainWord),
+        title: Text(wordEntry.primaryWord),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        actions: [
-          IconButton(
-            onPressed: _isLoading ? null : _toggleFavorite,
-            icon: _isLoading
-                ? const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : Icon(
-                    _favoritesService.isFavorite(widget.wordEntry.slug)
-                        ? Icons.favorite
-                        : Icons.favorite_border,
-                    color: _favoritesService.isFavorite(widget.wordEntry.slug)
-                        ? Colors.red
-                        : null,
-                  ),
-            tooltip: _favoritesService.isFavorite(widget.wordEntry.slug)
-                ? 'Remove from favorites'
-                : 'Add to favorites',
-          ),
-          IconButton(
-            onPressed: _showAddToListDialog,
-            icon: const Icon(Icons.playlist_add),
-            tooltip: 'Add to list',
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildWordHeader(),
+            _buildWordHeader(context),
             const SizedBox(height: 24),
-            _buildDefinitions(),
-            const SizedBox(height: 24),
-            _buildTags(),
-            if (widget.wordEntry.senses.any((sense) => sense.info.isNotEmpty))
+            _buildDefinitions(context),
+            if (wordEntry.hasPitchAccent) ...[
               const SizedBox(height: 24),
-            _buildAdditionalInfo(),
+              _buildPitchAccent(context),
+            ],
+            if (wordEntry.hasAudio) ...[
+              const SizedBox(height: 24),
+              _buildAudioSection(context),
+            ],
+            if (wordEntry.frequencyRank != null) ...[
+              const SizedBox(height: 24),
+              _buildFrequencyInfo(context),
+            ],
+            const SizedBox(height: 24),
+            _buildTags(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildWordHeader() {
+  Widget _buildWordHeader(BuildContext context) {
     return Card(
       elevation: 2,
       child: Padding(
@@ -147,444 +51,391 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (widget.wordEntry.japanese.isNotEmpty)
-              ...widget.wordEntry.japanese.map((reading) => Padding(
+            if (wordEntry.reading.isNotEmpty)
+              ...wordEntry.reading.map((reading) => Padding(
                 padding: const EdgeInsets.only(bottom: 12),
                 child: Row(
                   children: [
-                    if (reading.word != null)
+                    if (reading.kanji != null) ...[
+                      if (reading.hasFurigana)
+                        RubyTextWidget(
+                          text: reading.kanji!,
+                          furigana: reading.furigana,
+                          kanjiStyle: const TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        )
+                      else
+                        Text(
+                          reading.kanji!,
+                          style: const TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      const SizedBox(width: 16),
+                    ],
+                    if (!reading.hasFurigana || reading.kanji == null)
                       Text(
-                        reading.word!,
-                        style: const TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
+                        reading.kana,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey[600],
                         ),
                       ),
-                    const SizedBox(width: 16),
-                    Text(
-                      reading.reading,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey[600],
-                      ),
-                    ),
                   ],
                 ),
               )),
-            if (widget.wordEntry.isCommon || widget.wordEntry.jlpt.isNotEmpty)
-              const SizedBox(height: 12),
-            _buildHeaderTags(),
+            if (wordEntry.isCommon)
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.green.withValues(alpha: 0.1),
+                  border: Border.all(color: Colors.green),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: const Text(
+                  'Common Word',
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildHeaderTags() {
-    final tags = <Widget>[];
-
-    if (widget.wordEntry.isCommon) {
-      tags.add(_buildTag('Common word', Colors.green, large: true));
-    }
-
-    for (final jlpt in widget.wordEntry.jlpt) {
-      tags.add(_buildTag(jlpt.toUpperCase(), Colors.blue, large: true));
-    }
-
-    if (tags.isEmpty) return const SizedBox.shrink();
-
-    return Wrap(
-      spacing: 8,
-      runSpacing: 6,
-      children: tags,
+  Widget _buildDefinitions(BuildContext context) {
+    return Card(
+      elevation: 1,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Definitions',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 12),
+            ...wordEntry.senses.asMap().entries.map((senseEntry) {
+              final index = senseEntry.key;
+              final sense = senseEntry.value;
+              
+              return Padding(
+                padding: EdgeInsets.only(bottom: index < wordEntry.senses.length - 1 ? 16 : 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (sense.comprehensivePosDisplay.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: Wrap(
+                          spacing: 6,
+                          runSpacing: 4,
+                          children: sense.comprehensivePosDisplay.map((tag) =>
+                            _buildPosTag(tag, small: true)
+                          ).toList(),
+                        ),
+                      ),
+                    // Consolidated definitions format: "1. hello, good day, good afternoon"
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(right: 8, top: 2),
+                          child: Text(
+                            '${index + 1}.',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            sense.allGlossTexts.join(', '),
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (sense.info.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Text(
+                          'Notes: ${sense.info.join(', ')}',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey[600],
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              );
+            }),
+          ],
+        ),
+      ),
     );
   }
 
-  Widget _buildDefinitions() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Definitions',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
-        ),
-        const SizedBox(height: 12),
-        ...widget.wordEntry.senses.asMap().entries.map((entry) {
-          final index = entry.key;
-          final sense = entry.value;
-          
-          return Card(
-            margin: const EdgeInsets.only(bottom: 12),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+  Widget _buildPitchAccent(BuildContext context) {
+    return Card(
+      elevation: 1,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.trending_up, color: Colors.purple[600]),
+                const SizedBox(width: 8),
+                Text(
+                  'Pitch Accent',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            ...wordEntry.pitchAccent.map((accent) => Padding(
+              padding: const EdgeInsets.only(bottom: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (sense.partsOfSpeech.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: Wrap(
-                        spacing: 6,
-                        children: sense.partsOfSpeech.map((pos) => 
-                          _buildTag(pos, Colors.orange, small: true)
-                        ).toList(),
-                      ),
-                    ),
-                  ...sense.englishDefinitions.asMap().entries.map((defEntry) {
-                    final defIndex = defEntry.key;
-                    final definition = defEntry.value;
-                    
-                    return Padding(
-                      padding: EdgeInsets.only(
-                        bottom: defIndex < sense.englishDefinitions.length - 1 ? 6 : 0
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(right: 8, top: 2),
-                            child: Text(
-                              '${index + 1}.${sense.englishDefinitions.length > 1 ? '${defIndex + 1}' : ''}',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey[600],
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Text(
-                              definition,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                height: 1.4,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-                  if (sense.seeAlso.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: Text(
-                        'See also: ${sense.seeAlso.join(', ')}',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey[600],
-                          fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                    ),
-                  if (sense.source.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4),
-                      child: Text(
-                        'Source: ${_formatSource(sense.source)}',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey[600],
-                          fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                    ),
+                  Text(
+                    'Reading: ${accent.reading}',
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                  Text(
+                    'Pattern: ${accent.patternDescription}',
+                    style: TextStyle(color: Colors.grey[700]),
+                  ),
                 ],
               ),
-            ),
-          );
-        }),
-      ],
+            )),
+          ],
+        ),
+      ),
     );
   }
 
-  Widget _buildTags() {
-    final allTags = <Widget>[];
+  Widget _buildAudioSection(BuildContext context) {
+    return Card(
+      elevation: 1,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.volume_up, color: Colors.blue[600]),
+                const SizedBox(width: 8),
+                Text(
+                  'Audio Pronunciation',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'Audio is available for this word',
+              style: TextStyle(color: Colors.grey[700]),
+            ),
+            const SizedBox(height: 8),
+            ElevatedButton.icon(
+              onPressed: () {
+                // TODO: Implement audio playback
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Audio playback not implemented yet')),
+                );
+              },
+              icon: const Icon(Icons.play_arrow),
+              label: const Text('Play Audio'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
-    for (final tag in widget.wordEntry.tags) {
-      if (tag.startsWith('wanikani')) {
-        allTags.add(_buildTag('WaniKani Level ${tag.substring(8)}', Colors.purple));
-      } else {
-        allTags.add(_buildTag(tag, Colors.grey));
-      }
+  Widget _buildFrequencyInfo(BuildContext context) {
+    final freq = wordEntry.frequencyRank!;
+    String frequencyText;
+    Color frequencyColor;
+
+    if (freq <= 1000) {
+      frequencyText = 'Very common (top 1000)';
+      frequencyColor = Colors.green;
+    } else if (freq <= 5000) {
+      frequencyText = 'Common (top 5000)';
+      frequencyColor = Colors.orange;
+    } else if (freq <= 10000) {
+      frequencyText = 'Moderately common (top 10000)';
+      frequencyColor = Colors.yellow[700]!;
+    } else {
+      frequencyText = 'Less common (rank: $freq)';
+      frequencyColor = Colors.grey;
     }
+
+    return Card(
+      elevation: 1,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            Icon(Icons.bar_chart, color: frequencyColor),
+            const SizedBox(width: 8),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Frequency',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  frequencyText,
+                  style: TextStyle(color: frequencyColor),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTags(BuildContext context) {
+    final allTags = [
+      ...wordEntry.tags,
+      ...wordEntry.jlpt,
+    ];
 
     if (allTags.isEmpty) return const SizedBox.shrink();
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Tags',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 6,
-          children: allTags,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildAdditionalInfo() {
-    final infoList = widget.wordEntry.senses
-        .expand((sense) => sense.info)
-        .where((info) => info.isNotEmpty)
-        .toList();
-
-    if (infoList.isEmpty) return const SizedBox.shrink();
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Additional Information',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: infoList.map((info) => Padding(
-                padding: const EdgeInsets.only(bottom: 4),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('• ', style: TextStyle(fontWeight: FontWeight.bold)),
-                    Expanded(child: Text(info)),
-                  ],
-                ),
-              )).toList(),
+    return Card(
+      elevation: 1,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Tags',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
+            const SizedBox(height: 12),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                ...wordEntry.jlpt.map((jlpt) => _buildTag(jlpt, Colors.blue)),
+                ...wordEntry.tags.map((tag) => _buildTag(tag, Colors.purple)),
+              ],
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 
-  String _formatSource(List<Map<String, dynamic>> sources) {
-    return sources.map((source) {
-      if (source.containsKey('language') && source.containsKey('word')) {
-        return '${source['language']}: ${source['word']}';
-      } else if (source.containsKey('text')) {
-        return source['text'];
-      } else {
-        return source.toString();
-      }
-    }).join(', ');
-  }
-
-  Widget _buildTag(String text, Color color, {bool large = false, bool small = false}) {
+  Widget _buildTag(String text, Color color, {bool small = false}) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: small ? 6 : (large ? 12 : 8),
-        vertical: small ? 2 : (large ? 6 : 4),
+        horizontal: small ? 6 : 8,
+        vertical: small ? 3 : 4,
       ),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(small ? 4 : (large ? 8 : 6)),
         border: Border.all(color: color.withValues(alpha: 0.3)),
+        borderRadius: BorderRadius.circular(4),
       ),
       child: Text(
         text,
         style: TextStyle(
-          fontSize: small ? 10 : (large ? 14 : 12),
-          fontWeight: FontWeight.w600,
           color: color,
+          fontSize: small ? 11 : 12,
+          fontWeight: FontWeight.w500,
         ),
       ),
     );
   }
-
-  Widget _buildListTileForDialog(WordList list) {
-    return FutureBuilder<List<int>>(
-      future: _wordListService.getListsContainingWord(widget.wordEntry.slug),
-      builder: (context, snapshot) {
-        final listsContaining = snapshot.data ?? [];
-        final isAlreadyInList = listsContaining.contains(list.id);
-        return _buildListTileContent(list, isAlreadyInList);
-      },
+  
+  Widget _buildPosTag(String tag, {bool small = false}) {
+    Color color = _getPosTagColor(tag);
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: small ? 6 : 8,
+        vertical: small ? 3 : 4,
+      ),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.1),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(
+        tag,
+        style: TextStyle(
+          color: color,
+          fontSize: small ? 11 : 12,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
     );
   }
-
-  Widget _buildListTileContent(WordList list, bool isAlreadyInList) {
+  
+  Color _getPosTagColor(String tag) {
+    // Primary POS types
+    switch (tag) {
+      case 'Verb':
+        return Colors.blue[700]!;
+      case 'i-adj':
+        return Colors.red[700]!;
+      case 'na-adj':
+        return Colors.orange[700]!;
+      case 'no-adj':
+        return Colors.green[600]!;
+      case 'Noun':
+        return Colors.green[700]!;
+      case 'Suffix':
+      case 'Expr':
+        return Colors.purple[600]!;
+    }
     
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundColor: isAlreadyInList ? Colors.grey : Theme.of(context).primaryColor,
-        child: Text(
-          list.name.substring(0, 1).toUpperCase(),
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      title: Text(list.name),
-      subtitle: FutureBuilder<List<WordEntry>>(
-        future: _wordListService.getWordsInList(list.id),
-        builder: (context, snapshot) {
-          final wordCount = snapshot.data?.length ?? 0;
-          return Text('$wordCount words');
-        },
-      ),
-      trailing: isAlreadyInList 
-          ? const Icon(Icons.check_circle, color: Colors.green)
-          : const Icon(Icons.add_circle_outline),
-      enabled: !isAlreadyInList,
-      onTap: isAlreadyInList 
-          ? null 
-          : () => Navigator.of(context).pop(list),
-    );
-  }
-
-  Future<void> _showAddToListDialog() async {
-    try {
-      // Show loading indicator
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) => const AlertDialog(
-          content: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(width: 16),
-              Text('Loading lists...'),
-            ],
-          ),
-        ),
-      );
-
-      // Ensure word lists are loaded before accessing them
-      if (!_wordListService.isInitialized) {
-        await _wordListService.initialize();
-      }
-      
-      // Close loading dialog
-      if (mounted) {
-        Navigator.of(context).pop();
-      }
-      
-      final lists = _wordListService.wordLists;
+    // Verb details
+    if (tag == 'Ichidan' || tag == 'Transitive' || tag == 'Intransitive' || 
+        tag.contains('Godan') || tag == 'Irregular') {
+      return Colors.blue[600]!;
+    }
     
-    if (lists.isEmpty) {
-      // Show dialog to create a list first
-      if (mounted) {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('No Lists Available'),
-            content: const Text('You need to create a word list first. Go to the Learn tab to create your first list.'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
-      }
-      return;
+    // Adjective details
+    if (tag.contains('adj')) {
+      return Colors.red[600]!;
     }
-
-    WordList? selectedList;
-    if (mounted) {
-      selectedList = await showDialog<WordList>(
-        context: context,
-        builder: (context) => AlertDialog(
-        title: const Text('Add to List'),
-        content: SizedBox(
-          width: 300,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Add "${widget.wordEntry.mainWord}" to which list?'),
-              const SizedBox(height: 16),
-              if (lists.length > 5)
-                SizedBox(
-                  height: 300,
-                  child: ListView.builder(
-                    itemCount: lists.length,
-                    itemBuilder: (context, index) => _buildListTileForDialog(lists[index]),
-                  ),
-                )
-              else
-                ...lists.map((list) => _buildListTileForDialog(list)),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel'),
-          ),
-        ],
-      ),
-      );
-    }
-
-    if (selectedList != null) {
-      final success = await _wordListService.addWordToList(
-        selectedList.id,
-        widget.wordEntry,
-      );
-      
-      if (success) {
-        // Also create a flashcard for this word
-        await _wordListService.createFlashcardFromWord(
-          widget.wordEntry.slug,
-          [selectedList.id],
-          widget.wordEntry,
-        );
-      }
-      
-      if (mounted) {
-        if (success) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Added "${widget.wordEntry.mainWord}" to "${selectedList.name}" and created flashcard'),
-            ),
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Failed to add word to list'),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
-      }
-    }
-    } catch (e) {
-      // Close loading dialog if still open
-      if (mounted) {
-        Navigator.of(context).pop();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Error loading lists: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    }
+    
+    // Default
+    return Colors.grey[700]!;
   }
 }

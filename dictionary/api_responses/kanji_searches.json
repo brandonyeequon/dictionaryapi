@@ -1,0 +1,761 @@
+[
+  {
+    "search_term": "今",
+    "category": "Kanji",
+    "timestamp": "2025-05-30T11:32:52.771544",
+    "response": {
+      "status_code": 200,
+      "headers": {
+        "access-control-allow-credentials": "true",
+        "connection": "keep-alive",
+        "date": "Fri, 30 May 2025 17:32:52 GMT",
+        "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+        "strict-transport-security": "max-age=63072000; preload",
+        "content-length": "1168",
+        "access-control-expose-headers": "content-type",
+        "content-type": "application/json",
+        "server": "openresty"
+      },
+      "body": {
+        "kanji": [
+          {
+            "literal": "今",
+            "meanings": [
+              "now"
+            ],
+            "grade": 2,
+            "stroke_count": 4,
+            "frequency": 49,
+            "jlpt": 5,
+            "onyomi": [
+              "コン",
+              "キン"
+            ],
+            "kunyomi": [
+              "いま"
+            ],
+            "chinese": [
+              "jin1"
+            ],
+            "korean_r": [
+              "geum"
+            ],
+            "korean_h": [
+              "금"
+            ],
+            "parts": [
+              "𠆢",
+              "一"
+            ],
+            "radical": "人"
+          }
+        ],
+        "words": [
+          {
+            "reading": {
+              "kana": "いま",
+              "kanji": "今",
+              "furigana": "[今|いま]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "now",
+                  "the present time",
+                  "just now",
+                  "soon",
+                  "immediately"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  },
+                  {
+                    "Adjective": "No"
+                  },
+                  "Adverb"
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "another",
+                  "more"
+                ],
+                "pos": [
+                  "Adverb"
+                ],
+                "language": "English"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1288850",
+            "pitch": [
+              {
+                "part": "い",
+                "high": true
+              },
+              {
+                "part": "ま",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "こん",
+              "kanji": "今",
+              "furigana": "[今|こん]"
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "the current ...",
+                  "this"
+                ],
+                "pos": [
+                  "Prefix"
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "today's ..."
+                ],
+                "pos": [
+                  "Prefix"
+                ],
+                "language": "English"
+              }
+            ],
+            "pitch": [
+              {
+                "part": "こ",
+                "high": true
+              },
+              {
+                "part": "ん",
+                "high": false
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "いまいま",
+              "kanji": "今今",
+              "furigana": "[今今|いま|いま]"
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "right now"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "search_term": "人",
+    "category": "Kanji",
+    "timestamp": "2025-05-30T11:32:53.714581",
+    "response": {
+      "status_code": 200,
+      "headers": {
+        "access-control-allow-credentials": "true",
+        "connection": "keep-alive",
+        "date": "Fri, 30 May 2025 17:32:53 GMT",
+        "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+        "strict-transport-security": "max-age=63072000; preload",
+        "content-length": "2187",
+        "access-control-expose-headers": "content-type",
+        "content-type": "application/json",
+        "server": "openresty"
+      },
+      "body": {
+        "kanji": [
+          {
+            "literal": "人",
+            "meanings": [
+              "person"
+            ],
+            "grade": 1,
+            "stroke_count": 2,
+            "frequency": 5,
+            "jlpt": 5,
+            "onyomi": [
+              "ジン",
+              "ニン"
+            ],
+            "kunyomi": [
+              "ひと",
+              "-り",
+              "-と"
+            ],
+            "chinese": [
+              "ren2"
+            ],
+            "korean_r": [
+              "in"
+            ],
+            "korean_h": [
+              "인"
+            ],
+            "parts": [
+              "人"
+            ],
+            "radical": "人"
+          }
+        ],
+        "words": [
+          {
+            "reading": {
+              "kana": "ひと",
+              "kanji": "人",
+              "furigana": "[人|ひと]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "person",
+                  "someone",
+                  "somebody"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "human beings",
+                  "mankind",
+                  "man",
+                  "people",
+                  "humans"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "human (Homo sapiens)"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "information": "usu. ヒト",
+                "misc": "UsuallyWrittenInKana"
+              },
+              {
+                "glosses": [
+                  "(other) people",
+                  "others"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "character",
+                  "personality",
+                  "nature"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "capable person",
+                  "competent person",
+                  "suitable person",
+                  "right person"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "adult",
+                  "grown-up"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "I",
+                  "me",
+                  "one"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "information": "used when rebuking or criticizing someone"
+              }
+            ],
+            "audio": "/resource/audio/kanjialive/1580640",
+            "pitch": [
+              {
+                "part": "ひ",
+                "high": false
+              },
+              {
+                "part": "と",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "じん",
+              "kanji": "人",
+              "furigana": "[人|じん]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "-ian (e.g. Italian)",
+                  "-ite (e.g. Tokyoite)"
+                ],
+                "pos": [
+                  "Suffix"
+                ],
+                "language": "English",
+                "information": "indicates nationality, race, origin, etc."
+              },
+              {
+                "glosses": [
+                  "-er (e.g. performer, etc.)",
+                  "person working with ..."
+                ],
+                "pos": [
+                  "Suffix"
+                ],
+                "language": "English",
+                "information": "indicates expertise (in a certain field)"
+              },
+              {
+                "glosses": [
+                  "man",
+                  "person",
+                  "people"
+                ],
+                "pos": [
+                  "Suffix"
+                ],
+                "language": "English",
+                "information": "usu. in compound words"
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "にん",
+              "kanji": "人",
+              "furigana": "[人|にん]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "counter for people"
+                ],
+                "pos": [
+                  "Counter"
+                ],
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "と",
+              "kanji": "人",
+              "furigana": "[人|と]"
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "person"
+                ],
+                "pos": [
+                  "Suffix"
+                ],
+                "language": "English"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "search_term": "日",
+    "category": "Kanji",
+    "timestamp": "2025-05-30T11:32:54.655763",
+    "response": {
+      "status_code": 200,
+      "headers": {
+        "connection": "keep-alive",
+        "access-control-allow-credentials": "true",
+        "date": "Fri, 30 May 2025 17:32:54 GMT",
+        "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+        "strict-transport-security": "max-age=63072000; preload",
+        "content-length": "2576",
+        "access-control-expose-headers": "content-type",
+        "content-type": "application/json",
+        "server": "openresty"
+      },
+      "body": {
+        "kanji": [
+          {
+            "literal": "日",
+            "meanings": [
+              "day",
+              "sun",
+              "Japan",
+              "counter for days"
+            ],
+            "grade": 1,
+            "stroke_count": 4,
+            "frequency": 1,
+            "jlpt": 5,
+            "onyomi": [
+              "ニチ",
+              "ジツ"
+            ],
+            "kunyomi": [
+              "ひ",
+              "-び",
+              "-か"
+            ],
+            "chinese": [
+              "ri4"
+            ],
+            "korean_r": [
+              "il"
+            ],
+            "korean_h": [
+              "일"
+            ],
+            "parts": [
+              "日"
+            ],
+            "radical": "日"
+          }
+        ],
+        "words": [
+          {
+            "reading": {
+              "kana": "ひ",
+              "kanji": "日",
+              "furigana": "[日|ひ]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "day",
+                  "days"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "sun",
+                  "sunshine",
+                  "sunlight"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "(the) day",
+                  "daytime",
+                  "daylight"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "date",
+                  "deadline"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "(past) days",
+                  "time (e.g. of one's childhood)"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "case (esp. unfortunate)",
+                  "event"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "information": "as 〜した日には, 〜と来た日には, etc."
+              }
+            ],
+            "audio": "/resource/audio/tofugu/1463770",
+            "pitch": [
+              {
+                "part": "ひ",
+                "high": false
+              },
+              {
+                "part": "",
+                "high": true
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "にち",
+              "kanji": "日",
+              "furigana": "[日|にち]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "Sunday"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "misc": "Abbreviation",
+                "xref": "日曜"
+              },
+              {
+                "glosses": [
+                  "nth day (of the month)"
+                ],
+                "pos": [
+                  "Suffix"
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "counter for days"
+                ],
+                "pos": [
+                  "Counter"
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "Japan"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English",
+                "misc": "Abbreviation",
+                "xref": "日本"
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "か",
+              "kanji": "日",
+              "furigana": "[日|か]"
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "day of month"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Suffix"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "counter for days"
+                ],
+                "pos": [
+                  "Counter"
+                ],
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "んち",
+              "kanji": "日",
+              "furigana": "[日|んち]"
+            },
+            "common": false,
+            "senses": [
+              {
+                "glosses": [
+                  "nth day (of the month)"
+                ],
+                "pos": [
+                  "Suffix"
+                ],
+                "language": "English",
+                "misc": "Colloquialism",
+                "xref": "日・にち・2"
+              },
+              {
+                "glosses": [
+                  "counter for days"
+                ],
+                "pos": [
+                  "Counter"
+                ],
+                "language": "English",
+                "misc": "Colloquialism",
+                "xref": "日・にち・3"
+              }
+            ]
+          },
+          {
+            "reading": {
+              "kana": "ひび",
+              "kanji": "日々",
+              "furigana": "[日々|ひ|び]"
+            },
+            "common": true,
+            "senses": [
+              {
+                "glosses": [
+                  "daily",
+                  "everyday"
+                ],
+                "pos": [
+                  {
+                    "Adjective": "No"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "days (e.g. of one's youth)"
+                ],
+                "pos": [
+                  {
+                    "Noun": "Normal"
+                  }
+                ],
+                "language": "English"
+              },
+              {
+                "glosses": [
+                  "every day",
+                  "day after day",
+                  "day by day",
+                  "from day to day"
+                ],
+                "pos": [
+                  "Adverb"
+                ],
+                "language": "English"
+              }
+            ],
+            "pitch": [
+              {
+                "part": "ひ",
+                "high": true
+              },
+              {
+                "part": "び",
+                "high": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+]

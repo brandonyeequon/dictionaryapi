@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../models/word_entry.dart';
 import '../services/favorites_service.dart';
 import '../widgets/word_card.dart';
-import 'word_detail_screen.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
@@ -58,11 +57,15 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   }
 
   void _showWordDetails(WordEntry wordEntry) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => WordDetailScreen(wordEntry: wordEntry),
-      ),
+    // Temporarily disabled during Jotoba migration
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Word details temporarily unavailable during API migration')),
     );
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => WordDetailScreen(wordEntry: wordEntry),
+    //   ),
+    // );
   }
 
   @override
