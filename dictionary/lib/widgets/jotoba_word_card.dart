@@ -210,43 +210,23 @@ class JotobaWordCard extends StatelessWidget {
 
   Widget _buildPitchAccent(BuildContext context) {
     if (wordEntry.pitchParts.isNotEmpty) {
-      return Row(
-        children: [
-          Icon(Icons.trending_up, size: 14.0, color: Colors.red[600]),
-          const SizedBox(width: 4.0),
-          MinimalPitchAccentWidget(
-            pitchParts: wordEntry.pitchParts,
-          ),
-          const SizedBox(width: 4.0),
-          Expanded(
-            child: CompactPitchAccentWidget(
-              pitchParts: wordEntry.pitchParts,
-              fontSize: 11,
-            ),
-          ),
-        ],
+      return CompactPitchAccentWidget(
+        pitchParts: wordEntry.pitchParts,
+        fontSize: 11,
       );
     }
-    
-    final pitchInfo = wordEntry.pitchAccent.isNotEmpty 
-        ? wordEntry.pitchAccent.first.patternDescription 
+
+    final pitchInfo = wordEntry.pitchAccent.isNotEmpty
+        ? wordEntry.pitchAccent.first.patternDescription
         : '';
-    
-    return Row(
-      children: [
-        Icon(Icons.trending_up, size: 14.0, color: Colors.purple[600]),
-        const SizedBox(width: 4.0),
-        Expanded(
-          child: Text(
-            'Pitch: $pitchInfo',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Colors.purple[600],
-            ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-      ],
+
+    return Text(
+      'Pitch: $pitchInfo',
+      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+        color: Colors.purple[600],
+      ),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 
