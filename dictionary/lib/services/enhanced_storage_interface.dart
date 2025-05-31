@@ -1,9 +1,9 @@
-import '../../models/word_entry.dart';
-import '../../models/enhanced_flashcard.dart';
-import '../../models/user_progress.dart';
-import '../../models/study_session.dart';
-import '../../models/word_list.dart';
-import '../../models/word_mastery.dart';
+import '../models/word_entry.dart';
+import '../models/enhanced_flashcard.dart';
+import '../models/user_progress.dart';
+import '../models/study_session.dart';
+import '../models/word_list.dart';
+import '../models/word_mastery.dart';
 
 /// Enhanced storage interface for the advanced flashcard system
 /// Supports list-based flashcards, user progress tracking, and study sessions

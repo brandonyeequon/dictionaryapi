@@ -5,8 +5,8 @@ import '../models/word_entry.dart';
 import '../models/word_list.dart';
 import '../models/enhanced_flashcard.dart';
 import '../models/study_session.dart';
-import 'storage/enhanced_storage_interface.dart';
-import 'storage/enhanced_storage_factory.dart';
+import 'enhanced_storage_interface.dart';
+import 'storage/firebase_storage_factory.dart';
 import 'enhanced_flashcard_service.dart';
 
 /// Enhanced word list service that integrates with the flashcard system
@@ -32,7 +32,7 @@ class EnhancedWordListService extends ChangeNotifier {
     if (_isInitialized) return;
     
     try {
-      _storage = EnhancedStorageFactory.createStorage();
+      _storage = FirebaseStorageFactory.createStorage();
       await _storage.initialize();
       _isInitialized = true;
       

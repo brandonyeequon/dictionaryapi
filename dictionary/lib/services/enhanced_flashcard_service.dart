@@ -6,8 +6,8 @@ import '../models/word_entry.dart';
 import '../models/word_mastery.dart';
 import '../models/study_session.dart';
 import '../models/user_progress.dart';
-import 'storage/enhanced_storage_interface.dart';
-import 'storage/enhanced_storage_factory.dart';
+import 'enhanced_storage_interface.dart';
+import 'storage/firebase_storage_factory.dart';
 
 /// Enhanced flashcard service with list integration, SRS, and progress tracking
 class EnhancedFlashcardService extends ChangeNotifier {
@@ -45,7 +45,7 @@ class EnhancedFlashcardService extends ChangeNotifier {
     if (_isInitialized) return;
     
     try {
-      _storage = EnhancedStorageFactory.createStorage();
+      _storage = FirebaseStorageFactory.createStorage();
       await _storage.initialize();
       _isInitialized = true;
       

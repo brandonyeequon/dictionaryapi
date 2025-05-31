@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dictionary_screen.dart';
 import 'enhanced_learn_screen.dart';
+import '../services/auth_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -40,6 +41,32 @@ class _HomeScreenState extends State<HomeScreen> {
         return true;
       },
       child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Jisho Dictionary'),
+          actions: [
+            PopupMenuButton<String>(
+              onSelected: (value) async {
+                if (value == 'logout') {
+                  await AuthService().signOut();
+                }
+              },
+              itemBuilder: (BuildContext context) {
+                return [
+                  PopupMenuItem<String>(
+                    value: 'logout',
+                    child: Row(
+                      children: [
+                        Icon(Icons.logout, color: Theme.of(context).colorScheme.error),
+                        const SizedBox(width: 8),
+                        const Text('Sign Out'),
+                      ],
+                    ),
+                  ),
+                ];
+              },
+            ),
+          ],
+        ),
         body: Stack(
           children: List.generate(_screens.length, (index) {
             return Offstage(

@@ -327,4 +327,52 @@ class StudySessionStats {
       'reviews_by_difficulty': reviewsByDifficultyJson,
     };
   }
+
+  /// Create StudySessionStats from a list of StudySession objects
+  factory StudySessionStats.fromStudySessions(List<StudySession> sessions) {
+    if (sessions.isEmpty) {
+      return const StudySessionStats();
+    }
+
+    final totalSessions = sessions.length;
+    final totalCards = sessions.fold<int>(0, (sum, session) => sum + session.totalCards);
+    final totalAccuracy = sessions.fold<double>(0, (sum, session) => sum + session.accuracy);
+    final averageAccuracy = totalAccuracy / totalSessions;
+    final totalStudyTime = sessions.fold<Duration>(
+      Duration.zero,
+      (sum, session) => sum + session.duration,
+    );
+
+    // Calculate streaks
+    sessions.sort((a, b) => a.startTime.compareTo(b.startTime));
+    final lastSessionDate = sessions.last.startTime;
+    
+    // Session type counts
+    final sessionsByType = <StudySessionType, int>{};
+    for (final session in sessions) {
+      sessionsByType[session.sessionType] = 
+          (sessionsByType[session.sessionType] ?? 0) + 1;
+    }
+
+    // Review difficulty counts
+    final reviewsByDifficulty = <ReviewDifficulty, int>{};
+    for (final session in sessions) {
+      for (final review in session.cardReviews) {
+        reviewsByDifficulty[review.difficulty] = 
+            (reviewsByDifficulty[review.difficulty] ?? 0) + 1;
+      }
+    }
+
+    return StudySessionStats(
+      totalSessions: totalSessions,
+      totalCards: totalCards,
+      averageAccuracy: averageAccuracy,
+      totalStudyTime: totalStudyTime,
+      lastSessionDate: lastSessionDate,
+      currentStreak: 0, // Would need more complex calculation
+      longestStreak: 0, // Would need more complex calculation
+      sessionsByType: sessionsByType,
+      reviewsByDifficulty: reviewsByDifficulty,
+    );
+  }
 }
