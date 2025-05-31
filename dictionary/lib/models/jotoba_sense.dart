@@ -118,6 +118,14 @@ class JotobaSense {
       }
     }
     
+    // Parse info field - handle both 'info' list and 'information' string
+    List<String> infoParsed = [];
+    if (json['info'] != null) {
+      infoParsed = _parseStringList(json['info']);
+    } else if (json['information'] != null) {
+      infoParsed = [json['information'].toString()];
+    }
+    
     return JotobaSense(
       glosses: (json['glosses'] as List<dynamic>? ?? [])
           .map((g) {
@@ -132,16 +140,27 @@ class JotobaSense {
           .toList(),
       partsOfSpeech: partsOfSpeech,
       detailedPartsOfSpeech: detailedPartsOfSpeech,
-      tags: List<String>.from(json['tags'] ?? []),
-      info: List<String>.from(json['info'] ?? json['information'] != null ? [json['information']] : []),
-      restrictions: List<String>.from(json['restrictions'] ?? []),
+      tags: _parseStringList(json['tags']),
+      info: infoParsed,
+      restrictions: _parseStringList(json['restrictions']),
       seeAlso: seeAlso,
       antonyms: antonyms,
-      source: List<String>.from(json['source'] ?? []),
+      source: _parseStringList(json['source']),
       dialects: dialects,
       fields: fields,
-      misc: List<String>.from(json['misc'] ?? []),
+      misc: _parseStringList(json['misc']),
     );
+  }
+
+  /// Helper method to parse string or list fields
+  static List<String> _parseStringList(dynamic value) {
+    if (value is List) {
+      return List<String>.from(value);
+    }
+    if (value is String) {
+      return [value];
+    }
+    return [];
   }
 
   Map<String, dynamic> toJson() {
