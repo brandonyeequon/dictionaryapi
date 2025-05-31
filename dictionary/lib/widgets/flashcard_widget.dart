@@ -73,7 +73,7 @@ class FlashcardWidget extends StatelessWidget {
         // Word
         Builder(builder: (context) {
           final wordStyle = Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onPrimaryContainer);
-          return RubyTextWidget(text: flashcard.word, furigana: flashcard.furiganaReading, kanjiStyle: wordStyle, textAlign: TextAlign.center);
+          return RubyTextWidget(text: flashcard.word, furigana: flashcard.furiganaReading, kanjiStyle: wordStyle);
         }),
         
         const Spacer(),

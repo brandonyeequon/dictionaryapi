@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 
 import '../models/word_entry.dart';
+import '../models/jotoba_word_entry.dart'; // Added import
 import '../models/word_list.dart';
 import '../models/enhanced_flashcard.dart';
 import '../models/study_session.dart';
@@ -234,7 +235,8 @@ class EnhancedWordListService extends ChangeNotifier {
       final flashcardService = EnhancedFlashcardService();
       await flashcardService.initialize();
       
-      return await flashcardService.createFlashcardFromWord(wordEntry, listIds);
+      final jotobaEntry = JotobaWordEntry.fromWordEntry(wordEntry);
+      return await flashcardService.createFlashcardFromWord(jotobaEntry, listIds);
     } catch (e) {
       debugPrint('[EnhancedWordListService] Create flashcard from word failed: $e');
       return false;
@@ -249,7 +251,8 @@ class EnhancedWordListService extends ChangeNotifier {
       
       // The EnhancedFlashcardService.createFlashcardFromWord already handles
       // both creating new flashcards and updating existing ones with new list IDs
-      final success = await flashcardService.createFlashcardFromWord(wordEntry, listIds);
+      final jotobaEntry = JotobaWordEntry.fromWordEntry(wordEntry);
+      final success = await flashcardService.createFlashcardFromWord(jotobaEntry, listIds);
       
       if (success) {
         debugPrint('[EnhancedWordListService] Successfully ensured flashcard exists for ${wordEntry.slug} in lists: $listIds');

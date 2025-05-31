@@ -1,6 +1,7 @@
 import 'jotoba_reading.dart';
 import 'jotoba_sense.dart';
 import 'jotoba_pitch_accent.dart';
+import 'word_entry.dart'; // Added import
 import 'jotoba_pitch_part.dart';
 import 'jotoba_gloss.dart';
 
@@ -35,6 +36,61 @@ class JotobaWordEntry {
     this.collocations,
     this.alternativeSpellings,
   });
+
+  // Factory to create JotobaWordEntry from a simpler WordEntry
+  factory JotobaWordEntry.fromWordEntry(WordEntry wordEntry) {
+    // Helper to get primary definition from WordEntry senses
+    String getPrimaryDefinition(List<WordSense> senses) { // Changed Sense to WordSense
+      if (senses.isNotEmpty && senses.first.englishDefinitions.isNotEmpty) {
+        return senses.first.englishDefinitions.join(', ');
+      }
+      return '';
+    }
+
+    return JotobaWordEntry(
+      slug: wordEntry.slug,
+      reading: [
+        JotobaReading(
+          kanji: wordEntry.mainWord,
+          kana: wordEntry.mainReading,
+          furigana: null, // WordEntry typically doesn't store detailed furigana
+          tags: [], // Added missing required parameter
+          info: [], // Added missing required parameter
+        )
+      ],
+      senses: [ // Create a single sense for simplicity from WordEntry
+        JotobaSense(
+          glosses: [
+            JotobaGloss(
+              text: getPrimaryDefinition(wordEntry.senses),
+              language: 'English',
+              tags: [],
+            )
+          ],
+          partsOfSpeech: wordEntry.senses.isNotEmpty ? wordEntry.senses.first.partsOfSpeech : [],
+          detailedPartsOfSpeech: {},
+          tags: wordEntry.senses.isNotEmpty ? wordEntry.senses.first.tags : [], // Using tags from WordSense
+          info: wordEntry.senses.isNotEmpty ? wordEntry.senses.first.info : [],
+          restrictions: [],
+          seeAlso: [],
+          antonyms: [],
+          source: [],
+          dialects: [],
+          fields: [],
+          misc: [], // Note: wordEntry.senses.first.tags could be used for misc if appropriate
+        )
+      ],
+      audio: [], // WordEntry doesn't have audio
+      common: wordEntry.isCommon, // Corrected from common to isCommon
+      tags: wordEntry.tags,
+      jlpt: wordEntry.jlpt,
+      pitchAccent: [], // WordEntry doesn't have pitch
+      pitchParts: [],  // WordEntry doesn't have pitch parts
+      frequency: null,
+      collocations: null,
+      alternativeSpellings: null,
+    );
+  }
 
   factory JotobaWordEntry.fromJson(Map<String, dynamic> json) {
     return JotobaWordEntry(

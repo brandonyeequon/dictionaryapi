@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/word_list.dart';
 import '../models/word_entry.dart';
+import '../models/jotoba_word_entry.dart'; // Added import
 import '../services/flashcard_service.dart';
 
 enum StudyResult { again, hard, good, easy, next }
@@ -401,7 +402,9 @@ class _ListStudySessionScreenState extends State<ListStudySessionScreen> {
     await _flashcardService.loadFlashcards();
     
     if (!_flashcardService.hasFlashcard(word.slug)) {
-      await _flashcardService.addFlashcard(word);
+      // Convert WordEntry to JotobaWordEntry before adding
+      final jotobaEntry = JotobaWordEntry.fromWordEntry(word);
+      await _flashcardService.addFlashcard(jotobaEntry);
     }
     
     // Update the flashcard with the review

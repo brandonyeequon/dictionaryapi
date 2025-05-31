@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:idb_shim/idb_browser.dart';
 import '../../models/word_entry.dart';
+import '../../models/jotoba_word_entry.dart'; // Added import
 import '../../models/enhanced_flashcard.dart';
 import '../../models/user_progress.dart';
 import '../../models/study_session.dart';
@@ -588,9 +589,10 @@ class EnhancedWebStorage implements EnhancedStorageInterface {
   @override
   Future<bool> createFlashcardFromWord(String wordSlug, List<int> listIds, WordEntry wordEntry) async {
     try {
+      final jotobaEntry = JotobaWordEntry.fromWordEntry(wordEntry); // Convert
       final flashcard = EnhancedFlashcard.fromWordEntry(
         DateTime.now().millisecondsSinceEpoch.toString(),
-        wordEntry,
+        jotobaEntry, // Use converted entry
         listIds,
       );
       return await saveFlashcard(flashcard);
