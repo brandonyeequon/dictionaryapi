@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/enhanced_flashcard.dart';
+import '../widgets/ruby_text_widget.dart';
 
 /// Widget for displaying a flashcard with flip animation
 class FlashcardWidget extends StatelessWidget {
@@ -70,26 +71,10 @@ class FlashcardWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Word
-        Text(
-          flashcard.word,
-          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.onPrimaryContainer,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        
-        const SizedBox(height: 16),
-        
-        // Reading
-        if (flashcard.reading.isNotEmpty && flashcard.reading != flashcard.word)
-          Text(
-            flashcard.reading,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: Theme.of(context).colorScheme.onPrimaryContainer.withValues(alpha: 0.8),
-            ),
-            textAlign: TextAlign.center,
-          ),
+        Builder(builder: (context) {
+          final wordStyle = Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onPrimaryContainer);
+          return RubyTextWidget(text: flashcard.word, furigana: flashcard.furiganaReading, kanjiStyle: wordStyle, textAlign: TextAlign.center);
+        }),
         
         const Spacer(),
         

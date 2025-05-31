@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'word_mastery.dart';
-import 'word_entry.dart';
+import './jotoba_word_entry.dart'; // Changed from 'word_entry.dart'
 
 /// Enhanced flashcard that integrates with word lists and tracks mastery
 class EnhancedFlashcard {
@@ -8,6 +8,7 @@ class EnhancedFlashcard {
   final String wordSlug;
   final String word;
   final String reading;
+  final String? furiganaReading;
   final String definition;
   final List<String> tags;
   final List<int> wordListIds; // Lists this card belongs to
@@ -28,6 +29,7 @@ class EnhancedFlashcard {
     required this.wordSlug,
     required this.word,
     required this.reading,
+    this.furiganaReading,
     required this.definition,
     required this.tags,
     required this.wordListIds,
@@ -46,17 +48,18 @@ class EnhancedFlashcard {
 
   factory EnhancedFlashcard.fromWordEntry(
     String id,
-    WordEntry wordEntry,
+    JotobaWordEntry wordEntry, // Changed type here
     List<int> wordListIds,
   ) {
     final now = DateTime.now();
     return EnhancedFlashcard(
       id: id,
-      wordSlug: wordEntry.slug,
-      word: wordEntry.mainWord,
-      reading: wordEntry.mainReading,
+      wordSlug: wordEntry.slug ?? '', // Added null check
+      word: wordEntry.primaryWord,
+      reading: wordEntry.primaryReading,
+      furiganaReading: wordEntry.primaryFurigana, // Now uses primaryFurigana
       definition: wordEntry.primaryDefinition,
-      tags: wordEntry.jlpt + wordEntry.tags,
+      tags: List<String>.from(wordEntry.jlpt)..addAll(wordEntry.tags), // Updated tags
       wordListIds: wordListIds,
       createdAt: now,
       lastReviewed: now,
@@ -75,6 +78,7 @@ class EnhancedFlashcard {
       wordSlug: json['word_slug'] as String,
       word: json['word'] as String,
       reading: json['reading'] as String,
+      furiganaReading: json['furigana_reading'] as String?,
       definition: json['definition'] as String,
       tags: List<String>.from(json['tags'] ?? []),
       wordListIds: List<int>.from(json['word_list_ids'] ?? []),
@@ -98,6 +102,7 @@ class EnhancedFlashcard {
       'word_slug': wordSlug,
       'word': word,
       'reading': reading,
+      'furigana_reading': furiganaReading,
       'definition': definition,
       'tags': tags,
       'word_list_ids': wordListIds,
@@ -271,6 +276,7 @@ class EnhancedFlashcard {
     String? wordSlug,
     String? word,
     String? reading,
+    String? furiganaReading,
     String? definition,
     List<String>? tags,
     List<int>? wordListIds,
@@ -291,6 +297,7 @@ class EnhancedFlashcard {
       wordSlug: wordSlug ?? this.wordSlug,
       word: word ?? this.word,
       reading: reading ?? this.reading,
+      furiganaReading: furiganaReading ?? this.furiganaReading,
       definition: definition ?? this.definition,
       tags: tags ?? this.tags,
       wordListIds: wordListIds ?? this.wordListIds,

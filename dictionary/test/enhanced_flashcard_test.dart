@@ -2,8 +2,34 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:dictionary/models/enhanced_flashcard.dart';
 import 'package:dictionary/models/word_mastery.dart';
 import 'package:dictionary/models/user_progress.dart';
+import 'package:dictionary/models/jotoba_word_entry.dart'; // Added
+import 'package:dictionary/models/jotoba_reading.dart'; // Added
 
 void main() {
+  // Helper to create a JotobaWordEntry (copied from flashcard_test.dart)
+  JotobaWordEntry createTestJotobaEntry({
+    String slug = '食べる',
+    String primaryWord = '食べる',
+    String primaryReading = 'たべる',
+    String primaryDefinition = 'to eat',
+    List<String> jlpt = const ['N5'],
+    List<String> tags = const ['common'],
+    String? primaryFurigana,
+  }) {
+    return JotobaWordEntry(
+      slug: slug,
+      reading: [
+        JotobaReading(kanji: primaryWord, kana: primaryReading, furigana: primaryFurigana, tags: [], info: [])
+      ],
+      senses: [], // Simplified for this test, add senses if needed for definition
+      audio: [],
+      common: true,
+      tags: tags,
+      jlpt: jlpt,
+      pitchAccent: [],
+      pitchParts: [],
+    );
+  }
   group('Enhanced Flashcard System Tests', () {
     group('Word Mastery Tests', () {
       test('mastery level progression works correctly', () {
@@ -40,13 +66,41 @@ void main() {
     });
 
     group('Enhanced Flashcard Tests', () {
-      test('flashcard creation works correctly', () {
+      final mockJotobaEntryWithFurigana = createTestJotobaEntry(
+        primaryFurigana: '[食|た]べる',
+      );
+
+      final mockJotobaEntryWithoutFurigana = createTestJotobaEntry(
+        primaryWord: 'たべる', // Kana only word
+        primaryFurigana: null,
+      );
+
+      test('EnhancedFlashcard.fromWordEntry creates correctly with furigana', () {
+        final flashcard = EnhancedFlashcard.fromWordEntry('id1', mockJotobaEntryWithFurigana, [1]);
+        expect(flashcard.word, '食べる');
+        expect(flashcard.reading, 'たべる');
+        expect(flashcard.furiganaReading, '[食|た]べる');
+        // expect(flashcard.definition, 'to eat'); // Needs senses in mock
+        expect(flashcard.tags, containsAll(['N5', 'common']));
+        expect(flashcard.wordListIds, [1]);
+      });
+
+      test('EnhancedFlashcard.fromWordEntry creates correctly without furigana', () {
+        final flashcard = EnhancedFlashcard.fromWordEntry('id2', mockJotobaEntryWithoutFurigana, [2]);
+        expect(flashcard.word, 'たべる');
+        expect(flashcard.reading, 'たべる');
+        expect(flashcard.furiganaReading, isNull);
+        expect(flashcard.wordListIds, [2]);
+      });
+
+      test('flashcard creation (manual) works correctly', () {
         final now = DateTime.now();
         final flashcard = EnhancedFlashcard(
           id: 'test_id',
           wordSlug: 'house',
           word: '家',
           reading: 'いえ',
+          furiganaReading: '[家|いえ]',
           definition: 'house, home',
           tags: ['N5', 'basic'],
           wordListIds: [1, 2],
@@ -58,6 +112,7 @@ void main() {
         expect(flashcard.wordSlug, 'house');
         expect(flashcard.word, '家');
         expect(flashcard.reading, 'いえ');
+        expect(flashcard.furiganaReading, '[家|いえ]');
         expect(flashcard.definition, 'house, home');
         expect(flashcard.wordListIds, [1, 2]);
         expect(flashcard.masteryLevel, MasteryLevel.newWord);
@@ -321,6 +376,7 @@ void main() {
           wordSlug: 'house',
           word: '家',
           reading: 'いえ',
+          furiganaReading: '[家|いえ]',
           definition: 'house, home',
           tags: ['N5', 'basic'],
           wordListIds: [1, 2, 3],
@@ -343,6 +399,7 @@ void main() {
         expect(deserializedCard.wordSlug, originalCard.wordSlug);
         expect(deserializedCard.word, originalCard.word);
         expect(deserializedCard.reading, originalCard.reading);
+        expect(deserializedCard.furiganaReading, originalCard.furiganaReading);
         expect(deserializedCard.definition, originalCard.definition);
         expect(deserializedCard.tags, originalCard.tags);
         expect(deserializedCard.wordListIds, originalCard.wordListIds);
@@ -351,6 +408,31 @@ void main() {
         expect(deserializedCard.totalReviews, originalCard.totalReviews);
         expect(deserializedCard.accuracy, originalCard.accuracy);
         expect(deserializedCard.createdAt, originalCard.createdAt);
+      });
+
+      test('enhanced flashcard toJson/fromJson with null furiganaReading', () {
+        final originalCard = EnhancedFlashcard(
+          id: 'test_id_null_furigana',
+          wordSlug: 'kana_word',
+          word: 'かな',
+          reading: 'かな',
+          furiganaReading: null,
+          definition: 'kana characters',
+          tags: ['basic'],
+          wordListIds: [4],
+          masteryLevel: MasteryLevel.reviewing,
+          createdAt: DateTime(2024, 1, 1),
+          lastReviewed: DateTime(2024, 1, 2),
+          nextReview: DateTime(2024, 1, 3),
+        );
+
+        final json = originalCard.toJson();
+        expect(json['furigana_reading'], isNull);
+        final deserializedCard = EnhancedFlashcard.fromJson(json);
+
+        expect(deserializedCard.id, originalCard.id);
+        expect(deserializedCard.furiganaReading, isNull);
+        expect(deserializedCard.word, 'かな');
       });
 
       test('user progress can be serialized and deserialized', () {

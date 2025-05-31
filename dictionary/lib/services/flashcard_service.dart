@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import '../models/flashcard.dart';
-import '../models/word_entry.dart';
+import '../models/jotoba_word_entry.dart'; // Changed from word_entry.dart
 import 'storage/storage_interface.dart';
 import 'storage/storage_factory.dart';
 
@@ -53,12 +53,12 @@ class FlashcardService extends ChangeNotifier {
     }
   }
 
-  Future<bool> addFlashcard(WordEntry wordEntry) async {
+  Future<bool> addFlashcard(JotobaWordEntry wordEntry) async { // Changed parameter type
     try {
       if (!_isLoaded) await loadFlashcards();
       
       // Check if flashcard already exists
-      if (_flashcards.any((card) => card.wordSlug == wordEntry.slug)) {
+      if (_flashcards.any((card) => card.wordSlug == (wordEntry.slug ?? ''))) { // Added null check for slug
         return false; // Already exists
       }
 

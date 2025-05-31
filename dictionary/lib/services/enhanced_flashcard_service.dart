@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 
 import '../models/enhanced_flashcard.dart';
-import '../models/word_entry.dart';
+import '../models/jotoba_word_entry.dart'; // Changed from word_entry.dart
 import '../models/word_mastery.dart';
 import '../models/study_session.dart';
 import '../models/user_progress.dart';
@@ -95,16 +95,16 @@ class EnhancedFlashcardService extends ChangeNotifier {
 
   /// Create a flashcard from a word entry in specific lists
   Future<bool> createFlashcardFromWord(
-    WordEntry wordEntry, 
+    JotobaWordEntry wordEntry, // Changed parameter type
     List<int> wordListIds,
   ) async {
     await _ensureInitialized();
     
     try {
       // Check if flashcard already exists
-      if (await _storage.hasFlashcard(wordEntry.slug)) {
+      if (await _storage.hasFlashcard(wordEntry.slug ?? '')) { // Added null check for slug
         // Add to additional lists if not already present
-        final existingCard = await _storage.getFlashcardByWordSlug(wordEntry.slug);
+        final existingCard = await _storage.getFlashcardByWordSlug(wordEntry.slug ?? ''); // Added null check
         if (existingCard != null) {
           final newListIds = <int>{...existingCard.wordListIds, ...wordListIds}.toList();
           if (newListIds.length > existingCard.wordListIds.length) {
@@ -119,7 +119,7 @@ class EnhancedFlashcardService extends ChangeNotifier {
       }
 
       // Create new flashcard
-      final cardId = '${wordEntry.slug}_${DateTime.now().millisecondsSinceEpoch}';
+      final cardId = '${wordEntry.slug ?? wordEntry.primaryWord}_${DateTime.now().millisecondsSinceEpoch}'; // Updated cardId generation
       final flashcard = EnhancedFlashcard.fromWordEntry(cardId, wordEntry, wordListIds);
       
       final success = await _storage.saveFlashcard(flashcard);
@@ -128,7 +128,7 @@ class EnhancedFlashcardService extends ChangeNotifier {
         await _refreshCaches(); // Refresh to update due cards
         notifyListeners();
         
-        debugPrint('[EnhancedFlashcardService] Created flashcard for ${wordEntry.slug} - notifying listeners');
+        debugPrint('[EnhancedFlashcardService] Created flashcard for ${wordEntry.slug ?? wordEntry.primaryWord} - notifying listeners');
       }
       
       return success;

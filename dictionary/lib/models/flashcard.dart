@@ -1,8 +1,11 @@
+import './jotoba_word_entry.dart';
+
 class Flashcard {
   final String id;
   final String wordSlug;
   final String word;
   final String reading;
+  final String? furiganaReading;
   final String definition;
   final List<String> tags;
   final DateTime createdAt;
@@ -18,6 +21,7 @@ class Flashcard {
     required this.wordSlug,
     required this.word,
     required this.reading,
+    this.furiganaReading,
     required this.definition,
     required this.tags,
     required this.createdAt,
@@ -29,15 +33,16 @@ class Flashcard {
     this.isLearning = true,
   });
 
-  factory Flashcard.fromWordEntry(String id, dynamic wordEntry) {
+  factory Flashcard.fromWordEntry(String id, JotobaWordEntry wordEntry) {
     final now = DateTime.now();
     return Flashcard(
       id: id,
-      wordSlug: wordEntry.slug,
-      word: wordEntry.mainWord,
-      reading: wordEntry.mainReading,
+      wordSlug: wordEntry.slug ?? '',
+      word: wordEntry.primaryWord,
+      reading: wordEntry.primaryReading,
+      furiganaReading: wordEntry.primaryFurigana,
       definition: wordEntry.primaryDefinition,
-      tags: wordEntry.jlpt + wordEntry.tags,
+      tags: List<String>.from(wordEntry.jlpt)..addAll(wordEntry.tags),
       createdAt: now,
       lastReviewed: now,
       nextReview: now.add(const Duration(days: 1)),
@@ -50,6 +55,7 @@ class Flashcard {
       wordSlug: json['word_slug'],
       word: json['word'],
       reading: json['reading'],
+      furiganaReading: json['furigana_reading'] as String?,
       definition: json['definition'],
       tags: List<String>.from(json['tags'] ?? []),
       createdAt: DateTime.fromMillisecondsSinceEpoch(json['created_at']),
@@ -68,6 +74,7 @@ class Flashcard {
       'word_slug': wordSlug,
       'word': word,
       'reading': reading,
+      'furigana_reading': furiganaReading,
       'definition': definition,
       'tags': tags,
       'created_at': createdAt.millisecondsSinceEpoch,
@@ -85,6 +92,7 @@ class Flashcard {
   double get easeFactorAsDouble => easeFactor / 100.0;
 
   Flashcard copyWith({
+    String? furiganaReading,
     DateTime? lastReviewed,
     DateTime? nextReview,
     int? intervalDays,
@@ -97,6 +105,7 @@ class Flashcard {
       wordSlug: wordSlug,
       word: word,
       reading: reading,
+      furiganaReading: furiganaReading ?? this.furiganaReading,
       definition: definition,
       tags: tags,
       createdAt: createdAt,
